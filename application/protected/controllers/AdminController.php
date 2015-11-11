@@ -441,7 +441,7 @@ class AdminController extends CController
 
         $this_server = new Synchronization();
 
-        if ( $this_server->isMaster() ) {
+        if ( !$this_server->isProcessed() || $this->isMaster() ) {
 
             $criteria = new CDbCriteria();
             $criteria->order = "communication_port asc, communication_type asc";
