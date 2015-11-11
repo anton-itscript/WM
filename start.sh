@@ -23,6 +23,11 @@ if [ -n "$MIGRATIONS" ] ; then
 fi
 
 
+chmod 777 /dev/ttyS0
+chmod 777 /dev/ttyS1
+chmod 777 /dev/ttyS2
+chmod 777 /dev/ttyS3
+
 
 # Start supervisord and services
 /usr/bin/supervisord -n -c /etc/supervisord.conf
