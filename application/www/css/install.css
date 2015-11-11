@@ -1,0 +1,276 @@
+/*========== MARKUP ==========*/
+html, body {padding: 0; margin: 0;}
+body {
+    min-width:995px;
+}
+div#headerwrap {
+	position:absolute;
+	width:100%;
+	top:0;
+	left:0;
+	height:80px;
+        z-index: 99999;
+}
+/* position:fixed for modern browsers - header and footer do not scroll */
+body>div#headerwrap {
+	position:fixed;
+}
+
+div#header {
+	height:80px;
+	width:995px;
+	margin:0 auto;
+}
+
+div#header_top {
+    height: 77px;
+    /*border: 1px solid red;*/
+}
+
+
+/* set a left margin to compensate for IE/Win always making room for a scrollbar */
+div#middlewrap {
+/* set left margin and bottom padding for IE5/Win */
+	padding:80px 0 85px 0;
+	margin-left:0;
+/* set left margin and bottom padding for others */
+	voice-family: "\"}\""; 
+	voice-family:inherit;
+	margin-left:16px;
+}
+/* set left margin for modern browsers */
+body>div#middlewrap {
+	margin-left:0;
+}
+div.middlenarrow {
+	width:995px;
+	margin:0 auto;
+}
+
+/* no positioning for IE5/Win - the whole page scrolls */
+div#footerwrap {
+	width:100%;
+	p\osition:absolute;
+	bottom:0;
+	left:0;
+	height:40px;
+}
+body>div#footerwrap {
+	position:fixed;
+       
+}
+div#footer {
+	height:40px;
+	width:995px;
+	margin:0 auto;
+}
+ 
+
+
+/*========== MARKUP STYLING ==========*/
+html, body {
+    background-color: #FFF;
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #6b6b6b;
+}
+
+div#headerwrap {
+    /*border: 1px solid red;*/
+    background: transparent url(../img/bg_header_inst.png) repeat-x top center;
+}
+
+div#header {
+    /*background-color: yellow;*/
+}
+
+
+
+div#middlewrap {
+    /*background-color: aquamarine;*/
+ 
+}
+div.middlenarrow {
+    /*background-color: pink;*/
+}
+
+div#footerwrap {
+    background-color: #f0f0f0;
+}
+
+div#footer {
+    padding-top: 5px;
+}
+div#logo {
+    background: transparent url(../img/logo.png) no-repeat 97% 50% ;
+    width: 490px;
+    height: 30px;
+    border-right: 1px solid #bbbbbb;
+    float: left;
+}
+div#copyright {
+    width: 490px;
+    font-family: Verdana;
+    color: #999;
+    font-size: 11px;
+    float: left;
+    padding: 10px 0px 0px 10px;
+    line-height: 15px;
+}
+
+
+/*========== HEADER MENU STYLES ========== */
+
+
+#header_company {
+    clear: both; 
+    float: left;
+}
+    #header_company div{
+        letter-spacing: 0.6px;
+        font-family: Calibri; 
+        font-size: 28px; 
+        color: #fff;    
+    }
+
+
+     
+
+/*========== MIDDLE PAGE STYLES ==========*/
+div.middlewide {
+    background-color: #f6f6f6;
+}
+div.middlewide.third_menu {
+background-color: #fbc900;
+}
+
+/*========== COMMON STYLES ==========*/
+
+.clear {clear: both;}
+.left  {float: left;}
+.right {float: right;}
+.spacer {height: 10px;}
+a {color: #174352; text-decoration: underline;}
+a:hover, a:active {color: #1e5a6f;}
+h1 {
+    font-family:Calibri;
+    font-size: 22px;
+    color: #174352;
+    font-weight: bold;
+    padding: 20px 0px;
+}
+div.errorMessage, label.error {
+    color: #ff9393;
+}
+.small {font-size:.8em;margin-bottom:1.875em;line-height:1.875em;}
+/*========== TABLE INFO ========== */
+
+table.info td, table.info th{
+    font-family: Calibri;
+    font-size: 14px;
+    padding: 2px 5px 2px 0px;
+}
+table.info th {
+    font-weight: bold;
+    color: #4f4f4f;
+}
+table.info th.blue {
+    color: #174352;
+    font-size: 16px;
+}
+
+
+/*========== TABLE FORM ========== */    
+table.formtable {
+    border-collapse: separate;
+    border-spacing: 0;    
+}
+    table.formtable td, table.formtable th {
+        padding: 5px 10px 5px 0px;
+    }
+    table.formtable th {
+        color: #045772;
+    }
+
+    table.formtable td input[type=text], table.formtable td input[type=password], textarea {
+        background: #fbfbfb url(../img/bg_fieldtop.png) repeat-x top left;
+        border: 1px solid #d2d2d2;
+        padding: 3px;
+        width: 200px;
+        color: #4f4f4f;
+    }    
+table.formtable td.date {
+    width: 160px;
+    vertical-align: middle;
+}
+table.formtable td.date input {
+    width: 130px;
+}
+table.formtable td.empty {
+    width: 10px;
+}
+table.formtable td.time {
+    width: 50px;
+}
+table.formtable td.time input {
+    width: 40px;
+}    
+input[type=submit], input[type=button] {
+    color: #2e1e00;
+    background: #fbc900 url(../img/bg_button.png) repeat-x top left;
+    padding: 3px 5px 3px 5px;
+    border: 1px solid #b79514;
+    cursor: pointer;
+}
+input[type=submit]:hover, input[type=button]:hover {
+    background: #fbc900;
+}
+input[type=submit]:active, input[type=button]:active {
+    background: #fde67a;
+}
+
+
+/*========== BLOCKQUOTES ==========*/
+blockquote.tip, blockquote.note {
+    border-bottom: 1px solid #E4DFB8;
+    border-top: 1px solid #E4DFB8;
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    margin: 5px 0;
+    padding: 10px 5px 10px 55px;   
+    font-size: 11px;
+    line-height: 13px;
+}
+
+blockquote.tip {
+    background-color: #FFFAE6;
+    background-image: url("../img/tip.gif");
+    border-color: #E4DFB8;
+}
+blockquote.note {
+    background-color: #FFE6E6;
+    background-image: url("../img/note.gif");
+    border-color: #D9C3C3;
+}
+
+.navigation {
+    padding: 0px 0px 0px 0px;
+}
+
+.navigation a {
+    display:block;
+    float:left;
+    padding: 10px;
+    margin-right: 10px;
+    color: #D9C3C3;
+}
+.navigation a.available {
+color: #1E5A6F;
+}
+.navigation a.active {
+    background-color: #FBC900;
+}
+
+.navigation a.available:hover {
+    background-color: #FBC900;
+}

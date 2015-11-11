@@ -1,0 +1,23 @@
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+
+Options +FollowSymLinks
+
+IndexIgnore */*
+RewriteEngine on
+
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+
+RewriteRule . index.php
+
+php_flag magic_quotes_gpc 0
+
+<Files installator.php>
+    #order allow,deny
+    #deny from all
+</Files>

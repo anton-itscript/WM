@@ -1,0 +1,1646 @@
+/*========== FONTS ==========*/
+@font-face {
+    font-family: Calibri;
+    src: url(fonts/calibri-webfont.woff) format('woff'), url(fonts/calibri-webfont.ttf) format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Tahoma;
+    src: url(fonts/tahoma-webfont.woff) format('woff'), url(fonts/tahoma-webfont.ttf) format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Arial;
+    src: url(fonts/tahoma-webfont.woff) format('woff'), url(fonts/arial-webfont.ttf) format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Verdana;
+    src: url(fonts/tahoma-webfont.woff) format('woff'), url(fonts/verdana-webfont.ttf) format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/*========== MARKUP ==========*/
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-width: 995px;
+}
+
+div#headerwrap {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 107px;
+    z-index: 99999;
+}
+
+/* position:fixed for modern browsers - header and footer do not scroll */
+body > div#headerwrap {
+    position: fixed;
+}
+
+div#header {
+    height: 107px;
+    width: 995px;
+    margin: 0 auto;
+}
+
+div#header_top {
+    height: 70px;
+    /*border: 1px solid red;*/
+}
+
+/* set a left margin to compensate for IE/Win always making room for a scrollbar */
+div#middlewrap {
+    /* set left margin and bottom padding for IE5/Win */
+    padding: 107px 0 85px 0;
+    margin-left: 0;
+    /* set left margin and bottom padding for others */
+    voice-family: "\"}\"";
+    voice-family: inherit;
+    margin-left: 16px;
+}
+
+/* set left margin for modern browsers */
+body > div#middlewrap {
+    margin-left: 0;
+}
+
+div.middlenarrow {
+    width: 995px;
+    margin: 0 auto;
+}
+
+/* no positioning for IE5/Win - the whole page scrolls */
+div#footerwrap {
+    margin-top: 35px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 55px;
+}
+
+body > div#footerwrap {
+    position: fixed;
+
+}
+
+div#footer {
+    height: 35px;
+    width: 995px;
+    margin: 0 auto;
+}
+
+/*========== MARKUP STYLING ==========*/
+html, body {
+    background-color: #FFF;
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #6b6b6b;
+}
+
+div#headerwrap {
+    /*border: 1px solid red;*/
+    background: transparent url(../img/bg_header.png) repeat-x top center;
+}
+
+div#header {
+    /*background-color: yellow;*/
+}
+
+div#middlewrap {
+    /*background-color: aquamarine;*/
+
+}
+
+div.middlenarrow {
+    /*background-color: pink;*/
+}
+
+div#footerwrap {
+    background-color: #f0f0f0;
+}
+
+div#footer {
+    padding-top: 3px;
+}
+
+div#logo {
+    background: transparent url(../img/logo.png) no-repeat 70% 35%;
+    width: 480px;
+    height: 30px;
+    border-right: 1px solid #bbbbbb;
+    float: left;
+    text-align: right;
+    padding: 10px 10px 0px 0px;
+}
+
+div#logo a {
+    font-family: Verdana;
+    color: #999;
+    font-size: 10px;
+}
+
+div#copyright {
+    width: 490px;
+    font-family: Verdana;
+    color: #999;
+    font-size: 10px;
+    float: left;
+    padding: 10px 0px 0px 10px;
+
+}
+#footerwrap .status {
+    font-family: Verdana;
+    color: #999;
+    text-align:center;
+    margin: 0 0 5px 0;
+}
+/*========== HEADER MENU STYLES ========== */
+#first_menu {
+    text-align: right;
+    float: right;
+    width: 600px;
+}
+
+#first_menu ul li {
+    float: right;
+    height: 23px;
+    margin-left: 1px;
+}
+
+#first_menu ul li a {
+    display: block;
+    padding: 3px 5px;
+    background-color: #056d90;
+    color: #70b2c8;
+    position: relative; /* для IE6, чтобы ссылка была кликабильной по всей своей площади */
+    font-size: 11px;
+    font-family: Tahoma;
+    text-decoration: none;
+    padding: 5px 8px 5px 8px;
+}
+
+#first_menu ul li a:hover, #first_menu ul li a.active {
+    background: transparent url(../img/bg_fmenu.png) repeat-x top left;
+    color: #2e1e00;
+}
+
+#header_company {
+    float: left;
+    padding-top: 10px;
+}
+
+#header_company #header_soft_name {
+    letter-spacing: 0.6px;
+    font-family: Calibri;
+    font-size: 28px;
+}
+
+#header_company #header_soft_name a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#header_company #header_company_name {
+    letter-spacing: 0.35px;
+    font-family: Calibri;
+    font-size: 12px;
+    color: #b9dde9;
+    margin-top: 5px;
+}
+
+#header_time {
+    float: right;
+    width: 600px;
+    padding-top: 10px;
+}
+
+#header_time div {
+    font-family: Arial;
+    color: #fff;
+    font-size: 12px;
+    float: right;
+    text-align: left;
+}
+
+#header_time div.delimiter {
+    background: transparent url("../img/bg_smenu_delimiter.png") no-repeat 100% 80%;
+    padding-right: 10px;
+}
+
+#header_time div.time {
+    color: #d2eca2;
+    margin: 0px 10px 0px 0px;
+
+}
+
+#header_time div.text {
+    padding-top: 7px;
+    padding-right: 10px;
+}
+
+#header_time div.selecttime {
+    width: 190px;
+}
+
+#second_menu {
+    margin-top: 0px;
+}
+
+#second_menu ul li {
+    float: left;
+}
+
+#second_menu ul li.delimiter {
+    background: transparent url(../img/bg_smenu_delimiter.png) no-repeat center 75%;
+    width: 1px;
+    padding: 15px 0px 0px 0px;
+}
+
+#second_menu ul li a {
+    display: block;
+    color: #fbfbfb;
+    position: relative; /* для IE6, чтобы ссылка была кликабильной по всей своей площади */
+    font-size: 16px;
+    font-family: Calibri;
+    text-decoration: none;
+    padding: 8px 8px 8px 8px;
+}
+
+#second_menu ul li a:hover, #second_menu ul li a.active {
+    color: #2e1e00;
+    background: transparent url(../img/bg_smenu.png) repeat-x bottom center;
+}
+
+#third_menu {
+
+}
+
+#third_menu ul li {
+    float: left;
+}
+
+#third_menu ul li.delimiter {
+    background: transparent url(../img/bg_tmenu_delimiter.png) no-repeat bottom center;
+    width: 5px;
+    padding: 5px 0px 0px 0px;
+}
+
+#third_menu ul li a {
+    display: block;
+    position: relative;
+    color: #2e1e00;
+    text-decoration: none;
+    font-family: Calibri;
+    font-size: 14px;
+    padding: 5px 8px 5px 8px;
+}
+
+#third_menu ul li a:hover, #third_menu ul li a.active {
+    text-decoration: underline;
+}
+
+/*========== MIDDLE PAGE STYLES ==========*/
+div.middlewide {
+    background-color: #f6f6f6;
+}
+
+div.middlewide.third_menu {
+    background-color: #fbc900;
+}
+
+/*========== COMMON STYLES ==========*/
+
+.clear {
+    clear: both;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.spacer {
+    height: 10px;
+}
+
+a {
+    color: #174352;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+a:hover, a:active {
+    color: #1e5a6f;
+}
+
+h1 {
+    font-family: Calibri;
+    font-size: 22px;
+    color: #174352;
+    font-weight: bold;
+    padding: 20px 0px;
+}
+
+h2 {
+    font-family: Calibri;
+    font-size: 20px;
+    color: #174352;
+    font-weight: bold;
+
+}
+
+div.errorMessage, label.error {
+    line-height: 150%;
+    color: #FF2B78;
+}
+
+div.errorSummary {
+    border: 1px solid #FF0004;
+    background-color: #FFF2F2;
+    padding: 10px;
+    margin-bottom: 10px;
+
+}
+
+div.errorSummary p, div.errorSummary ul li {
+    color: red;
+}
+
+div.errorSummary ul li {
+    list-style-type: disc;
+    color: red;
+    margin-left: 15px;
+    padding-top: 5px;
+}
+
+.small {
+    font-size: 10px;
+    line-height: 11px;
+    padding: 3px 0px;
+}
+
+.status_success {
+    background: #ffffd9 url(../img/icon_action_successfull.png) no-repeat 10px 10px;
+    border: 1px solid #009933;
+    color: #000;
+    padding: 12px 12px 12px 40px;
+
+}
+
+a.refresh {
+    background: #edfcfe url(../img/refresh.png) no-repeat left center;
+    padding: 0px 2px 0px 17px;
+}
+
+h1 a.refresh {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.right_align {
+    padding: 5px 0px;
+    text-align: right;
+}
+
+/*========== TABLE INFO ========== */
+
+table.info td, table.info th {
+    font-family: Calibri;
+    font-size: 14px;
+    padding: 2px 5px 2px 0px;
+}
+
+table.info th {
+    font-weight: bold;
+    color: #4f4f4f;
+}
+
+table.info th.blue {
+    color: #174352;
+    font-size: 16px;
+}
+
+table.info td span.late {
+    color: red;
+}
+
+/*========== DATA BOX ========== */
+.cover {
+    text-align: right;
+    background: #fbfbfb url(../img/bg_fieldtop.png) repeat-x top left;
+    border: 1px solid #d2d2d2;
+    color: #4f4f4f;
+}
+
+.cover div {
+    min-height: 11px;
+    padding: 2px;
+    white-space: nowrap;
+}
+
+.cover.late div {
+    padding: 2px;
+    white-space: nowrap;
+    color: red;
+}
+
+.cover .down {
+    background: transparent url(../img/arrow_down.png) no-repeat 3px 2px;
+}
+
+.cover .up {
+    background: transparent url(../img/arrow_up.png) no-repeat 3px 2px;
+}
+
+.cover.error {
+    background: #fff3f3 url(../img/bg_fieldtop_error.png) repeat-x top left;
+    border: 1px solid #ffa3a3;
+}
+
+.data_box {
+    border: 1px solid #ead6ae;
+}
+
+.data_box .header {
+    padding: 3px 15px 3px 15px;
+    background-color: #fff5e2;
+    text-align: center;
+    font-family: Arial;
+    font-size: 12px;
+    line-height: 14px;
+    color: #4f4f4f;
+}
+
+.data_box .header a {
+    color: #174352;
+    font-weight: bold;
+}
+
+.data_box .header span {
+    font-size: 11px;
+    float: right;
+    padding: 0px 5px 0px 5px;
+}
+
+.data_box .header span.late {
+    font-size: 11px;
+    float: right;
+    color: red;
+    background-color: #fff;
+}
+
+.data_box div.content {
+    padding: 5px 5px 5px 5px;
+    position: relative;
+}
+
+.data_box div.content table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.data_box div.content table th, div.content table td {
+    padding: 2px 3px 2px 3px;
+    font-size: 11px;
+}
+
+.data_box div.content table th {
+    color: #045772;
+}
+
+.data_box div.content table tr:hover:not(.not-hover) {
+    background-color: #FBFFDD;
+}
+
+#rg_panel_boxes {
+    /*padding-top: 15px;*/
+}
+
+#rg_panel_boxes .data_box {
+    width: 235px;
+    float: left;
+    margin-bottom: 15px;
+}
+
+#rg_panel_boxes .data_box.margin {
+    margin-right: 15px;
+}
+
+#rg_panel_boxes .data_box table th {
+    width: 60px;
+}
+
+#rg_panel_boxes .data_box .cover {
+    width: 100px;
+}
+
+#aws_panel_boxes {
+    width: 100%;
+}
+
+#aws_panel_boxes div.left {
+    width: 487px;
+    float: left;
+}
+
+#aws_panel_boxes div.right {
+    width: 487px;
+    float: right;
+}
+
+#aws_panel_boxes .data_box {
+    margin-bottom: 10px;
+    width: 495px;
+}
+
+#aws_panel_boxes .data_box.margin {
+    margin-right: 10px;
+}
+
+#aws_panel_boxes .data_box .content td .cover {
+    width: 90px;
+}
+
+#aws_panel_boxes .data_box .content td .cover.smaller {
+    width: 70px;
+}
+
+#aws_panel_boxes .data_box .content th {
+    width: 110px;
+}
+
+/* individual styles for AWS SINGLE blocks */
+#aws_single_boxes_new .data_box {
+    float: left;
+    margin: 0px 5px 5px 0px;
+}
+
+#aws_single_boxes_new .data_box .content {
+    height: 100px;
+}
+
+#aws_single_boxes_new .data_box.wind {
+    width: 180px;
+}
+
+#aws_single_boxes_new .data_box.wind .cover {
+    width: 65px;
+}
+
+#aws_single_boxes_new .data_box .content.content_wind_speed {
+    height: 220px;
+}
+
+#aws_single_boxes_new .data_box .content.content_wind_direction {
+    height: 220px;
+}
+
+#aws_single_boxes_new .data_box.pressure {
+    /*width: 180px;*/
+    height: 190px;
+}
+
+#aws_single_boxes_new .data_box.snow_depth {
+    /*width: 180px;*/
+    height: 165px;
+}
+
+#aws_single_boxes_new .data_box.pressure .cover {
+    width: 65px;
+}
+
+#aws_single_boxes_new .data_box.temperature_and_humidity {
+    width: 235px;
+    height: 190px;
+}
+
+#aws_single_boxes_new .data_box.temperature_and_humidity .cover {
+    width: 55px;
+}
+
+#aws_single_boxes_new .data_box.sun {
+    width: 375px;
+}
+
+#aws_single_boxes_new .data_box.sun .content {
+    height: 100px;
+}
+
+#aws_single_boxes_new .data_box.sun .cover.sd {
+    width: 50px;
+}
+
+#aws_single_boxes_new .data_box.sun .cover.sr {
+    width: 100px;
+}
+
+#aws_single_boxes_new .data_box.rain {
+    width: 185px;
+}
+
+#aws_single_boxes_new .data_box.rain .content {
+    height: 100px;
+}
+
+#aws_single_boxes_new .data_box.rain .cover {
+    width: 65px;
+}
+
+#aws_single_boxes_new .data_box.visibility {
+    width: 180px;
+}
+
+#aws_single_boxes_new .data_box.visibility .content {
+    height: 80px;
+}
+
+#aws_single_boxes_new .data_box.visibility .cover {
+    width: 65px;
+}
+
+#aws_single_boxes_new .data_box.visibility-dlm13m {
+    width: 180px;
+}
+
+#aws_single_boxes_new .data_box.visibility-dlm13m .content {
+    height: 120px;
+}
+
+#aws_single_boxes_new .data_box.visibility-dlm13m .cover {
+    width: 65px;
+}
+
+#aws_single_boxes_new .data_box.clouds {
+    width: 360px;
+}
+
+#aws_single_boxes_new .data_box.clouds .cover {
+    width: 65px;
+}
+
+#aws_single_boxes_new .data_box.sky-conditions {
+    width: 420px;
+}
+
+#aws_single_boxes_new .data_box.sky-conditions .content {
+    height: 80px;
+}
+
+#aws_single_boxes_new .data_box.sky-conditions .cover {
+    width: 45px;
+}
+
+#aws_single_boxes_new .data_box.temperature_soil {
+    width: 630px;
+}
+
+#aws_single_boxes_new .data_box.temperature_soil .content {
+    height: auto;
+    min-height: 70px;
+}
+
+#aws_single_boxes_new .data_box.temperature_soil .cover {
+    width: 60px;
+}
+
+#aws_single_boxes_new .data_box.sea_level {
+    width: 330px;
+}
+
+#aws_single_boxes_new .data_box.sea_level .content {
+    height: auto;
+}
+
+#aws_single_boxes_new .data_box.sea_level .cover {
+    width: 70px;
+}
+
+#aws_single_boxes_new .data_box.wind_dial .content {
+    width: 205px;
+    height: 275px;
+}
+
+#aws_single_boxes_new .data_box.wind_dial .content table td {
+    padding: 0;
+}
+
+#aws_single_boxes_new .data_box .content .dial_container {
+    /*
+    width:217px;
+    height:217px;
+    */
+    width: 210px;
+    height: 210px;
+    background: transparent url(../img/meteos_kompas_index_new.jpg) no-repeat center center;
+    position: relative;
+}
+
+#aws_single_boxes_new .data_box .content .dial_container .dial_arrow {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+
+    /*Initial arrow position: */
+    /*left: 86.5px;*/
+    /* dial_conteiner.width()/2 - dial_arrow.width()/2 */
+    /*top: 16.5px;*/
+    /* dial_conteiner.height()/2 - dial_arrow.height()/2 - 70;  //70 - radius*/
+    left: 83px;
+    top: 13px;
+}
+
+#aws_single_boxes_new .data_box .content .dial_container .dial_value {
+    position: absolute;
+    width: 35px;
+    height: 30px;
+    color: #4f4f4f;
+    font-size: 18px;
+    text-align: center;
+    /*Initial arrow position: */
+    left: 90px;
+    top: 92px;
+}
+
+/* left and right scroll  */
+.data_box .content a.list_left, .data_box .content a.list_right {
+    position: absolute;
+    text-decoration: none;
+    display: block;
+    width: 10px;
+    height: 13px;
+    top: 7px;
+    cursor: pointer;
+}
+
+.data_box .content a.list_left.disabled, .data_box .content a.list_right.disabled {
+    cursor: default;
+}
+
+.data_box .content a.list_left {
+    left: 5px;
+    background: transparent url(../img/arrow_left_1.png) no-repeat top left;
+}
+
+.data_box .content a.list_right {
+    right: 5px;
+    background: transparent url(../img/arrow_right_1.png) no-repeat top right;
+}
+
+.data_box .content a.list_left.disabled {
+    background: transparent url(../img/arrow_left_1_disabled.png) no-repeat top left;
+}
+
+.data_box .content a.list_right.disabled {
+    right: 5px;
+    background: transparent url(../img/arrow_right_1_disabled.png) no-repeat top right;
+}
+
+/*========== TABLE FORM ========== */
+table.formtable {
+    border-collapse: separate;
+    border-spacing: 0;
+    line-height: 20px;
+}
+
+table.formtable.middlecolumns td, table.formtable.middlecolumns th {
+    vertical-align: middle;
+}
+
+table.formtable td, table.formtable th {
+    vertical-align: middle;
+    padding: 5px 10px 5px 0px;
+
+}
+
+table.formtable th {
+    color: #045772;
+}
+
+table.formtable td input[type=text], table.formtable td input[type=password], textarea {
+    background: #fbfbfb url(../img/bg_fieldtop.png) repeat-x top left;
+    border: 1px solid #d2d2d2;
+    padding: 2px;
+    width: 200px;
+    color: #4f4f4f;
+}
+
+table.formtable th input[type=checkbox] {
+    position: relative;
+    top: 2px;
+    margin: 0;
+}
+
+table.formtable.messageslog td.date {
+    width: 140px;
+}
+
+table.formtable td.date {
+    width: 150px;
+    vertical-align: middle;
+}
+
+table.formtable td.date input {
+    width: 120px;
+}
+
+table.formtable.messageslog td.date input {
+    width: 100px;
+}
+
+table.formtable td.empty {
+    width: 10px;
+}
+
+table.formtable td.time {
+    width: 50px;
+}
+
+table.formtable td.time input {
+    width: 40px;
+}
+
+input[type=submit], input[type=button], input[type=reset], button {
+    color: #2e1e00;
+    background: #fbc900 url(../img/bg_button.png) repeat-x top left;
+    padding: 3px 5px 3px 5px;
+    border: 1px solid #b79514;
+    cursor: pointer;
+}
+
+input[type=submit]:hover, input[type=button]:hover, input[type=reset]:hover, button:hover {
+    background: #fbc900;
+}
+
+input[type=submit]:active, input[type=button]:active, input[type=reset]:active, button:hover {
+    background: #fde67a;
+}
+
+table.formtable.messageslog tr td {
+    vertical-align: top;
+}
+
+table.formtable.awsstable td {
+    vertical-align: top;
+}
+
+div.checkboxes_list {
+    /*height: 100px; */
+    overflow-y: auto;
+    font-size: 10px;
+    width: 200px;
+    border: 1px solid #E7E7E7;;
+}
+
+/*hide FullInfoStation*/
+#hideFullInfoStation {
+    position: absolute;
+    right: 20px;
+    /*padding-top: 5px;*/
+    height: 30px;
+    width: 60px;
+    background-image: url(../img/hFIS.png);
+    z-index: 2;
+}
+
+#blockLargeInfoStation {
+    position: absolute;
+    /*display: none;*/
+    width: 100%;
+    height: 30px;
+    z-index: 1;
+}
+
+/*========== TABLE LIST ========== */
+table.tablelist {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-top: 1px solid #ead6ae;
+    border-left: 1px solid #ead6ae;
+    width: 100%;
+    height: 100%;
+}
+
+table.tablelist td, table.tablelist th {
+    border-right: 1px solid #ead6ae;
+    border-bottom: 1px solid #ead6ae;
+    padding: 5px;
+}
+
+table.tablelist th {
+    color: #045772;
+    background-color: #fff5e2;
+    white-space: nowrap;
+}
+
+table.tablelist tr.c td {
+    background-color: #fefdf7;
+}
+
+table.tablelist tr.bottomdouble td, table.tablelist tr.bottomdouble th, table.tablelist tr td.bottomdouble, table.tablelist tr th.bottomdouble {
+    border-bottom: 3px solid #ead6ae;
+}
+
+table.tablelist tr.error td.status {
+    color: red;
+}
+
+table.tablelist tr:hover td {
+    background-color: #FBFFDD;
+}
+
+table.tablelist tr td.title {
+    position: relative;
+    width: 120px;
+}
+
+table.tablelist tr td.title span {
+    width: 100px;
+    float: left;
+}
+
+table.tablelist tr td.title a {
+    float: right;
+    background: transparent url(../img/icon_page.png) no-repeat top center;
+    height: 14px;
+    width: 14px;
+    display: block;
+    cursor: pointer;
+}
+
+table.tablelist tr th a {
+    padding-right: 10px;
+}
+
+table.tablelist th a.desc {
+    background: url("../img/order_desc.png") no-repeat scroll right center transparent;
+    display: block;
+}
+
+table.tablelist th a.asc {
+    background: url("../img/order_asc.png") no-repeat scroll right center transparent;
+    display: block;
+}
+
+table.tablelist th a.asc:hover, table.tablelist th a.asc.selected {
+    background: url("../img/order_asc_selected.png") no-repeat scroll right center transparent;
+    display: block;
+}
+
+table.tablelist th a.desc:hover, table.tablelist th a.desc.selected {
+    background: url("../img/order_desc_selected.png") no-repeat scroll right center transparent;
+    display: block;
+}
+
+table.rgtable th, table.rgtable td {
+    font-size: 11px;
+}
+
+table.rgtable th {
+    text-align: center;
+}
+
+table.rgtable .rgmsg {
+    width: 950px;
+    overflow-x: scroll;
+}
+
+table.awstable th, table.awstable td {
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+table.tablelist.messageslog td {
+    font-size: 11px;
+}
+
+table.tablelist.messageslog td.message {
+    font-size: 10px;
+}
+
+table.tablelist.messageslog .date {
+    width: 70px;
+}
+
+table.tablelist.messageslog .info {
+    width: 270px;
+}
+
+table.tablelist.messageslog .chk {
+    width: 20px;
+    vertical-align: middle;
+}
+
+table.tablelist.messageslog .tools {
+    width: 50px;
+}
+
+/*========== SCHEDULE LIST  ==========*/
+table.schedulelist th {
+    text-align: center;
+}
+
+table.schedulelist th.f1 {
+    width: 65px;
+}
+
+table.schedulelist th.f2, table.schedulelist th.f3 {
+    width: 100px;
+}
+
+table.schedulelist th.f4 {
+    width: 310px;
+}
+
+/*========== MESSAGE HISTORY ==========*/
+.message_history_red {
+    color: red;
+    padding: 5px 0px;
+}
+
+.message_history_green {
+    color: #060;
+    padding: 5px 0px;
+}
+
+.message_history_errors {
+    width: 540px;
+    overflow-x: auto;
+    white-space: nowrap;
+    color: red;
+}
+
+.message_history_warnings {
+    width: 540px;
+    overflow-x: auto;
+    white-space: nowrap;
+    color: #060;
+}
+
+.message_history_warnings.long {
+    height: 100px;
+    overflow-y: auto;
+}
+
+/*========== BREAD CRUMBS ==========*/
+.breadcrumbs {
+    padding: 5px 0px;
+}
+
+.breadcrumbs a {
+    color: #1e5a6f;
+    font-size: 11px;
+}
+
+.breadcrumbs a:last-child {
+    color: #174352;
+    text-decoration: none;
+}
+
+/*========== BLOCKQUOTES ==========*/
+blockquote.tip, blockquote.note {
+    border-bottom: 1px solid #E4DFB8;
+    border-top: 1px solid #E4DFB8;
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    margin: 5px 0;
+    padding: 10px 5px 10px 55px;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+blockquote.tip {
+    background-color: #FFFAE6;
+    background-image: url("../img/tip.gif");
+    border-color: #E4DFB8;
+}
+
+blockquote.note {
+    background-color: #FFE6E6;
+    background-image: url("../img/note.gif");
+    border-color: #D9C3C3;
+}
+
+.synop_explanations span {
+    color: #009933;
+    font-weight: bold;
+}
+
+/*========== AWS TABLE ==========*/
+.awstable_block {
+    padding: 5px;
+    border: 1px solid #c0c0c0;
+    width: 100%;
+    /*overflow-x: hidden;*/
+}
+
+.awstable_tabs div {
+
+    z-index: 5;
+    background-color: #f0f0f0;
+    padding: 5px;
+    float: left;
+    border-top: 1px solid #c0c0c0;
+    border-left: 1px solid #c0c0c0;
+    border-right: 1px solid #c0c0c0;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.awstable_tabs div.active {
+    padding: 7px;
+    background-color: #fff;
+    margin-bottom: -10px;
+}
+
+.awstable_tabs div:hover {
+    background-color: #fff;
+}
+
+#changes_history {
+    border: 1px solid #c0c0c0;
+    height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #FCFCFC;
+}
+
+#destinations_container {
+
+}
+
+#destinations_container .destination_block {
+    padding: 5px;
+    border: 1px solid #D2D2D2;
+    background-color: #f9f9f9;
+    margin-top: 10px;
+}
+
+#whileLoadingBg {
+    background: none repeat scroll 0 0 #FFFFFF;
+    display: none;
+    height: 100%;
+    left: 0;
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+#whileLoadingBg div {
+    text-align: center;
+    z-index: 3;
+    opacity: 1;
+    padding-top: 20px;
+}
+
+/*scrolling*/
+.dateScroll {
+    float: left;
+    width: 120px;
+    height: 45px;
+}
+
+.topScroll {
+    float: left;
+    width: 858px;
+    overflow-x: hidden;
+}
+
+.leftScroll {
+    float: left;
+    width: 120px;
+    overflow-y: hidden;
+}
+
+.mainScroll {
+    float: none;
+    width: 875px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+/* for superadmin */
+.DisableTD a {
+    color: red;
+    text-decoration: none;
+}
+
+.EnableTD a {
+    color: green;
+    text-decoration: none
+}
+
+.EnableTD {
+    color: green;
+}
+
+.yiiPager li {
+    display: inline;
+}
+
+/*========== table Data ========== */
+.awspanel .tableData {
+    text-align: right;
+    color: #4f4f4f;
+    padding: 0 !important;
+}
+
+.awspanel .tableData > div {
+    padding: 3px 2px;
+}
+
+.awspanel .tableData .down {
+    background: transparent url(../img/arrow_down.png) no-repeat 0px 0px;
+}
+
+.awspanel .tableData .up {
+    background: transparent url(../img/arrow_up.png) no-repeat 0px 0px;
+}
+
+.awspanel .tableData .error {
+    background: #fff3f3;
+}
+
+.awspanel table.tablelist {
+    border-spacing: 5px 0;
+    width: auto;
+    white-space: nowrap;
+    border: 0;
+}
+
+.awspanel table.tablelist td,
+.awspanel table.tablelist th {
+    padding: 3px;
+}
+
+.awspanel table.tablelist tr th a {
+    padding-right: 0;
+    text-decoration: none;
+}
+
+.awspanel table.tablelist th {
+    border-top: 1px solid #ead6ae;
+    border-left: 1px solid #ead6ae;
+    border-bottom: 0;
+    text-align: center;
+}
+
+.awspanel table.tablelist td {
+    border-bottom: 0;
+    border-top: 1px solid #ead6ae;
+    border-left: 1px solid #ead6ae;
+    /*width: 5%;*/
+}
+
+.awspanel table.tablelist .paddingHeader td,
+.awspanel table.tablelist .paddingHeader th {
+    padding: 2px;
+}
+
+.awspanel table.tablelist td {
+    min-width: 54px;
+}
+
+.awspanel table.tablelist.td_size_2 td {
+    min-width: 125px;
+}
+
+.awspanel table.tablelist.td_size_4 td {
+    min-width: 125px;
+}
+
+.awspanel table.tablelist.td_size_6 td {
+    min-width: 125px;
+}
+
+.awspanel table.tablelist.td_size_8 td {
+    min-width: 91px;
+}
+
+.awspanel table.tablelist.td_size_10 td {
+    min-width: 70px;
+}
+
+.awspanel table.tablelist.td_size_12 td {
+    min-width: 56px;
+}
+
+.awspanel table.tablelist td.handler {
+    min-width: 160px;
+
+}
+
+.awspanel table.tablelist .handler div.metric {
+    float: right;
+}
+
+.awspanel table.tablelist .tableSpace {
+    background: rgba(255, 239, 0, 0.05);
+}
+
+.awspanel table.tablelist .trSpace td {
+    padding: 0;
+    height: 3px;
+    background: #FFFFFF;
+    border: 0 !important;
+    border-top: 1px solid #ead6ae !important;
+}
+
+.awspanel table.tablelist .late {
+    color: #ff0000;
+}
+
+.middlenarrow.awspanel table.tablelist .hideBg {
+    background: none !important;
+    border: none !important;
+}
+
+/*
+STATION GROUP
+*/
+.grouplist table.tablelist {
+    width: auto;
+    white-space: nowrap;
+    text-align: center;
+    border-left: 0;
+}
+
+.grouplist table.tablelist th {
+    text-align: center;
+    width: 60px;
+}
+
+.grouplist table.tablelist td {
+    text-align: center;
+}
+
+.grouplist table.tablelist tr.check td {
+    padding: 0;
+}
+
+.grouplist table.tablelist tr.check td.stations {
+    text-align: left;
+    border-left: 1px solid #ead6ae !important;
+    padding: 2px;
+}
+
+.grouplist table.tablelist tr.edit td {
+    background: none;
+    border: 0;
+}
+
+.grouplist table.tablelist tr.edit td input {
+    float: right;
+}
+
+/*
+HEARTBEAT REPORT FORM
+*/
+.heartbeat table.tablelist {
+    border-spacing: 10px 0;
+    white-space: nowrap;
+    border: 0;
+}
+
+.heartbeat table.tablelist tr:hover td {
+    background-color: #fff;
+}
+
+.heartbeat table.tablelist td:hover {
+    background-color: #FBFFDD !important;
+}
+
+.heartbeat table.tablelist th {
+    border-top: 1px solid #ead6ae;
+    border-left: 1px solid #ead6ae;
+    text-align: center;
+}
+
+.heartbeat table.tablelist td {
+    border-left: 1px solid #ead6ae;
+    text-align: center;
+}
+
+.heartbeat table.tablelist a {
+    text-decoration: none;
+}
+.heartbeat div.now_report {
+    padding-top: 40px;
+    padding-right: 20px;
+    float: right;
+}
+/*
+HEARTBEAT REPORT
+*/
+.heartbeatreport {
+    white-space: nowrap;
+}
+
+.heartbeatreport table {
+    margin-bottom: 5px;
+    white-space: nowrap;
+}
+
+.heartbeatreport table.stat td {
+    width: 25%;
+}
+.heartbeatreport div.db_small_stat table{
+    max-width: 49.8%;
+    float: left;
+}
+.heartbeatreport div.db_small_stat table.stat{
+    max-width: 49.8%;
+    float: right;
+}
+
+.heartbeatreport .stations table.stat td {
+    width: 10%;
+}
+
+.heartbeatreport div.value_format {
+    float: right;
+}
+
+.heartbeatreport div.station_stat {
+    padding-top: 5px;
+    line-height: 1.3;
+}
+.heartbeatreport div.station_name {
+    font-weight: bold;
+    padding: 5px;
+}
+
+.heartbeatreport .th_hidden {
+    text-decoration: underline;
+}
+
+.heartbeatreport table tr:hover td {
+    background-color: #fff;
+}
+
+.heartbeatreport table td:hover {
+    background-color: #FBFFDD !important;
+}
+.heartbeatreport div.download {
+    padding-top: 40px;
+    padding-right: 20px;
+    float: right;
+}
+
+/**
+ * Select list aws graph|table
+ */
+ul.column-4 {
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+}
+
+ul.column-8 {
+    -webkit-column-count: 8;
+    -moz-column-count: 8;
+    column-count: 8;
+}
+.select-list input[type = button] {
+    width: 90%;
+    max-width: 200px;
+}
+.select-list .select-option {
+    width: 995px;
+    position: absolute;
+    z-index: 1;
+    padding: 15px;
+
+    left: 50%;
+    margin-left: -510px;
+
+    vertical-align: top;
+
+    background-color: #f6f6f6;
+    border-bottom: #FFFFFF solid 15px;
+}
+.select-list .select-option h3 {
+    margin-top: 15px;
+    font-family: Calibri;
+    font-size: 16px;
+    color: #174352;
+
+}
+.select-list ul {
+    margin-top: 15px;
+    list-style: none;
+}
+.select-list li{
+    min-width: 25%;
+}
+.select-list li label{
+    vertical-align: top;
+}
+.select-list li:first-child.head{
+    padding: 0 0 5px 15px;
+}
+.select-list li.head{
+    vertical-align: bottom;
+    padding: 10px 0 10px 15px;
+    font-size: 1.3em;
+}
+.select-list li.head-colors{
+    vertical-align: bottom;
+    padding: 0px 0 15px 15px;
+    font-size: 1.3em;
+}
+
+/*
+ *  pop - up
+ */
+
+#modal_form {
+    width: 300px;
+    border-radius: 5px;
+    border: 3px #fbc900 solid;
+    background: #fff;
+    position: fixed;
+    top: 95%;
+    left: 50%;
+    margin-left: -150px;
+    display: none;
+    opacity: 0;
+    z-index: 5;
+    padding: 20px 20px;
+}
+
+#modal_form #modal_button {
+    float: right;
+    margin-top: 20px;
+}
+
+#overlay {
+    z-index: 3;
+    position: fixed;
+    background-color: #000;
+    opacity: 0.8;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    display: none;
+}
+#modal_form h2 {
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+#modal_form label {
+    font-size: 16px;
+    line-height: 150%;
+}
+
+#modal_form input {
+    padding: 3px;
+}
+
+#sms_list {
+    margin-bottom: 50px;
+}
+
+[disabled="disabled"] {
+   opacity: 0.7;
+}
+
+
+.station-color {
+    display:inline-block;
+    width:10px;
+    height:10px;
+    margin-bottom:2px;
+    margin-left:2px;
+}
+
+
+@-moz-document url-prefix()
+{
+    .station-color {
+        margin-bottom:0px;
+    }
+
+}

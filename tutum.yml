@@ -1,0 +1,23 @@
+db:
+  image: 'tutum.co/itscript/wm-db:latest'
+  environment:
+    - MYSQL_PASS=wm_pass
+    - MYSQL_ROOT_PASSWORD=wm_root
+    - MYSQL_USER=wm
+    - ON_CREATE_DB_1=wm_docker
+    - ON_CREATE_DB_2=wm_docker_long
+    - STARTUP_SQL_1=/tmp/wm_clear_databases/wm_docker.sql
+    - STARTUP_SQL_2=/tmp/wm_clear_databases/wm_docker_long.sql
+  ports:
+    - '3306:3306'
+  volumes:
+    - '/var/docker/wm/db/var/lib/mysql:/var/lib/mysql'
+  web:
+    image: 'tutum.co/itscript/wm:latest'
+    links:
+      - db
+    ports:
+      - '80:80'
+    volumes:
+      - '/var/docker/wm/web/log:/usr/share/nginx/html/log'
+      - '/var/docker/wm/web/protected/runtime:/usr/share/nginx/html/protected/runtime'

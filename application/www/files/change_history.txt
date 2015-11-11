@@ -1,0 +1,395 @@
+--------------------------------------------------------------------------------
+0.05.08:
+--------------------------------------------------------------------------------
+- Changed php memory_limit to 2048Mb.
+- Extended timeout for export operations.
+
+--------------------------------------------------------------------------------
+0.05.07:
+--------------------------------------------------------------------------------
+- Added sunshine duration data parsing from xml files.
+
+--------------------------------------------------------------------------------
+0.05.06:
+--------------------------------------------------------------------------------
+- Added rainfall data parsing from xml files.
+
+--------------------------------------------------------------------------------
+0.05.05:
+--------------------------------------------------------------------------------
+- Changed GSM modem listener settings.
+
+--------------------------------------------------------------------------------
+0.05.04:
+--------------------------------------------------------------------------------
+- Improved performance.
+- Fixed small bugs.
+
+--------------------------------------------------------------------------------
+0.05.03:
+--------------------------------------------------------------------------------
+Comments were added to the most significant scripts.
+
+--------------------------------------------------------------------------------
+0.05.02:
+--------------------------------------------------------------------------------
+BUFR updates:
+* timestamp now is report generation run timestamp (earlier there was last message's timestamp BUFR was generated for)
+  (applied for Section#1 of BUFR)
+* SQL for choosing of 1(24) hour Summary rain/solar/sun was changed: now "from date" is included, "to date" is not included.
+* SQL for choosing last message X hours ago was changed. Now we select last message before timestamp (earlier we selected last message with exact timestamp).
+
+--------------------------------------------------------------------------------
+0.05.01:
+--------------------------------------------------------------------------------
+Main Labels have been moved to separate files. It allows to change them at one place and not go through a lot of files.
+
+--------------------------------------------------------------------------------
+0.05.00:
+--------------------------------------------------------------------------------
+- New functionality was added: 
+  Moving of old data to backup database
+
+New section "Admin / Setup / DB Export" is available for Admin. 
+Here Admin can activate this feature and setup settings for frequency, 
+data lifetime and credentials to connect with backup database. 
+Backup database can be located at remote server (it must have MySQL server installed)
+
+Once feature is enabled - it will start to move old data in background.
+Data is moving by parts - so not all old data can be moved at once.
+Also "Admin / Setup / DB Export Log" has been added. Here admin can see brief information about last data moving.
+
+- RG Pages are hide if there are no any RG Stations
+- AWS Pages are hide if there are no any AWS Stations
+- Export has been added to RG Table page (xls format)
+- Some similar functions in Sensor Handlers have been moved to general class
+- RG Graph: was updated. Now it works quickly and displays 60 points
+- SYNOP: tested, some changes added (length of pressure, MSL, temperature was incorrect in some cases)
+- Scheduled history log: div's width for long messages has been limited
+- AWS Graph: fixed problem with disappeared graphs of all sensors
+- AWS Panel: fixed design issue (two panels have been loaded with delay)
+- Installation script: ActiveComPort auto installation has been added
+
+--------------------------------------------------------------------------------
+0.4.27:
+--------------------------------------------------------------------------------
+- changes to BUFR:
+  * problem with MAX/MIN temperature is fixed
+  * BUFR timestamp now is report generation run timestamp (earlier there was last message's timestamp BUFR was generated for)
+    (applied for Section#4 of BUFR)
+
+--------------------------------------------------------------------------------
+0.4.26:
+--------------------------------------------------------------------------------
+- 'magnetic_north_offset' was applied for wind direction (1 min, 2 min avg, 10 min avg) at: AWS Panel, AWS Single, AWS Table, AWS Graph, Scheduled Reports(BUFR, SYNOP, Export)
+- added prepare_binary function, and each value in BUFR goes through it. This function puts decimal data into binary format and fits it to required bits length (adds zeros to left or strip excess digits on right)
+- changes in BUFR:
+  * Problem fixed: "There are 2 area for 24 hour rain. (3 02 034) This one either reports nothing or a number which is not consistent with (3 02 040)."
+  * Change for TP MAX/MIN: "Max Temperature should be calculated from 9pm to 9pm and then reported at 12UTC."
+  * Changes to make offset between UTC and local time (Time period or displacement)
+- BUFR and SYNOP now show 10-min avg wind data (1 min data was earlier)
+--------------------------------------------------------------------------------
+0.4.25:
+--------------------------------------------------------------------------------
+Some changes were added to Bufr scheme (actual only for Samoa).
+Small update for Last Low/High tide
+
+--------------------------------------------------------------------------------
+0.4.24:
+--------------------------------------------------------------------------------
+Some changes were added to Bufr scheme (actual only for Samoa).
+Small update for Last Low/High tide
+
+--------------------------------------------------------------------------------
+0.4.23:
+--------------------------------------------------------------------------------
+AWS Single css changes to more compact view
+
+Sea Level:
+ the way of calculation of Last Low/High values was changed
+
+--------------------------------------------------------------------------------
+0.4.22:
+--------------------------------------------------------------------------------
+Sensors:
+ - small bugfix for cloud sensor display
+
+BUFR, SYNOP:
+ - now "M" data is shown as missed (zeros were before)
+
+STATION SAVE:
+ - Parameter "Incoming message interval" now is available. 
+   It is used to calculate if next message is not coming in time. 
+
+AWS Panel, AWS Single, RG Panel:
+ - "Last TX" time now is RED if new message is not coming in time.
+
+--------------------------------------------------------------------------------
+0.4.21:
+--------------------------------------------------------------------------------
+Metrics conversion:
+ - Formula for convertion knots to m/s and vise versa was updated
+
+XML data source:
+ - Incoming Solar Radiation value now is multiplying by 60
+
+--------------------------------------------------------------------------------
+0.4.20:
+--------------------------------------------------------------------------------
+Cloud Height Sensor:
+ - Was moved to R12 format (Cloud Depth #1, #2, #3 were added; Cloud Amount #1,#2,#3 were removed)
+
+AWS Panel, AWS Single, AWS Table, AWS Graph:
+ - Cloud Depth #1, #2, #3 were added; Cloud Amount #1,#2,#3 were removed
+
+Convert XML to messages:
+ - Now script converts <CLOUDD1>,<CLOUDD2>,<CLOUDD3> into Cloud Depth #1,#2,#3
+
+AWS Graph:
+ - "Select all stations" checkbox was added
+ - DP & MSL were added to features list
+
+AWS Table:
+- DP & MSL were added to features list
+
+Admin / Connections History:
+ - Export was added
+
+--------------------------------------------------------------------------------
+0.4.19:
+--------------------------------------------------------------------------------
+XML data source:
+ - DP & MSL were missed during parsing messages (created on XML source). Fixed now.
+ - Solar Radiation is processing now.
+
+AWS Single, AWS Panel:
+ - Cloud Height is displaying first now. Metrics were removed from inside of field.
+ - Range output was added
+ - "Vertical visibility" tag was renamed to "VV"
+ - "Sea Level. Still have 10m being displayed as wave height." - Fixed
+
+
+--------------------------------------------------------------------------------
+0.4.18:
+--------------------------------------------------------------------------------
+XML data source:
+- Convert XML to Messages script was changed. Now it parses XML according to new format
+
+Cloud sensor:
+ - "Measuring Range" was added
+
+AWS Table:
+ - Sea Level values were returned to 3 decimals
+
+AWS Panel:
+ - some values were red highlighted even though they don't have filter in setup. FIXED
+
+Sensors Handlers big changes:
+ - now system stores and displays "M" as unavailable value instead of "0" value
+
+--------------------------------------------------------------------------------
+0.4.17:
+--------------------------------------------------------------------------------
+Sea Level:
+ - "Wave height displays as 100m, clearly no true. the data coming in is typically 0100 or 0200. This should be interpreted as 10 cm or 20cm." - FIXED
+ - Calculation of trend was rechecked. Basing on treshold period was fixed (script didn't check treshold period set by user and used 15 min as hardcoded)
+
+Schedule:
+ - fixed small issues.
+
+--------------------------------------------------------------------------------
+0.4.16:
+--------------------------------------------------------------------------------
+Changes in Schedule:
+ - now user can add multiple destinations to any schedule (more than 1 email, ftp, local folder per each schedule)
+   If no any destinations were added - schedule will be stored only in history
+
+Admin/Settings/Other Settings:
+ - "Local Timezone" selection was moved from Site Header to "Admin/Settings/Other Settings".
+   So, local timezone will be the same for all visitors and only admin can change it.
+   This timezone will be used to show calculated values & observed values in this timezone.
+
+AWSPanel:
+- Data only for 1 tab is loaded with page loading. Data for each other station is loaded after click to tab.
+- check/uncheck all was added to stations and features list
+
+--------------------------------------------------------------------------------
+0.4.15:
+--------------------------------------------------------------------------------
+Issues fixing:
+- The AWS table "implodes" FIXED
+- Tried to delete messages in message history and there was an error  " CDbCrteria.:lister_log_id" is not defined. FIXED
+- No DP or MSL for Faleolo East FIXED
+- Converting XML to Messages was parse Visibility data as feets. Changed to meters.
+- Height of Wind Dial block was changed to the same size as wind block
+
+
+--------------------------------------------------------------------------------
+0.4.14:
+--------------------------------------------------------------------------------
+Some queries optimizations
+
+--------------------------------------------------------------------------------
+0.4.13:
+--------------------------------------------------------------------------------
+Database and SQL queries optimization. Now "AWS Panel" and "AWS Single" loading time is smaller.
+AWS Table: 
+ - Export button was added. Export format is XML - because we need to display data of different stations separately.
+
+AWS Graph:
+ - Now 60 points are displayed
+ - Y-axe extreme values were changed to [MIN - 20%; MAX+20%]
+
+Admin / Connections:
+ - representation of connection time now is more user-friendly
+--------------------------------------------------------------------------------
+0.4.12:
+--------------------------------------------------------------------------------
+.htaccess file was updated to allow upload files more that 8M
+
+--------------------------------------------------------------------------------
+0.4.11:
+--------------------------------------------------------------------------------
+"Mail params":
+- Ability to change emailing params was added. Go to "Admin / Setup / Check Mailing Settings"
+
+--------------------------------------------------------------------------------
+0.4.10:
+--------------------------------------------------------------------------------
+"Database optimization":
+- content of scheduled outputs was moved from database into files (re-saving, re-generating now is working with files)
+- 24hr ago report_explanations are removed from database
+
+"Export":
+- sql bug was fixed
+
+"Filters":
+- T1 <=0,  T1 >= 4,000,000. Now this is working without "equal" for all sensors.
+
+"Sea Level Sensor" (New incoming data will be stored properly):
+- Now we put (Baseline - incoming_Mean_data) as Mean Data into database
+- Fixed problem: "I note that in AWS table the sea level is referred to in "m" and a sample value of 2677 is presented. This should read 2.677". 
+   
+"Convert XML to messages":
+- Problem with missing wind speed & direction was fixed
+
+--------------------------------------------------------------------------------
+0.4.9:
+--------------------------------------------------------------------------------
+"AWS Single":
+- fixed problem with jumping wind dial
+
+"AWOS"
+- fixed bug with adding sensors to AWOS
+
+"Sea Level"
+- (a1) param "baseline" value was added to SL sensor details. It is used to calculate "true" value of sea/tide level.
+
+--------------------------------------------------------------------------------
+0.4.8:
+--------------------------------------------------------------------------------
+"AWS Graph":
+- SL Mean was added
+
+"Process Message" script:
+- sea level trend is calculating for each message with measuring time in HH:00, HH:15, HH:30, HH:45
+
+"AWS Single", "AWS Panel":
+- Last Low/High Tide value and time were added
+
+"Sea Level" sensor:
+- new parameters "Trend Treshold" (default is 0), "Trend Treshold Period" (default is 30) were added
+
+--------------------------------------------------------------------------------
+0.4.7:
+--------------------------------------------------------------------------------
+"Schedule":
+- for FTP delivery "binary" flag was added for ftp_fput in case of BUFR delivery.
+
+"XML to message converter"
+- New fields "path to XML folder", "Check XML folder frequency" were added at "Admin / Settings / Other Settings" 
+- Background script for checking "path to XML folder" with chosen frequency was created. It checks folder, copies found XMLs into project's subfolder and pass control to ConverterXmlToMessage module. 
+  ConverterXmlToMessage checks structure of XML, founds needed data; founds AWS26 (for RNWY INDEX=1) and AWS08 (for RNWY INDEX=2) in database, founds their sensors and creates messages like @...$ for those stations.
+- Ability to upload XML into "path to XML folder" was added ("Admin / Import / Import XML")
+- Ability to see brief log of XML process was added ("Admin / Connections / XML Log")
+
+--------------------------------------------------------------------------------
+0.4.6:
+--------------------------------------------------------------------------------
+"Schedule":
+- fixed problem with large values in BUFR (in case data length more than allowed bits count - script crops value from the right side (less significant bits)).
+- for FTP delivery of BUFR reports "binary" flag was added for fopen file for writing at FTP.
+
+--------------------------------------------------------------------------------
+0.4.5:
+--------------------------------------------------------------------------------
+"Schedule":
+- fixed problem with disappearing of extension for reports in emails.
+- fixed problem with wrong link inside of email
+- fixed problem with incorrect calculation of "302046 -> 012049" in bufr
+
+--------------------------------------------------------------------------------
+0.4.4:
+--------------------------------------------------------------------------------
+"Schedule":
+- Bug "Report name contains 1970_01_01 after last update" was fixed (Ticket 123)
+- Bug "Scheduled email contains wrong link to page with schedules list" was fixed (Ticket 123)
+- Bug "Some Scheduled export files show some sensor data twice" was fixed.
+- Bug "regenerating BUFR CSV or SYNOP results in a SYNOP message" was fixed
+
+
+"Admin / Settings / Other Settings":
+- Length of "Company title" was decreased to 50 symbols. (Ticket 117)
+
+"Admin / Add Station":
+- Abbreviation for Lat, Lng was expanded for warning messages (Ticket 118)
+- New field "WMO Originating centre was added". This shall become the input field for "BUFR/Section 1/Octet 5-6 (Code table C-11)". By default this field=202 (Samoa) (Ticket 106)
+
+"Admin / Station / Sensors":
+- Output of Max/Min/Diff limits in sensors list now is formatted.
+
+"Connections"
+- Timeout of connection with ESP was increased from 5 seconds to 10 seconds
+
+
+--------------------------------------------------------------------------------
+0.4.3:
+--------------------------------------------------------------------------------
+Connection with ESP function:
+- if connection lost - script will do 3 attempts of reconnection.
+
+"Admin/Setup/Other Settings":
+- Added new property "Scheduled Reports Path" with default value "C:\weather_monitor_reports". 
+  User don't need to create this folder by himself - script will create it automatically.
+
+"Home/Schedule":
+- Added new destination type "Folder at Local PC". Also new field "Local Folder Name" accompanies this type.
+- got rid of ability to edit Bufr in textarea
+- some changes in database:
+  * foreign key was removed from field listener_log_id in table schedule_process because "data_export" schedule depends on more than 1 listener_log_id
+  * for Export type we store ids of all messages that are proper for period
+
+
+
+--------------------------------------------------------------------------------
+0.4.2:
+--------------------------------------------------------------------------------
+Station Add/Edit:
+- communication type "GPRS" was temporary hide because it is not actual yet
+- communication type "SMS" was renamed to "Direct SMS" because at this stage script can only listen to modem connected to PC directly
+- communication type "TCP/IP" was added. Also new fields "IP" and "Port" accompany this communication type. User should enter IP address of ESP server and TCP/UDP port here.
+- WMO Member State # was renamed to WMO State ID#
+- Country ID# and City ID# were removed
+
+
+Connections:
+- added posibility to connect with IP via socket and listen data from that source
+- added log of connections - you can find link to this page in "Admin / Connections" submenu
+
+Export:
+- label changed from "Do Export" to "Export"
+
+Background Process:
+- Added schtask "delaircoPrepareScript" which runs every minute and checks if there is unprocessed messages.
+
+

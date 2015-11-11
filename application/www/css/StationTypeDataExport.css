@@ -1,0 +1,29 @@
+.schedule-type-report {
+
+}
+
+.schedule-type-report ul {
+	padding:5px 0 0 0;
+}
+
+.schedule-type-report ul li {
+	padding:0 0 5px 0;
+}
+
+
+.schedule-type-report .cell-vm-ac{
+	vertical-align:middle;
+	text-align:center;
+}
+
+.schedule-type-report .cell-vm-al{
+	vertical-align:middle;
+	text-align:left;
+}
+
+
+.schedule-type-report .disabled{
+	opacity: 0.7;
+    background-color: #eee;
+}
+

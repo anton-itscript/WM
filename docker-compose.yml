@@ -1,0 +1,33 @@
+wm-host-image:
+  build: WM-Web
+  ports:
+  - 9999:80
+  links:
+  - wm-db-image:db
+  volumes:
+  - "/var/docker/wm/web/log:/usr/share/nginx/html/log"
+  - "/var/docker/wm/web/protected/runtime:/usr/share/nginx/html/protected/runtime"
+  - "/var/docker/wm/web/protected/nosqlvars:/usr/share/nginx/html/protected/nosqlvars"
+  - "/var/docker/wm/web/protected/migrations:/usr/share/nginx/html/protected/migrations"
+  - "/var/docker/wm/web/www/files/backups:/usr/share/nginx/html/www/files/backups"
+  - "/var/docker/wm/web/www/files/schedule_reports:/usr/share/nginx/html/www/files/schedule_reports"
+  - "/var/docker/wm/web/www/files/schedule_type_reports:/usr/share/nginx/html/www/files/schedule_type_reports"
+  - "/var/docker/wm/web/www/files/xml_messages:/usr/share/nginx/html/www/files/xml_messages"
+  - "/var/docker/wm/web/www/files/weather_monitor_reports:/usr/share/nginx/html/www/files/weather_monitor_reports"
+
+wm-db-image:
+  build: WM-Db
+  ports:
+  - 3307:3306
+  environment:
+  - MYSQL_ROOT_PASSWORD:"wm_root"
+  - MYSQL_USER:"wm"
+  - MYSQL_PASS:"wm_pass"
+  - ON_CREATE_DB_1:"wm_docker"
+  - ON_CREATE_DB_2:"wm_docker_long"
+  - STARTUP_SQL_1:"/tmp/wm_clear_databases/wm_docker.sql"
+  - STARTUP_SQL_2:"/tmp/wm_clear_databases/wm_docker_long.sql"
+  volumes:
+  - /var/docker/wm/db/var/lib/mysql:/var/lib/mysql
+  - /var/docker/wm/web/www/files/backups:/var/wm_backups 
+
