@@ -1556,7 +1556,7 @@ ul.column-8 {
     vertical-align: top;
 }
 .select-list li:first-child.head{
-    padding: 0 0 5px 15px;
+    padding: 0 0 0px 4px;
 }
 .select-list li.head{
     vertical-align: bottom;
@@ -1565,7 +1565,7 @@ ul.column-8 {
 }
 .select-list li.head-colors{
     vertical-align: bottom;
-    padding: 0px 0 15px 15px;
+    padding: 0px 0 15px 3px;
     font-size: 1.3em;
 }
 

@@ -46,9 +46,9 @@ $this->widget('TwoDatesFilter', array('block_path' => '#filterparams', 'date_fro
                                     <li  class="<?=$group['class']?> hide"  style="display:none;">
                                         <ul>
 
-                                        <?php if (!in_array($group_key,['TemperatureWater', 'TemperatureSoil'])): ?>
+                                        <?php // if (!in_array($group_key,['TemperatureWater', 'TemperatureSoil'])): ?>
                                             <li class="head"><?php echo $group['name'] ?></li>
-                                        <?php endif; ?>
+                                        <?php // endif; ?>
                                             <li  class="head-colors">
                                                 <?php // echo "<pre>"; print_r($group['class']); echo "</pre>";
                                                 if (count($group['stations']) )

@@ -287,12 +287,12 @@ function init()
 
     updateButton();
 
-    jQuery('#AWSTableForm_sensor_feature_code_Temperature_all').unbind('click').click(function() {
-        jQuery("input[name *= 'AWSTableForm\[sensor_feature_code\]\[Temperature']:checkbox").prop('checked', this.checked);
-    });
-    jQuery("input[name *= 'AWSTableForm\[sensor_feature_code\]\[Temperature' ]:checkbox").unbind('click').click(function() {
-        jQuery('#AWSTableForm_sensor_feature_code_Temperature_all').prop('checked', !jQuery("input[name *= 'AWSTableForm\[sensor_feature_code\]\[Temperature']:not(:checked):checkbox").length);
-    });
-    jQuery('#AWSTableForm_sensor_feature_code_Temperature_all').prop('checked', !jQuery("input[name *= 'AWSTableForm\[sensor_feature_code\]\[Temperature']:not(:checked):checkbox").length);
+    //jQuery('#AWSTableForm_sensor_feature_code_Temperature_all').unbind('click').click(function() {
+    //    jQuery("input[name *= 'AWSTableForm\[sensor_feature_code\]\[Temperature']:checkbox").prop('checked', this.checked);
+    //});
+    //jQuery("input[name *= 'AWSTableForm\[sensor_feature_code\]\[Temperature' ]:checkbox").unbind('click').click(function() {
+    //    jQuery('#AWSTableForm_sensor_feature_code_Temperature_all').prop('checked', !jQuery("input[name *= 'AWSTableForm\[sensor_feature_code\]\[Temperature']:not(:checked):checkbox").length);
+    //});
+    //jQuery('#AWSTableForm_sensor_feature_code_Temperature_all').prop('checked', !jQuery("input[name *= 'AWSTableForm\[sensor_feature_code\]\[Temperature']:not(:checked):checkbox").length);
 
 }

@@ -147,13 +147,13 @@ function init()
 
     updateButton();
 
-    jQuery('#AWSGraphForm_sensor_feature_code_Temperature_all').unbind('click').click(function() {
-        jQuery("input[name *= 'AWSGraphForm\[sensor_feature_code\]\[Temperature']:checkbox").prop('checked', this.checked);
-    });
-    jQuery("input[name *= 'AWSGraphForm\[sensor_feature_code\]\[Temperature' ]:checkbox").unbind('click').click(function() {
-        jQuery('#AWSGraphForm_sensor_feature_code_Temperature_all').prop('checked', !jQuery("input[name *= 'AWSGraphForm\[sensor_feature_code\]\[Temperature']:not(:checked):checkbox").length);
-    });
-    jQuery('#AWSGraphForm_sensor_feature_code_Temperature_all').prop('checked', !jQuery("input[name *= 'AWSGraphForm\[sensor_feature_code\]\[Temperature']:not(:checked):checkbox").length);
+    //jQuery('#AWSGraphForm_sensor_feature_code_Temperature_all').unbind('click').click(function() {
+    //    jQuery("input[name *= 'AWSGraphForm\[sensor_feature_code\]\[Temperature']:checkbox").prop('checked', this.checked);
+    //});
+    //jQuery("input[name *= 'AWSGraphForm\[sensor_feature_code\]\[Temperature' ]:checkbox").unbind('click').click(function() {
+    //    jQuery('#AWSGraphForm_sensor_feature_code_Temperature_all').prop('checked', !jQuery("input[name *= 'AWSGraphForm\[sensor_feature_code\]\[Temperature']:not(:checked):checkbox").length);
+    //});
+    //jQuery('#AWSGraphForm_sensor_feature_code_Temperature_all').prop('checked', !jQuery("input[name *= 'AWSGraphForm\[sensor_feature_code\]\[Temperature']:not(:checked):checkbox").length);
 
 
     if (typeof dataJs != 'undefined') {
