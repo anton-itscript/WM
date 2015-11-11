@@ -219,7 +219,7 @@ class MainMenu
                 "label" => "ODSS export",
                 "items" => array(
                     'stationtypedatahistory'        => array(),
-                    'schedulehistory' => array(),
+                    'stationtypedatahistory' => array(),
                 )
             );
         }
