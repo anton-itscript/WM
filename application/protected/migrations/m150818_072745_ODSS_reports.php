@@ -155,7 +155,8 @@ class m150818_072745_ODSS_reports extends CDbMigration
         $command=$connection->createCommand($sql);
         $command->execute();
 
-        
+
+
     }
 
     /*

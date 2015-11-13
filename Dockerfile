@@ -69,6 +69,22 @@ RUN chmod 755 /start.sh
 # Add application code
 
 ADD ./application /usr/share/nginx/html/
+ADD ./application_config_params /usr/share/nginx/html/protected/config/params/
+RUN touch  /usr/share/nginx/html/protected/docker
+RUN mkdir -p \
+	/usr/share/nginx/html/protected/runtime \
+	/usr/share/nginx/html/protected/locks \
+	/usr/share/nginx/html/log \
+	/usr/share/nginx/html/www/files/backups \
+	/usr/share/nginx/html/www/files/hbr \
+	/usr/share/nginx/html/www/files/schedule_reports \
+	/usr/share/nginx/html/www/files/schedule_type_reports \
+	/usr/share/nginx/html/www/assets \
+	/usr/share/nginx/html/www/files/temp \
+	/usr/share/nginx/html/www/files/xml_messages \
+	/usr/share/nginx/html/www/files/weather_monitor_reports
+
+
 ADD ./cron-www-data /var/spool/cron/crontabs/www-data
 
 ###########################################################################################################################################

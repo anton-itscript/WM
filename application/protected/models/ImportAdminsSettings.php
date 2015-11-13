@@ -20,7 +20,7 @@ class ImportAdminsSettings extends CFormModel
     public function init()
     {
         $this->required_tables['settings'] = array(
-           // 'config',
+            //'config',
             'settings',
             'station',
             'station_group',
@@ -85,6 +85,7 @@ class ImportAdminsSettings extends CFormModel
         if (isset($conf['data']['config'])) {
             unset($conf['data']['config']);
         }
+
         foreach ($this->required_tables['settings'] as $table) {
             if (!array_key_exists($table,$conf['data'])) {
                 $this->addError('imported_file', 'Table "'.$table.'" missing');

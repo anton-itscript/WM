@@ -98,11 +98,12 @@ function checkData(ind){
 $(document).ready( function() {
     init();
     //
-    //if(checkData(0)){
+    if (checkData(0)) {
     setHeightTable(0);
-    setWidthColumn(0);//}
-    //else
-    //$('.awstable_block:eq(0)').html('No results');
+    setWidthColumn(0);
+    }
+    else
+    $('.awstable_block:eq(0)').html('No results');
     //
     $('.awstable_tabs div').click(function(){
 

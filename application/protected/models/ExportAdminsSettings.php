@@ -84,11 +84,11 @@ class ExportAdminsSettings extends CFormModel
         $settingsTable = Settings::model()->findAll();
         $tablesArray['settings'] = self::modelDataToArray($settingsTable);
 
-//        $configTable = Yii::app()->db->createCommand()
-//            ->select('c.config_id, c.key, c.label, c.value, c.default, c.type')
-//            ->from('config c')
-//            ->queryAll();
-//        $tablesArray['config'] = $configTable;
+        $configTable = Yii::app()->db->createCommand()
+            ->select('c.config_id, c.key, c.label, c.value, c.default, c.type')
+            ->from('config c')
+            ->queryAll();
+        $tablesArray['config'] = $configTable;
 
         $station = Yii::app()->db->createCommand()
                                                 ->select('

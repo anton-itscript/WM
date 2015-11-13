@@ -28,6 +28,7 @@ class MainMenu
 
     public function init()
     {
+//        ini_set('xdebug.max_nesting_level', 0);
         if ($this->current_controller == 'site' && $this->current_action != 'login') {
             $total_rain_stations = Station::getTotal ('rain');
             $total_aws_stations = Station::getTotal ('aws');
@@ -35,9 +36,10 @@ class MainMenu
 
         $this->data = array(
             'admin' => array(
-                'stations'=>array(
+                'stationsoverview'=>array(
                     "label"=>"admin_stations",
                     'items'=>array(
+                        'stationsoverview'  =>  array("label"=>"Stations Overview"),
                         'stationsave'       =>  array("label"=>"admin_create_station"),
                         'stations'          =>  array("label"=>'admin_stations'),
                         'stationgroups'     =>  array("label"=>'admin_station_groups')
@@ -213,13 +215,14 @@ class MainMenu
                 "items" => array(
                     'schedule'        => array(),
                     'schedulehistory' => array(),
+                    'schedulestationhistory' => array(),
                 )
             );
             $this->data['site']['stationtypedataexport'] = array(
                 "label" => "ODSS export",
                 "items" => array(
                     'stationtypedatahistory'        => array(),
-                    'stationtypedatahistory' => array(),
+
                 )
             );
         }

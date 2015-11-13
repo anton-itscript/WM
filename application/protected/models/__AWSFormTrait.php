@@ -36,7 +36,8 @@ trait __AWSFormTrait
     {
         $this->getFromMemory();
 
-        $this->getStationsList();
+        $this->getStationsList(true);
+
         $this->getGroupSensorsFeaturesList();
 
         return parent::init();
@@ -134,7 +135,7 @@ trait __AWSFormTrait
 
     public function checkStationId() {
 
-        $stations = $this->getStationsList();
+        $stations = $this->getStationsList(true);
 
         if ($stations && $this->station_id && is_array($this->station_id)) {
             foreach ($this->station_id as $key => $value) {
@@ -202,11 +203,11 @@ trait __AWSFormTrait
     /**
      * @return array|null $this->stations
      */
-    public function getStationsList()
+    public function getStationsList($color=false)
     {
-        if (!$this->stations) {
-            $this->stations = Station::prepareStationList(['aws','awos']);
-        }
+
+        $this->stations = Station::prepareStationList(['aws','awos'],$color);
+
         return $this->stations;
     }
 

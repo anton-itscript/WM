@@ -31,6 +31,7 @@ require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'applications_param_incl.
             'application.widgets.mailSender.mailSender',
             'application.filters.*',
             'application.views.*',
+			'application.extensions.TextFileWorker',
 		),
 
 		'preload' => array('log'),

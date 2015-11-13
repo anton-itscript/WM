@@ -171,5 +171,6 @@ return [
         ],
         'admin.smscommandsetup'      => [],
         'admin.generatesmscommand'   => [],
+        'admin.stationsoverview'     => [],
     ]
 ];

@@ -32,7 +32,7 @@ $this->widget('TwoDatesFilter', array('block_path' => '#filterparams', 'date_fro
             <div class="awstable_tabs">
                 <?php $first = true;?>
                 <?php foreach ($form->station_id as $station_id) {?>
-                    <div class="<?php echo $first ? 'active' . $first=false : ''; ?>"><?php echo $form->getStationsList()[$station_id]; ?></div>
+                    <div class="<?php echo $first ? 'active' . $first=false : ''; ?>"><?php echo $form->getStationsList(true)[$station_id]; ?></div>
                 <?php }?>
                 <div>All stations</div>
             </div>

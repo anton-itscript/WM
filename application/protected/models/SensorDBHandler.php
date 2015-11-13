@@ -90,6 +90,7 @@ class SensorDBHandler extends CStubActiveRecord{
             'RN',
             'HU',
             'WD',
+            'WL',
             'WS',
             'PR',
             'SN',

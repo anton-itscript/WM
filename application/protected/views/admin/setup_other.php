@@ -27,7 +27,14 @@
         <tr>
             <td><?php echo CHtml::activeLabel($settings, 'scheduled_reports_path')?></td>
             <td>
-                <?php echo CHtml::activeTextField($settings, 'scheduled_reports_path', array('style' => 'width: 350px;','disabled'=>'disabled'))?>
+                <?php
+                if (DOCKER) {
+                    echo CHtml::activeTextField($settings, 'scheduled_reports_path', array('style' => 'width: 350px;','disabled'=>'disabled'));
+                } else {
+                    echo CHtml::activeTextField($settings, 'scheduled_reports_path', array('style' => 'width: 350px;'));
+                }
+                ?>
+
                 <?php echo CHtml::error($settings,'scheduled_reports_path'); ?>
             </td>
         </tr>
@@ -43,7 +50,13 @@
         <tr>
             <td><?php echo CHtml::activeLabel($settings, 'xml_messages_path')?></td>
             <td>
-                <?php echo CHtml::activeTextField($settings, 'xml_messages_path', array('style' => 'width: 350px;','disabled'=>'disabled'))?> <br>Collect incoming XML messages in this folder.
+                <?php
+                if (DOCKER) {
+                    echo CHtml::activeTextField($settings, 'xml_messages_path', array('style' => 'width: 350px;','disabled'=>'disabled'));
+                } else {
+                    echo CHtml::activeTextField($settings, 'xml_messages_path', array('style' => 'width: 350px;'));
+                }
+                ?> <br>Collect incoming XML messages in this folder.
                 <?php echo CHtml::error($settings,'xml_messages_path'); ?>
             </td>
         </tr>   

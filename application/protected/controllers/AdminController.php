@@ -34,7 +34,13 @@ class AdminController extends CController
         }
 
         if (isset($_GET['get_config']) and (int)$_REQUEST['station_id'] ) {
-            $station = Station::model()->with('sensors.handler','sensors.features.metric')->findbyPk($_REQUEST['station_id']);
+            $station = Station::model()->with(
+                array(
+                    'sensors.handler'=>array('alias'=>'hh'),
+                    'sensors.features.metric',
+                    'station_calculation.station_calculation_variable.sensor_feature.sensor'=>array('alias'=>'feat'),
+                    'station_calculation.handler.metric'=>array('alias'=>'metr'),
+                ))->findbyPk($_REQUEST['station_id']);
 
             if (!is_null($station)) {
                 $stationParams = $station->getAttributes();
@@ -46,6 +52,8 @@ class AdminController extends CController
                         $sensorToAdd = array();
                         $sensorToAdd['display_name'] = $sensor->display_name;
                         $sensorToAdd['handler'] = $sensor['handler']->handler_id_code;
+                        $sensorToAdd['calculation']['dew_point'] = $sensor->hasCalculation('DewPoint');
+                        $sensorToAdd['calculation']['PressureSeaLevel'] = $sensor->hasCalculation('PressureSeaLevel');
                         $sensorToAdd['features'] = array();
                         if (count($sensor['features'])) {
                             foreach ($sensor['features'] as $feature) {
@@ -65,6 +73,13 @@ class AdminController extends CController
                     }
                 }
 
+                if (count($station['station_calculation'])) {
+//                    echo "<pre>";
+//                    //print_r($fileContent['sensors']);
+//                    print_r($station['station_calculation']);
+//                    echo "</pre>";
+//                    exit;
+                }
                 $fileContent = json_encode($fileContent,1);
                 It::downloadFile($fileContent,$fileName , 'text/conf');
             }
@@ -124,6 +139,16 @@ class AdminController extends CController
             $formLong->long()->delete();
 
         $this->redirect($this->createUrl('admin/stations'));
+    }
+
+    public function actionStationsOverview()
+    {
+        $stations = Station::model()->with(array('sensors.handler'=>array('alias'=>'hh'),'sensors.handler.features.metric'=>array('alias'=>'metr'),'station_calculation.handler.metric'))->findAll();
+
+        $this->render('stations_overview', array(
+            'stations' => $stations,
+        ));
+
     }
 
     /**
@@ -441,7 +466,7 @@ class AdminController extends CController
 
         $this_server = new Synchronization();
 
-        if ( !$this_server->isProcessed() || $this->isMaster() ) {
+        if ( !$this_server->isProcessed() || $this_server->isMaster() ) {
 
             $criteria = new CDbCriteria();
             $criteria->order = "communication_port asc, communication_type asc";
@@ -838,31 +863,33 @@ class AdminController extends CController
         }
         if (isset($_REQUEST['create']))
         {
-//            $backup_path = dirname(Yii::app()->request->scriptFile) .
-//                DIRECTORY_SEPARATOR .'files'.
-//                DIRECTORY_SEPARATOR .'backups';
-//
-//            if (It::isLinux())
-//            {
-//                $backup_path .= DIRECTORY_SEPARATOR .'`date +%Y_%m_%d`.sql';
-//            }
-//            else if (It::isWindows())
-//            {
-//                $backup_path .= DIRECTORY_SEPARATOR .'%DATE:~7,4%_%DATE:~3,2%_%DATE:~0,2%.sql';
-//            }
+            $backup_path = dirname(Yii::app()->request->scriptFile) .
+                DIRECTORY_SEPARATOR .'files'.
+                DIRECTORY_SEPARATOR .'backups';
 
-//            $command = Yii::app()->params['applications']['mysqldump_exe_path'] .
-//                ' --user="'. Yii::app()->params['db_params']['username'] .'"'.
-//                ' --password="'. Yii::app()->params['db_params']['password'] .'"'.
-//                ' --result-file="'. $backup_path .'" '.
-//                Yii::app()->params['db_params']['dbname'];
+            if (It::isLinux())
+            {
+                $backup_path .= DIRECTORY_SEPARATOR .'`date +%Y_%m_%d`.sql';
+            }
+            else if (It::isWindows())
+            {
+                $backup_path .= DIRECTORY_SEPARATOR .'%DATE:~7,4%_%DATE:~3,2%_%DATE:~0,2%.sql';
+            }
 
+            $command = Yii::app()->params['applications']['mysqldump_exe_path'] .
+                ' --user="'. Yii::app()->params['db_params']['username'] .'"'.
+                ' --password="'. Yii::app()->params['db_params']['password'] .'"'.
+                ' --result-file="'. $backup_path .'" '.
+                Yii::app()->params['db_params']['dbname'];
 
-            $backup_name= '`date +%Y_%m_%d`.sql';
-            $command = 'echo '.$backup_name . ' >'. dirname(Yii::app()->request->scriptFile) .
-                DIRECTORY_SEPARATOR . 'files' .
-                DIRECTORY_SEPARATOR .'backups' .
-                DIRECTORY_SEPARATOR . 'new';
+            if (DOCKER) {
+                $backup_name= '`date +%Y_%m_%d`.sql';
+                $command = 'echo '.$backup_name . ' >'. dirname(Yii::app()->request->scriptFile) .
+                    DIRECTORY_SEPARATOR . 'files' .
+                    DIRECTORY_SEPARATOR .'backups' .
+                    DIRECTORY_SEPARATOR . 'new';
+            }
+
 
             set_time_limit(1800); // 30min
 
@@ -883,27 +910,28 @@ class AdminController extends CController
                 DIRECTORY_SEPARATOR .'files'.
                 DIRECTORY_SEPARATOR .'backups';
 
-//            if (It::isLinux())
-//            {
-//                $backup_path .= DIRECTORY_SEPARATOR .'`date +%Y_%m_%d`_long.sql';
-//            }
-//            else if (It::isWindows())
-//            {
-//                $backup_path .= DIRECTORY_SEPARATOR .'%DATE:~7,4%_%DATE:~3,2%_%DATE:~0,2%_long.sql';
-//            }
+            if (It::isLinux())
+            {
+                $backup_path .= DIRECTORY_SEPARATOR .'`date +%Y_%m_%d`_long.sql';
+            }
+            else if (It::isWindows())
+            {
+                $backup_path .= DIRECTORY_SEPARATOR .'%DATE:~7,4%_%DATE:~3,2%_%DATE:~0,2%_long.sql';
+            }
 
+            $command = Yii::app()->params['applications']['mysqldump_exe_path'] .
+                ' --user="'. Yii::app()->params['db_long_params']['username'] .'"'.
+                ' --password="'. Yii::app()->params['db_long_params']['password'] .'"'.
+                ' --result-file="'. $backup_path .'" '.
+                Yii::app()->params['db_long_params']['dbname'];
 
-//            $command = Yii::app()->params['applications']['mysqldump_exe_path'] .
-//                ' --user="'. Yii::app()->params['db_long_params']['username'] .'"'.
-//                ' --password="'. Yii::app()->params['db_long_params']['password'] .'"'.
-//                ' --result-file="'. $backup_path .'" '.
-//                Yii::app()->params['db_long_params']['dbname'];
-
-            $backup_name= '`date +%Y_%m_%d`_long.sql';
-            $command = 'echo '.$backup_name . ' >'. dirname(Yii::app()->request->scriptFile) .
-                DIRECTORY_SEPARATOR . 'files' .
-                DIRECTORY_SEPARATOR .'backups' .
-                DIRECTORY_SEPARATOR . 'new_long';
+            if (DOCKER) {
+                $backup_name= '`date +%Y_%m_%d`_long.sql';
+                $command = 'echo '.$backup_name . ' >'. dirname(Yii::app()->request->scriptFile) .
+                    DIRECTORY_SEPARATOR . 'files' .
+                    DIRECTORY_SEPARATOR .'backups' .
+                    DIRECTORY_SEPARATOR . 'new_long';
+            }
 
             set_time_limit(1800); // 30min
 
@@ -1079,7 +1107,8 @@ class AdminController extends CController
         $arrh = array();
         if(SensorDBHandler::checkHandlersFor24h($handler_db->default_prefix)){
             $arrh[-1]='now';
-            for($i=0;$i<24;$i++) $arrh[$i]=($i<10?'0'.$i:$i).':00';
+            for($i=0;$i<24;$i++)
+                $arrh[$i]=($i<10 ? '0'.$i : $i).':00';
         }
         $this->render('setup_default_sensor', array(
             'handler_db'          => $handler_db,

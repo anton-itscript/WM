@@ -43,9 +43,17 @@ if (!isset($install['install_status']) || $install['install_status'] != 1) {
  * Run App
  */
 
+// is docker
+if (file_exists($protectedPath . DIRECTORY_SEPARATOR . 'docker')) {
+    define('DOCKER', true);
+} else {
+    define('DOCKER', false);
+}
+
 $yii = $protectedPath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'yii' .  DIRECTORY_SEPARATOR . 'yii.php';
 //$yii = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'yii' . DIRECTORY_SEPARATOR . 'yiilite.php';
-$config = $protectedPath . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'main.php';
 
+$config = $protectedPath . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'main.php';
 require_once($yii);
 Yii::createWebApplication($config)->run();
+

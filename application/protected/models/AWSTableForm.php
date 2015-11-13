@@ -48,10 +48,10 @@ class AWSTableForm extends CFormModel
             }
         }
 
-        if ($station_id <= 0) {
+        if (count($this->station_id) > 1) {
             $sql_part = "`t2`.`station_id` IN (".implode(',',$this->station_id).") ";
         } else {
-            $sql_part = "`t2`.`station_id` = '".$station_id."' ";
+            $sql_part = "`t2`.`station_id` = '".$this->station_id[0]."' ";
         }
 
         // 1.a) GET FEATURES
@@ -347,7 +347,7 @@ class AWSTableForm extends CFormModel
 
         // Turn off our amazing library autoload 
         // ( http://www.yiiframework.com/wiki/101/how-to-use-phpexcel-external-library-with-yii/)
-        spl_autoload_unregister(array('YiiBase','autoload'));        
+        spl_autoload_unregister(array('YiiBase','autoload'));
 
         // making use of our reference, include the main class
         // when we do this, phpExcel has its own autoload registration
@@ -364,22 +364,25 @@ class AWSTableForm extends CFormModel
         ->setSubject("XLS AWS Table Export")
         ->setDescription("Was generated with Weather Monitor software.");        
         
-        $all_stations = $this->getStationsList();
+        $all_stations = $this->getStationsList(false);
         $all_features = $this->getSensorsFeaturesList();
-        
+
         for ($i = 0; $i < $chosen_stations; $i++)
 		{
-            $objPHPExcel->createSheet($i);
 
-            $objPHPExcel->setActiveSheetIndex($i);  
-            $objPHPExcel->getActiveSheet()->setTitle($all_stations[$this->station_id[$i]]);
-            
-            $col = 1;
-            $row = 2;
-            $objPHPExcel->setActiveSheetIndex($i)->getColumnDimensionByColumn($col)->setWidth(20);
-            $objPHPExcel->setActiveSheetIndex($i)->setCellValueByColumnAndRow($col, $row, 'Datetime');
-            
-            $col++;
+                $objPHPExcel->createSheet($i);
+
+                $objPHPExcel->setActiveSheetIndex($i);
+                $objPHPExcel->getActiveSheet()->setTitle($all_stations[$this->station_id[$i]]);
+
+                $col = 1;
+                $row = 2;
+                $objPHPExcel->setActiveSheetIndex($i)->getColumnDimensionByColumn($col)->setWidth(20);
+                $objPHPExcel->setActiveSheetIndex($i)->setCellValueByColumnAndRow($col, $row, 'Datetime');
+
+                $col++;
+
+
             
 			foreach ($res['prepared_header'] as $prepared_header_key => $prepared_header_value)
 			{
@@ -418,7 +421,7 @@ class AWSTableForm extends CFormModel
             }
             
             $row = 4;
-            
+
             foreach ($res['prepared_data'] as $prepared_data_key => $prepared_data_value)
 			{
                 if (in_array($this->station_id[$i], $prepared_data_value['stations']) && $prepared_data_value['data'])

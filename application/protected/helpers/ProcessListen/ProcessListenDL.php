@@ -115,7 +115,7 @@ class ProcessListenDL extends BaseComponent
 
             if (is_null(SMSCommand::setResponse($message))) {
                 $this->_logger->log(__METHOD__ . ' Message type: ' . 'default');
-                $messageId = ListenerLog::addNew($message, $process->listener->listener_id, $process->settings->overwrite_data_on_listening, 'datalogger');
+                $messageId = ListenerLogTemp::addNew($message, $process->listener->listener_id, $process->settings->overwrite_data_on_listening, 'datalogger');
                 ListenerProcess::addComment($process->listener->listener_id, 'comment', 'got msg #'. $messageId);
             } else {
                 $this->_logger->log(__METHOD__ . ' Message type: ' . 'sms command');

@@ -32,7 +32,8 @@ class StationCalculationVariable extends CStubActiveRecord
 	public function relations()
     {
         return array(
-            'calculation' => array(self::BELONGS_TO, 'StationCalculation', 'calculation_id'),
+            'calculation'           => array(self::BELONGS_TO, 'StationCalculation', 'calculation_id'),
+            'sensor_feature'        => array(self::BELONGS_TO,'StationSensorFeature','sensor_feature_id'),
         );
     }
 

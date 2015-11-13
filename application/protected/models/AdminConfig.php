@@ -217,7 +217,6 @@ class AdminConfig extends MainInstall{
 
             $this->scenario = 'DBSYNC';
             $values = $this->getConfigFile('database_long_sync_config');
-
             $this->sync_id                   = $values['sync_id'];
             $this->sync_periodicity          = $values['periodicity'];
             $this->sync_interval             = $values['interval'];
@@ -225,6 +224,7 @@ class AdminConfig extends MainInstall{
             $this->sync_delete_periodicity   = $values['delete_periodicity'];
             $this->sync_delete_period        = $values['delete_period'];
             $this->sync_max_row              = $values['max_row'];
+
 
             $values = $this->getConfigFile('install_db_long');
             $this->status  = $values['install_database_long_status'];

@@ -1,4 +1,3 @@
-
 <div class="middlenarrow">
     <h1>
         <?php echo $user->user_id ? "Edit " . $user->username : "New User"; ?>
@@ -51,7 +50,7 @@
             <th><?php echo CHtml::activeLabel($user, 'access'); ?></th>
             <td>
                 <div>
-                    <input type="checkbox" id="check_all_features" onclick="$('div.checkBoxList input').attr('checked', ($(this).attr('checked') == 'checked' ? true : false));"/>
+                    <input type="checkbox" id="check_all_features" onclick="//$('div.checkBoxList input').attr('checked', ($(this).attr('checked') == 'checked' ? true : false));"/>
                     <?php echo CHtml::activeLabel($user, 'allAccess'); ?>
                 </div>
                 <?php
@@ -76,7 +75,6 @@
     </table>
     <?php echo CHtml::endForm(); ?>
 </div>
-
 
 <script>
     $(document).ready(function(){

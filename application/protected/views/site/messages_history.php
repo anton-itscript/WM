@@ -23,6 +23,8 @@
             <tr>
                 <th><?php echo CHtml::activeLabel($form, 'date_from')?></th>
                 <td>
+
+                    <?php //echo CHtml::textField('MessagesLogFilterForm[date_from]' ,$form->getDateFrom(), array('class' => 'date-pickmh input-calendar'))?>
                     <?php echo CHtml::activeTextField($form, 'date_from', array('class' => 'date-pick input-calendar'))?>
                     <div class="clear"></div>
                     <?php echo CHtml::error($form,'date_from'); ?>
@@ -36,6 +38,8 @@
             <tr>
                 <th><?php echo CHtml::activeLabel($form, 'date_to')?></th>
                 <td>
+
+                    <?php //echo CHtml::textField('MessagesLogFilterForm[date_to]', $form->getDateTo(), array('class' => 'date-pickmh input-calendar'))?>
                     <?php echo CHtml::activeTextField($form, 'date_to', array('class' => 'date-pick input-calendar'))?>
                     <div class="clear"></div>
                     <?php echo CHtml::error($form,'date_to'); ?>                
@@ -56,6 +60,12 @@
                     <?php if (Yii::app()->user->isSuperAdmin()) {?>
                         <?php echo CHtml::submitButton(It::t('site_label', 'do_delete_checked'), array('name' => 'delete_checked', 'onclick' => "return confirm('".It::t('site_label', 'msg_history__confirm_delete')."');"))?>
                     <?php } ?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <?php echo CHtml::activeRadioButtonList($form,'date_type_selected', $form->date_type)?>
+
                 </td>
             </tr>
             </table>

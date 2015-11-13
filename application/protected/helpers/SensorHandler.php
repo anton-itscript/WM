@@ -665,6 +665,7 @@ class SensorHandler extends BaseComponent{
 
 
 
+
             if (
                 (
                     $getDate['yday'] != $getDatePrev['yday']
@@ -686,11 +687,20 @@ class SensorHandler extends BaseComponent{
                 $this->prepared_pairs[$key]['value'] = $last['value'] - $data['sensor_feature_value'];
                 $this->prepared_pairs[$key]['normilized_value']=$value_norm;
 
+
+                if ($this->prepared_pairs[$key]['value'] < 0) {
+                    $this->prepared_pairs[$key]['period']= $getDate['hours']*60 + $getDate['minutes'];
+                    $this->prepared_pairs[$key]['value']=$last['value'];
+                    $this->prepared_pairs[$key]['normilized_value']=$last['normilized_value'];
+                }
+
                 if ($last['value'] == 0 && $this->prepared_pairs[$key]['value'] < 0) {
                     $this->prepared_pairs[$key]['value']= 0;
                     $this->prepared_pairs[$key]['normilized_value'] = 0.0000;
                 }
+
             }
+
 
             $this->_logger->log(__METHOD__.' getDate: '.$measuring_timestamp);
             $this->_logger->log(__METHOD__.' sensor_feature_id: '.$sensor_feature_id);

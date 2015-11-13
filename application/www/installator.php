@@ -20,6 +20,12 @@ date_default_timezone_set('UTC');
 	
 	//date_default_timezone_set('UTC');
 
+	if (file_exists($protectedPath . DIRECTORY_SEPARATOR . 'docker')) {
+		die('Docker version has not installation');
+	} else {
+
+	}
+
 	$protectedPath = dirname(__FILE__) . 
 						DIRECTORY_SEPARATOR . '..' .
 						DIRECTORY_SEPARATOR . 'protected';
@@ -37,7 +43,7 @@ date_default_timezone_set('UTC');
 				DIRECTORY_SEPARATOR . 'config' . 
 				DIRECTORY_SEPARATOR . 'install.php';
 
-//	require_once($yii);
+	require_once($yii);
 
-//	Yii::createWebApplication($config)->run();
+	Yii::createWebApplication($config)->run();
 ?>

@@ -29,7 +29,7 @@ class m150923_091233_listener_additional_params_long_db extends CDbMigration
 	public function safeDown()
 	{
         $this->dropColumn($this->table, $this->column);
-        return true;
+
 	}
 
 }

@@ -19,16 +19,29 @@ class MessagesLogFilterForm extends CFormModel {
     public $total;
     private $session_name = 'message_log_filter1';
 
+    public $date_type = array();
+    public $date_type_selected = 0;
+
     public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
     }    
     
     public function init(){
+        $this->date_type  = array('message date','created date');
         $this->getFromMemory();
         return parent::init();
     }
-    
+
+    public function getSelectedTypeDate()
+    {
+        if ($this->date_type_selected == 0) {
+            return 'measuring_timestamp';
+        } else if ($this->date_type_selected == 1) {
+            return 'created';
+        }
+    }
+
     //===== validation
     public function rules() {
         return array(
@@ -37,14 +50,50 @@ class MessagesLogFilterForm extends CFormModel {
             array('time_from,time_to', 'match', 'pattern' => '/^(\d{1,2}):(\d{1,2})$/'),
             array('time_from,time_to', 'length', 'max' => 5),
             array('date_to', 'checkDatesInterval'),
-            array('types', 'required')
+            array('types', 'required'),
+            array('date_type_selected', 'safe'),
         );
     }    
-    
+
+//    public function beforeValidate()
+//    {
+//        if ( preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/',$this->date_from,$matches_date_from)) {
+//           $this->date_from = $matches_date_from[2].'/'.$matches_date_from[1].'/'.$matches_date_from[3] ;
+//        }
+//        if (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/',$this->date_to,$matches_date_to) ) {
+//           $this->date_to = $matches_date_to[2].'/'.$matches_date_to[1].'/'.$matches_date_to[3] ;
+//        }
+//        parent::beforeValidate();
+//        return true;
+//    }
+
+
+    public function getDateFrom()
+    {
+            return $this->date_from;
+//        if ( preg_match("/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/",$this->date_from,$matches_date_from)) {
+//            return $matches_date_from[2].'/'.$matches_date_from[1].'/'.$matches_date_from[3] ;
+//        }
+
+    }
+
+    public function getDateTo()
+    {
+            return $this->date_to;
+//        if (preg_match("/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/",$this->date_to,$matches_date_to) ) {
+//            return $matches_date_to[2].'/'.$matches_date_to[1].'/'.$matches_date_to[3] ;
+//        }
+
+
+
+    }
+
     public function checkDatesInterval() {
+
         if (!$this->hasErrors('date_from') && !$this->hasErrors('date_to') && !$this->hasErrors('time_from') && !$this->hasErrors('time_to')) {
+
             $start_timestamp = strtotime($this->date_from.' '.$this->time_from);
-            $end_timestamp = strtotime($this->date_to.' '.$this->time_to);      
+            $end_timestamp = strtotime($this->date_to.' '.$this->time_to);
             
             if ($this->date_from && $this->date_to && $end_timestamp < $start_timestamp) {
                 $this->addError('date_to', 'End date and time must be later than start.');
@@ -61,16 +110,17 @@ class MessagesLogFilterForm extends CFormModel {
     public function putToMemory() {
         $session = new CHttpSession();
         $session->open();
- 
+
         $session[$this->session_name] = array(
-            'types'           => $this->types,
-            'date_from'       => $this->date_from,
-            'date_to'         => $this->date_to,
-            'time_from'       => $this->time_from,
-            'time_to'         => $this->time_to,        
-            'order_field'     => $this->order_field,
-            'order_direction' => $this->order_direction,
-            'total'           => $this->total,
+            'types'                 => $this->types,
+            'date_from'             => $this->date_from,
+            'date_to'               => $this->date_to,
+            'time_from'             => $this->time_from,
+            'time_to'               => $this->time_to,
+            'order_field'           => $this->order_field,
+            'order_direction'       => $this->order_direction,
+            'total'                 => $this->total,
+            'date_type_selected'    => $this->date_type_selected,
             );
 
     }
@@ -87,14 +137,15 @@ class MessagesLogFilterForm extends CFormModel {
         
         $session->open();
         
-        $this->types            = $session[$this->session_name] ? $session[$this->session_name]['types'] : array('failed','warning');
-        $this->date_from        = $session[$this->session_name] ? $session[$this->session_name]['date_from'] : '';
-        $this->date_to          = $session[$this->session_name] ? $session[$this->session_name]['date_to'] : '';
-        $this->time_from        = $session[$this->session_name] ? $session[$this->session_name]['time_from'] : '00:00';
-        $this->time_to          = $session[$this->session_name] ? $session[$this->session_name]['time_to'] : '';
-        $this->order_field      = $session[$this->session_name] ? $session[$this->session_name]['order_field'] : 'date';
-        $this->order_direction  = $session[$this->session_name] ? $session[$this->session_name]['order_direction'] : 'DESC';
-        $this->total            = $session[$this->session_name] ? $session[$this->session_name]['total'] : '0';
+        $this->types                    = $session[$this->session_name] ? $session[$this->session_name]['types'] : array('failed','warning');
+        $this->date_from                = $session[$this->session_name] ? $session[$this->session_name]['date_from'] : '';
+        $this->date_to                  = $session[$this->session_name] ? $session[$this->session_name]['date_to'] : '';
+        $this->time_from                = $session[$this->session_name] ? $session[$this->session_name]['time_from'] : '00:00';
+        $this->time_to                  = $session[$this->session_name] ? $session[$this->session_name]['time_to'] : '';
+        $this->order_field              = $session[$this->session_name] ? $session[$this->session_name]['order_field'] : 'date';
+        $this->order_direction          = $session[$this->session_name] ? $session[$this->session_name]['order_direction'] : 'DESC';
+        $this->total                    = $session[$this->session_name] ? $session[$this->session_name]['total'] : '0';
+        $this->date_type_selected       = $session[$this->session_name] ? $session[$this->session_name]['date_type_selected'] : '0';
     }
     //==== 
 
@@ -112,35 +163,46 @@ class MessagesLogFilterForm extends CFormModel {
             $this->putToMemory();
         }
     }
-    
-    
+
+    private function getSqlDateFrom()
+    {
+        if ($this->date_from) {
+            return " AND  `t1`.`" . $this->getSelectedTypeDate() . "` >= '" . date('Y-m-d H:i:s', strtotime($this->date_from . ' ' . $this->time_from)) . "'";
+        }
+        return '';
+    }
+
+    private function getSqlDateTo()
+    {
+        if ($this->date_to) {
+            return " AND  `t1`.`" . $this->getSelectedTypeDate() . "` <= '" . date('Y-m-d H:i:s', strtotime($this->date_to . ' ' . $this->time_to)) . "'";
+        }
+        return '';
+    }
     private function _prepareSqlCondition() {
         $sql_where = array();
         $sql_where_tmp = array();
-        
+        $date_from = $this->getSqlDateFrom();
+        $date_to = $this->getSqlDateTo();
+
         if ($this->types && in_array('failed', $this->types)) {
-            $sql_where_tmp[] = "(`t1`.`is_processed` = 1 AND `t1`.`failed` = 1)";
+
+            $sql_where_tmp[] = "(`t1`.`is_processed` = 1 AND `t1`.`failed` = 1) ". $date_from . $date_to ;
         }
         if ($this->types && in_array('warning', $this->types)) {
-            $sql_where_tmp[] = "(`t1`.`is_processed` = 1 AND `t2`.`process_error_id` > 0)";
+            $sql_where_tmp[] = "(`t1`.`is_processed` = 1 AND `t2`.`process_error_id` > 0) ". $date_from . $date_to ;
         }        
         if ($this->types && in_array('successfull', $this->types)) {
-            $sql_where_tmp[] = "(`t1`.`is_processed` = 1 AND `t2`.`process_error_id` IS NULL AND `t1`.`failed` = 0)";
+            $sql_where_tmp[] = "(`t1`.`is_processed` = 1 AND `t2`.`process_error_id` IS NULL AND `t1`.`failed` = 0) ". $date_from . $date_to ;
         }
         if ($this->types && in_array('not_processed_yet', $this->types)) {
-            $sql_where_tmp[] = "(`t1`.`is_processed` = 0)";
+            $sql_where_tmp[] = "(`t1`.`is_processed` = 0) ". $date_from . $date_to ;
         }        
         
         if ($sql_where_tmp) {
             $sql_where[] = implode(' OR ', $sql_where_tmp);
         }
-        
-        if ($this->date_from) {
-            $sql_where[] = "`t1`.`measuring_timestamp` >= '".date('Y-m-d H:i:s', strtotime($this->date_from.' '.$this->time_from))."'";
-        }
-        if ($this->date_to) {
-            $sql_where[] = "`t1`.`measuring_timestamp` <= '".date('Y-m-d H:i:s', strtotime($this->date_to .' '.$this->time_to))."'";
-        }
+
         
         $sql_where_str = $sql_where ? ' WHERE '.implode(' AND ', $sql_where) : '';
         

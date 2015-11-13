@@ -22,12 +22,12 @@ $this->widget('TwoDatesFilter', array('block_path' => '#filterparams', 'date_fro
             </tr>
             <tr>
                 <td>
-                    <?php if ($form->getStationsList()) {?>
+                    <?php if ($form->getStationsList(true)) {?>
                         <div class="select-list">
                             <?php echo CHtml::button(It::t('site_label', 'do_select'), array('id' => 'station_select', 'style' => 'width: 140px'))?>
                             <div class="select-option" id="station-select-list" style="display: none;">
                                 <?php echo CHtml::activeCheckBoxList(
-                                    $form, 'station_id', $form->getStationsList(),
+                                    $form, 'station_id', $form->getStationsList(true),
                                     array('separator'=>'','template'=>'<li>{input} {label}</li>', 'container' => 'ul class="select-ul column-4"', 'checkAll' => 'Select All')
                                 ) ?>
                             </div>
@@ -49,7 +49,7 @@ $this->widget('TwoDatesFilter', array('block_path' => '#filterparams', 'date_fro
 
                                             <?php //if (!in_array($group_key,['TemperatureWater', 'TemperatureSoil'])): ?>
                                                 <li class="head"><?php echo $group['name'] ?></li>
-                                            <?php // endif; ?>
+                                            <?php //endif; ?>
 
                                             <li  class="head-colors">
                                                 <?php

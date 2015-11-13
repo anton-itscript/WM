@@ -34,6 +34,26 @@ function init()
 
                     var container = $("#handler-select-list").find('.'+$(stationInpus[i]).val()+'-station');
                         container.show();
+
+                    // height logic
+                    var cont = $("#handler-select-list").find('li.'+$(stationInpus[i]).val()+'-station');
+                    console.log(cont)
+                    for (var j=0; j<cont.length; j++) {
+                        var lies = $(cont[j]).find('ul>li');
+                        var count_lies = lies.length
+                        if ($(cont[j]).is('li')) {
+                            $(cont[j]).find('ul').css('min-height',(25*count_lies)+'px')
+                        }
+                    }
+
+
+
+
+
+
+
+
+                        console.log()
                     if ($(container).hasClass('hide')) {
                         $(container).removeClass('hide');
                     }

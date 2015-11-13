@@ -5,6 +5,8 @@ class DefaultSensorsForm extends CFormModel {
     public $defListBox;
     public $test;
 
+    public $arrh = array();
+
     protected function setHandlers()
     {
         $criteria = new CDbCriteria();
@@ -13,7 +15,11 @@ class DefaultSensorsForm extends CFormModel {
         $criteria->order = "display_name";
         $criteria->index = 'handler_id';
 
-        $this->handlers = SensorDBHandler::model()->findAll($criteria);
+        $this->handlers = SensorDBHandler::model()->with('features.metric')->findAll($criteria);
+
+
+
+
     }
 
     protected function setDefListBox()
@@ -31,11 +37,15 @@ class DefaultSensorsForm extends CFormModel {
         $criteria = new CDbCriteria();
         $criteria->index = 'handler_id';
 
-        $this->calculations = CalculationDBHandler::model()->findAll($criteria);
+        $this->calculations = CalculationDBHandler::model()->with('metric')->findAll($criteria);
     }
 
     public function init()
     {
+        $this->arrh[-1]='now';
+        for($i=0;$i<24;$i++)
+            $this->arrh[$i]=($i<10 ? '0'.$i : $i).':00';
+
         $this->setHandlers();
         $this->setDefListBox();
         $this->setCalculation();

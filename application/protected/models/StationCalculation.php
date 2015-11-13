@@ -34,6 +34,7 @@ class StationCalculation extends CStubActiveRecord
         return array(
             'handler' => array(self::BELONGS_TO, 'CalculationDBHandler', 'handler_id'),        
             'Station' => array(self::BELONGS_TO, 'Station', 'station_id'),
+            'station_calculation_variable' => array(self::HAS_MANY, 'StationCalculationVariable', 'calculation_id'),
         );
     }
 

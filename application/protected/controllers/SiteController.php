@@ -462,6 +462,8 @@ class SiteController extends CController
                 if ($form->validate()) {
                     $requested = $form->station_id[0];
                     $res = $form->prepareList($requested);
+
+
                 }
             }
             if (isset($_POST['export'])) {
@@ -478,6 +480,7 @@ class SiteController extends CController
                 $res = $form->prepareList($requested);
             }
         }
+
         $render_data = [
             'form'            => $form,
             'res'             => $res,
@@ -676,6 +679,12 @@ class SiteController extends CController
         }
 
         if (Yii::app()->request->isPostRequest && isset($_POST['filter'])){
+//            if ( preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/',$_POST['MessagesLogFilterForm']['date_from'],$matches_date_from)) {
+//                $_POST['MessagesLogFilterForm']['date_from'] = $matches_date_from[2].'/'.$matches_date_from[1].'/'.$matches_date_from[3] ;
+//            }
+//            if (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/',$_POST['MessagesLogFilterForm']['date_to'],$matches_date_to) ) {
+//                $_POST['MessagesLogFilterForm']['date_to'] = $matches_date_to[2].'/'.$matches_date_to[1].'/'.$matches_date_to[3] ;
+//            }
             $form->attributes = $_POST['MessagesLogFilterForm'];
 			if ($form->validate()){
                 $this->redirect($this->createUrl('site/msghistory'));
@@ -688,6 +697,12 @@ class SiteController extends CController
         }
 
         if (Yii::app()->request->isPostRequest && isset($_POST['export'])){
+//            if ( preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/',$_POST['MessagesLogFilterForm']['date_from'],$matches_date_from)) {
+//                $_POST['MessagesLogFilterForm']['date_from'] = $matches_date_from[2].'/'.$matches_date_from[1].'/'.$matches_date_from[3] ;
+//            }
+//            if (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/',$_POST['MessagesLogFilterForm']['date_to'],$matches_date_to) ) {
+//                $_POST['MessagesLogFilterForm']['date_to'] = $matches_date_to[2].'/'.$matches_date_to[1].'/'.$matches_date_to[3] ;
+//            }
             $form->attributes = $_POST['MessagesLogFilterForm'];
 			if ($form->validate()){
                  $res = $form->makeExport();
