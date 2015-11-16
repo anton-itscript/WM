@@ -91,7 +91,7 @@ INSERT INTO `access_global` VALUES ('57', 'Site', 'ScheduleTypeDownload', '1', '
 INSERT INTO `access_global` VALUES ('58', 'Admin', 'SendSmsCommand', '1', '');
 INSERT INTO `access_global` VALUES ('59', 'Admin', 'SmsCommandSetup', '1', '');
 INSERT INTO `access_global` VALUES ('60', 'Admin', 'GenerateSmsCommand', '1', '');
-
+INSERT INTO `access_global` VALUES ('61', 'Admin', 'StationsOverview', '1', '');
 -- ----------------------------
 -- Table structure for access_user
 -- ----------------------------
@@ -784,6 +784,7 @@ CREATE TABLE `sensor_handler` (
   `aws_single_display_position` tinyint(4) NOT NULL DEFAULT '0',
   `aws_single_group` varchar(255) NOT NULL,
   `aws_station_uses` tinyint(1) NOT NULL DEFAULT '0',
+
   `rain_station_uses` tinyint(1) NOT NULL DEFAULT '0',
   `awa_station_uses` tinyint(1) NOT NULL DEFAULT '0',
   `flags` bigint(20) NOT NULL DEFAULT '0' COMMENT 'Bit flags',
