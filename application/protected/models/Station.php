@@ -539,4 +539,8 @@ class Station extends CStubActiveRecord
     }
 
 
+    public function getCalculation()
+    {
+        return $this->with('station_calculation.handler')->findByPk($this->getPrimaryKey());
+    }
 }

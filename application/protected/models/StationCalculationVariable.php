@@ -33,7 +33,7 @@ class StationCalculationVariable extends CStubActiveRecord
     {
         return array(
             'calculation'           => array(self::BELONGS_TO, 'StationCalculation', 'calculation_id'),
-            'sensor_feature'        => array(self::BELONGS_TO,'StationSensorFeature','sensor_feature_id'),
+            'sensor_feature'        => array(self::BELONGS_TO, 'StationSensorFeature','sensor_feature_id'),
         );
     }
 

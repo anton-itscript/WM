@@ -42,27 +42,36 @@ if (!$form->handlers) {
 
                     <?php $i=0;foreach ($value['features'] as $feature) {
 
-                    ?>
+                        $additional_features = $form->getFeatureByFeatureCodeAndHandlerIdCode($value->handler_id_code,$feature->feature_code); ?>
 
-                            <td><?=$feature['metric']->html_code ?></td>
-                            <td><?=$feature->feature_code?></td>
+                        <td><?=$feature['metric']->html_code ?></td>
+                        <td><?php  echo $additional_features['feature_name']?></td>
+                        <?php if ($additional_features['exstra_features']==true) { ?>
+                            <td colspan="3"></td>
+                            <td><?=$feature->feature_constant_value ?></td>
+                        <?php } else { ?>
                             <td><?=$feature->filter_max ?></td>
                             <td><?=$feature->filter_min ?></td>
                             <td><?=$feature->filter_diff ?></td>
-                            <td><?=$feature->feature_constant_value ?></td>
+                            <td></td>
+                        <?php }?>
                     <?php
                        break;
                     } ?>
-                    <td rowspan="<?=count($value['features'])?>" >
-                        <?php echo CHtml::activeDropDownList($value, 'start_time', $form->arrh, array('style' => 'width: 25px;')); ?>
+                    <td rowspan="<?=count($value['features'])?>" style="text-align:center; vertical-align:middle">
+                        <?php //echo CHtml::activeDropDownList($value, 'start_time', $form->arrh, array('style' => 'width: 25px;','disabled'=>'disabled')); ?>
+                        <?=$form->arrh[$value->start_time]?>
                     </td>
-                    <td rowspan="<?=count($value['features'])?>" style="padding: 1px"><?php
+
+                    <td rowspan="<?=count($value['features'])?>" style="padding: 1px; text-align:center; vertical-align:middle"><?php
                         $checkAws = $value->aws_station_uses;
                         echo CHtml::activeDropDownList($form, "handlers[$value->handler_id][aws_panel_show]",
                             $checkAws?$form->defListBox:array($form->defListBox[0]),
                             array('style' => 'width: 50px;',"disabled"=>$checkAws?'':"disabled"));?>
                     </td>
-                    <td rowspan="<?=count($value['features'])?>">
+
+
+                    <td rowspan="<?=count($value['features'])?>"  style="text-align:center; vertical-align:middle">
                         <a href="<?php echo $this->createUrl('admin/setupsensor', array('handler_id' => $value->handler_id))?>">Edit</a>
                     </td>
                 </tr>
@@ -71,14 +80,21 @@ if (!$form->handlers) {
                         $i++;
                         continue;
                     }
+                    $additional_features = $form->getFeatureByFeatureCodeAndHandlerIdCode($value->handler_id_code,$feature->feature_code);
+
                     ?>
                 <tr>
                     <td><?=$feature['metric']->html_code ?></td>
-                    <td><?=$feature->feature_code?></td>
-                    <td><?=$feature->filter_max ?></td>
-                    <td><?=$feature->filter_min ?></td>
-                    <td><?=$feature->filter_diff ?></td>
-                    <td><?=$feature->feature_constant_value ?></td>
+                    <td><?php  echo $additional_features['feature_name']?></td>
+                    <?php if ($additional_features['exstra_features']==true) { ?>
+                        <td colspan="3"></td>
+                        <td><?=$feature->feature_constant_value ?></td>
+                    <?php } else { ?>
+                        <td><?=$feature->filter_max ?></td>
+                        <td><?=$feature->filter_min ?></td>
+                        <td><?=$feature->filter_diff ?></td>
+                        <td></td>
+                    <?php }?>
                 </tr>
 
                 <?php } ?>

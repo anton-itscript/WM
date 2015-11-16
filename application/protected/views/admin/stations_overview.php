@@ -66,18 +66,27 @@
 				<td colspan="8">
 				<table class="tablelist">
 					<tbody>
-					<th colspan="8"><b>Sensors</b> of <?php echo $station->station_id_code; ?></th>
+					<tr>
+						<th colspan="3"><b>Sensors</b> of <?php echo $station->station_id_code; ?></th>
+						<th colspan="2">Calculations:</th>
+					</tr>
+					<tr>
+						<th>Sensor ID Code</th>
+						<th>Sensor name</th>
+						<th>Handler name</th>
+						<th>Dew Point</th>
+						<th>Pressure</th>
+					</tr>
+
 					<?php if (count($station['sensors'])) {?>
 						<?php foreach ($station['sensors'] as $sensor) {?>
-
-
 								<tr>
 									<td><?=$sensor->sensor_id_code?></td>
 									<td><?=$sensor->display_name?></td>
-									<td>Handler name: <?=$sensor['handler']->display_name?></td>
-									<td><?php //echo $sensor['handler']['features']['metric']->html_code?></td>
+									<td><?=$sensor['handler']->display_name?></td>
+									<td><?php echo $sensor->hasCalculation('DewPoint') ? "+" : "-";?></td>
+									<td><?php echo $sensor->hasCalculation('PressureSeaLevel') ? '+' : '-';?></td>
 								</tr>
-
 						<?php } ?>
 					<?php } else {?>
 						<tr>

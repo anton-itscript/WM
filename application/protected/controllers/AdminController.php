@@ -34,55 +34,8 @@ class AdminController extends CController
         }
 
         if (isset($_GET['get_config']) and (int)$_REQUEST['station_id'] ) {
-            $station = Station::model()->with(
-                array(
-                    'sensors.handler'=>array('alias'=>'hh'),
-                    'sensors.features.metric',
-                    'station_calculation.station_calculation_variable.sensor_feature.sensor'=>array('alias'=>'feat'),
-                    'station_calculation.handler.metric'=>array('alias'=>'metr'),
-                ))->findbyPk($_REQUEST['station_id']);
-
-            if (!is_null($station)) {
-                $stationParams = $station->getAttributes();
-                $fileName = $station->station_id.'_'.$station->station_id_code.'_'.$station->updated.'.conf';
-
-                $fileContent['station'] = $stationParams;
-                if (count($station['sensors'])) {
-                    foreach ($station['sensors'] as $sensor) {
-                        $sensorToAdd = array();
-                        $sensorToAdd['display_name'] = $sensor->display_name;
-                        $sensorToAdd['handler'] = $sensor['handler']->handler_id_code;
-                        $sensorToAdd['calculation']['dew_point'] = $sensor->hasCalculation('DewPoint');
-                        $sensorToAdd['calculation']['PressureSeaLevel'] = $sensor->hasCalculation('PressureSeaLevel');
-                        $sensorToAdd['features'] = array();
-                        if (count($sensor['features'])) {
-                            foreach ($sensor['features'] as $feature) {
-                                $featuresToAdd = array();
-                                $featuresToAdd['feature_constant_value'] = $feature->feature_constant_value;
-                                $featuresToAdd['feature_display_name'] = $feature->feature_display_name;
-                                $featuresToAdd['feature_code'] = $feature->feature_code;
-                                $featuresToAdd['metric'] = array();
-                                if ($feature['metric']) {
-                                    $featuresToAdd['metric'] = $feature['metric']->getAttributes();
-                                }
-                                $sensorToAdd['features'][] = $featuresToAdd;
-                            }
-                        }
-
-                        $fileContent['sensors'][] = $sensorToAdd;
-                    }
-                }
-
-                if (count($station['station_calculation'])) {
-//                    echo "<pre>";
-//                    //print_r($fileContent['sensors']);
-//                    print_r($station['station_calculation']);
-//                    echo "</pre>";
-//                    exit;
-                }
-                $fileContent = json_encode($fileContent,1);
-                It::downloadFile($fileContent,$fileName , 'text/conf');
-            }
+            $result = $importStations->getExport((int)$_REQUEST['station_id']);
+            It::downloadFile($result['file_content'], $result['file_name'], 'text/conf');
         }
 
         $stations = Station::model()->with('sensors')->findAll(array('order' => 't.station_id asc'));
@@ -230,6 +183,7 @@ class AdminController extends CController
                 $measurements[$key]['object'] = StationCalculationVariable::model()->find('calculation_id = :calculation_id AND variable_name = :variable_name', array(':calculation_id' => $calculation_db->calculation_id, ':variable_name' => $value['variable_name']));
             }
         }
+
         foreach ($measurements as $key => $value) {
             if (!$measurements[$key]['object']->calculation_variable_id) {
                 $measurements[$key]['object'] = new StationCalculationVariable();
@@ -267,11 +221,16 @@ class AdminController extends CController
                     $measurements[$key]['object']->addError('sensor_feature_id', $measurements[$key]['display_name'].' is required.');
                     $validated = false;
                 }
+
+                if ($measurements[$key]['required'] == 0) {
+                    unset($measurements[$key]);
+                }
             }
 
             $validated = $validated & $calculation_db->validate();
             if ($validated) {
                 $calculation_db->save();
+              
                 foreach ($measurements as $key => $value) {
                     $measurements[$key]['object']->calculation_id = $calculation_db->calculation_id;
                     $measurements[$key]['object']->save();

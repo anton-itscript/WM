@@ -7,6 +7,8 @@ class DefaultSensorsForm extends CFormModel {
 
     public $arrh = array();
 
+    protected $sensor_handlers = array();
+
     protected function setHandlers()
     {
         $criteria = new CDbCriteria();
@@ -17,9 +19,14 @@ class DefaultSensorsForm extends CFormModel {
 
         $this->handlers = SensorDBHandler::model()->with('features.metric')->findAll($criteria);
 
-
-
-
+        foreach ($this->handlers as $handler) {
+            $this->sensor_handlers[$handler->handler_id_code] = SensorHandler::create($handler->handler_id_code);
+        }
+//        echo "<pre>";
+//        print_r($this->sensor_handlers);
+//        print_r($this->handlers);
+//        echo "</pre>";
+//        exit;
     }
 
     protected function setDefListBox()
@@ -67,4 +74,42 @@ class DefaultSensorsForm extends CFormModel {
             }
         }
     }
+
+
+    public function getFeatureByFeatureCodeAndHandlerIdCode($handler_id_code, $feature_code)
+    {
+        foreach ($this->sensor_handlers[$handler_id_code]->features as $feature) {
+            if ($feature['feature_code'] == $feature_code) {
+                $feature['exstra_features'] = false;
+                return $feature;
+            }
+        }
+        foreach ($this->sensor_handlers[$handler_id_code]->extra_features as $feature) {
+            if ($feature['feature_code'] == $feature_code) {
+                $feature['exstra_features'] = true;
+                return $feature;
+            }
+        }
+
+
+        return $this->getFeature($handler_id_code, $feature_code);
+
+    }
+
+
+    public function getFeature($handler_id_code, $feature_code)
+    {
+        foreach ($this->handlers as $handler) {
+            if ($handler->handler_id_code == $handler_id_code) {
+                if (is_object($handler['features'][$feature_code])) {
+                    return $handler['features'][$feature_code]->getAttributes();
+                }
+            }
+        }
+        return array();
+    }
+
+
+
+
 }
