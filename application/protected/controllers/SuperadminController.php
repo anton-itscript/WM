@@ -8,7 +8,7 @@ class SuperadminController extends CController
         return true;
     }
     public function actionIndex(){
-		$this->redirect($this->createUrl('superadmin/users'));
+		$this->redirect($this->createUrl('superadmin/syncsettings'));
     }
     /*
      * Users
