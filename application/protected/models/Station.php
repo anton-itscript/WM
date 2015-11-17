@@ -30,7 +30,7 @@ class Station extends CStubActiveRecord
     public function afterFind()
     {
 
-        if(empty($this->color)) {
+        if(!$this->getUseLong() && empty($this->color)) {
             $this->beforeSave = false;
             $this->color = Color::randomColor();
             $this->save(false);

@@ -959,119 +959,7 @@ class SiteController extends CController
         ));
     }
 
-    public function actionStationTypeDataExport()
-    {
-        /** @var ScheduleReport $form */
-        /** @var ScheduleReportDestination[] $forms_d] */
-        if (Yii::app()->request->isPostRequest) {
 
-        }
-        TimezoneWork::set('UTC');
-        if (isset($_REQUEST['ex_schedule_id']) and (int)$_REQUEST['ex_schedule_id'] and isset($_REQUEST['active'])) {
-            $scheduleTypeReportForm = ScheduleTypeReport::model()->findByPk(intval($_REQUEST['ex_schedule_id']));
-            $scheduleTypeReportForm->setAttribute('active', $_REQUEST['active']);
-            $scheduleTypeReportForm->save();
-        }
-
-        $scheduleTypeReportForm =  new ScheduleTypeReport;
-
-        if (isset($_REQUEST['ex_delete_id'])) {
-            $scheduleTypeReportForm = ScheduleTypeReport::model()->findByPk(intval($_REQUEST['ex_delete_id']));
-            if ($scheduleTypeReportForm && $scheduleTypeReportForm->delete()) {
-                It::memStatus('schedule_deleted');
-                $this->redirect($this->createUrl('site/StationTypeDataExport'));
-            }
-        }
-
-//		if (isset($_REQUEST['resend_schedule_id'])) {
-//            $form = ScheduleTypeReport::model()->findByPk(intval($_REQUEST['resend_schedule_id']));
-//        }
-
-
-        if (isset($_REQUEST['ex_schedule_id']) and (int)$_REQUEST['ex_schedule_id'] and !isset($_REQUEST['active'])) {
-            $scheduleTypeReportForm = ScheduleTypeReport::model()->findByPk(intval($_REQUEST['ex_schedule_id']));
-
-        }
-
-
-        if (isset($scheduleTypeReportForm)) {
-            $scheduleTypeReportDestination = ScheduleTypeReportDestination::model()->findAllByAttributes(array('ex_schedule_id' => $scheduleTypeReportForm->ex_schedule_id));
-
-        } else {
-            $scheduleTypeReportDestination = array();
-
-        }
-
-
-        $valid = true;
-
-        if (Yii::app()->request->isPostRequest && isset($_POST['ScheduleTypeReport'])) {
-
-            $scheduleTypeReportForm->attributes = $_POST['ScheduleTypeReport'];
-            $valid = $valid & $scheduleTypeReportForm->validate();
-
-
-            if (isset($_POST['ScheduleTypeReportDestination'])) {
-                foreach ($_POST['ScheduleTypeReportDestination'] as $key => $value) {
-                    if ($value['ex_schedule_destination_id']) {
-                        $scheduleTypeReportDestination[$key] = ScheduleTypeReportDestination::model()->findByPk($value['ex_schedule_destination_id']);
-                    } else {
-                        $scheduleTypeReportDestination[$key] = new ScheduleTypeReportDestination();
-                    }
-
-                    $scheduleTypeReportDestination[$key]->attributes = $value;
-                    $valid = $valid & $scheduleTypeReportDestination[$key]->validate();
-                }
-            }
-
-            if ($valid) {
-                // $scheduleTypeReportForm->scenario='admin';
-                $scheduleTypeReportForm->save(false);
-
-                foreach ($scheduleTypeReportDestination as $key => $value) {
-                    $scheduleTypeReportDestination[$key]->ex_schedule_id = $scheduleTypeReportForm->ex_schedule_id;
-                    $scheduleTypeReportDestination[$key]->save();
-                }
-//                foreach ($forms_s as $key => $value) {
-//                    $forms_s[$key]->schedule_id = $form->schedule_id;
-//                    $forms_s[$key]->save();
-//                }
-                It::memStatus($scheduleTypeReportForm->isNewRecord ? 'schedule_added' : 'schedule_updated');
-                $this->redirect($this->createUrl('site/StationTypeDataExport'));
-            }
-        }
-
-        $str = new ScheduleTypeReport;
-        $scheduleTypeReportProcessed = new ScheduleTypeReportProcessed;
-        $scheduleTypesReports = $str->getList(10);
-
-        $this->render('schedule_type_report', array(
-            'forms_d'                           => $scheduleTypeReportDestination,
-            'scheduleTypeReportForm'            => $scheduleTypeReportForm,
-            'scheduleTypesReports'              => $scheduleTypesReports,
-            'scheduleTypeReportProcessed'       => $scheduleTypeReportProcessed,
-        ));
-    }
-
-    public function actionStationTypeDataHistory()
-    {
-        $ex_schedule_id = isset($_REQUEST['ex_schedule_id']) ? intval($_REQUEST['ex_schedule_id']) : null;
-
-        if (!(int)$ex_schedule_id)
-        {
-            $this->redirect($this->createUrl('site/StationTypeDataExport'));
-        }
-        TimezoneWork::set('UTC');
-
-        $history =  ScheduleTypeReportProcessed::getHistory($ex_schedule_id);
-        $scheduleTypeReport = new ScheduleTypeReport;
-        $report = $scheduleTypeReport->findByPk($ex_schedule_id);
-
-        $this->render('schedule_type_report_history', array(
-            'report' => $report,
-            'history' => $history,
-        ));
-    }
 
     public function actionScheduleDownload()
 	{
@@ -1089,24 +977,6 @@ class SiteController extends CController
 		$report_string = file_exists($file_path) ? file_get_contents($file_path) : $report_string = '';
 
         It::downloadFile($report_string, $file_name);
-    }
-
-    public function actionScheduleTypeDownload()
-	{
-        $id = isset($_REQUEST['id']) ? intval($_REQUEST['id']) : null;
-        if ((int)$id) {
-            $report= new ScheduleTypeReportProcessed;
-            $reportResult = $report->with('ex_schedule_report')->findByPk($id);
-            $reportResult->file_content;
-            $extension = $reportResult->ex_schedule_report->report_format;
-            $file_name = $reportResult->check_period_start . ' - ' . $reportResult->check_period_end;
-            $report_string = !empty($reportResult->file_content)? $reportResult->file_content : '';
-            $file_name .= '.'.$extension;
-            It::downloadFile($report_string, $file_name);
-        } else {
-            $this->redirect($_SERVER['HTTP_REFERER']);
-        }
-
     }
 
     public function actionLogin() {

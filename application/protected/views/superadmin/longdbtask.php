@@ -1,5 +1,5 @@
 <div class="middlenarrow">
-    <h1><?php echo It::t('menu_label', 'superadmin_LongDbTask'); ?></h1>
+    <h1><?php echo It::t('menu_label', 'superadmin_longdbtask'); ?></h1>
     <?php echo CHtml::beginForm($this->createUrl('superadmin/longdbtask'), 'post'); ?>
 
     <?php echo CHtml::errorSummary($conf_form); ?>

@@ -1,27 +1,24 @@
--- MySQL dump 10.13  Distrib 5.5.31, for Linux (x86_64)
---
--- Host: localhost    Database: delairco_wm_long
--- ------------------------------------------------------
--- Server version	5.5.31-log
+/*
+Navicat MySQL Data Transfer
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+Source Server         : localhost
+Source Server Version : 50544
+Source Host           : localhost:3306
+Source Database       : wm_long
 
---
--- Table structure for table `calculation_handler`
---
+Target Server Type    : MYSQL
+Target Server Version : 50544
+File Encoding         : 65001
 
+Date: 2015-11-10 11:28:45
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for calculation_handler
+-- ----------------------------
 DROP TABLE IF EXISTS `calculation_handler`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `calculation_handler` (
   `handler_id` tinyint(4) NOT NULL DEFAULT '0',
   `handler_id_code` varchar(255) DEFAULT NULL,
@@ -32,15 +29,102 @@ CREATE TABLE `calculation_handler` (
   `aws_panel_show` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`handler_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `listener`
---
+-- ----------------------------
+-- Records of calculation_handler
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for ex_schedule_report
+-- ----------------------------
+DROP TABLE IF EXISTS `ex_schedule_report`;
+CREATE TABLE `ex_schedule_report` (
+  `ex_schedule_id` int(11) NOT NULL,
+  `station_type` varchar(255) NOT NULL,
+  `report_type` varchar(50) NOT NULL DEFAULT 'synop' COMMENT 'synop, bufr',
+  `period` smallint(6) NOT NULL DEFAULT '60' COMMENT 'in minutes',
+  `report_format` varchar(20) NOT NULL DEFAULT 'csv' COMMENT 'txt, csv',
+  `start_datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `next_run_planned` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  `ex_schedule_ident` varchar(255) DEFAULT NULL,
+  `generation_delay` int(11) DEFAULT '0',
+  `aging_time_delay` int(11) DEFAULT '10',
+  `active` int(1) DEFAULT '1',
+  `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`ex_schedule_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ex_schedule_report
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ex_schedule_report_destination
+-- ----------------------------
+DROP TABLE IF EXISTS `ex_schedule_report_destination`;
+CREATE TABLE `ex_schedule_report_destination` (
+  `ex_schedule_destination_id` int(11) NOT NULL,
+  `ex_schedule_id` int(11) NOT NULL,
+  `method` varchar(20) NOT NULL DEFAULT 'mail',
+  `destination_email` varchar(255) NOT NULL,
+  `destination_local_folder` varchar(255) NOT NULL,
+  `destination_ip` varchar(15) NOT NULL,
+  `destination_ip_port` smallint(5) NOT NULL DEFAULT '21',
+  `destination_ip_folder` varchar(255) NOT NULL DEFAULT '',
+  `destination_ip_user` varchar(255) NOT NULL,
+  `destination_ip_password` varchar(255) NOT NULL,
+  PRIMARY KEY (`ex_schedule_destination_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ex_schedule_report_destination
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ex_schedule_report_processed
+-- ----------------------------
+DROP TABLE IF EXISTS `ex_schedule_report_processed`;
+CREATE TABLE `ex_schedule_report_processed` (
+  `ex_schedule_processed_id` int(11) NOT NULL,
+  `ex_schedule_id` int(11) NOT NULL,
+  `is_synchronized` int(1) DEFAULT '0',
+  `aging_time` int(50) DEFAULT NULL,
+  `current_role` varchar(255) NOT NULL DEFAULT 'none',
+  `check_period_start` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `check_period_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`ex_schedule_processed_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ex_schedule_report_processed
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ex_schedule_send_log
+-- ----------------------------
+DROP TABLE IF EXISTS `ex_schedule_send_log`;
+CREATE TABLE `ex_schedule_send_log` (
+  `ex_schedulte_send_log_id` int(11) NOT NULL,
+  `ex_schedule_processed_id` int(11) NOT NULL,
+  `ex_schedule_destination_id` int(11) NOT NULL,
+  `sent` int(1) DEFAULT '0',
+  `send_logs` longblob,
+  `updated` timestamp NULL DEFAULT NULL,
+  `created` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`ex_schedulte_send_log_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ex_schedule_send_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for listener
+-- ----------------------------
 DROP TABLE IF EXISTS `listener`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `listener` (
   `listener_id` int(11) NOT NULL DEFAULT '0',
   `process_pid` mediumint(9) unsigned DEFAULT NULL,
@@ -51,17 +135,18 @@ CREATE TABLE `listener` (
   `connection_result_description` varchar(255) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `additional_param` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`listener_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `listener_log`
---
+-- ----------------------------
+-- Records of listener
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for listener_log
+-- ----------------------------
 DROP TABLE IF EXISTS `listener_log`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `listener_log` (
   `log_id` int(11) NOT NULL DEFAULT '0',
   `listener_id` int(11) DEFAULT NULL,
@@ -86,15 +171,15 @@ CREATE TABLE `listener_log` (
   KEY `listener_log__measuring_timestamp` (`measuring_timestamp`),
   KEY `listener_log__is_indexes` (`is_actual`,`is_last`,`is_processed`,`is_processing`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `listener_log_process_error`
---
+-- ----------------------------
+-- Records of listener_log
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for listener_log_process_error
+-- ----------------------------
 DROP TABLE IF EXISTS `listener_log_process_error`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `listener_log_process_error` (
   `process_error_id` int(11) NOT NULL DEFAULT '0',
   `log_id` int(11) DEFAULT NULL,
@@ -107,15 +192,15 @@ CREATE TABLE `listener_log_process_error` (
   KEY `log_id` (`log_id`),
   CONSTRAINT `listener_log_process_errors_fk` FOREIGN KEY (`log_id`) REFERENCES `listener_log` (`log_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `listener_process`
---
+-- ----------------------------
+-- Records of listener_log_process_error
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for listener_process
+-- ----------------------------
 DROP TABLE IF EXISTS `listener_process`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `listener_process` (
   `listener_process_id` int(11) NOT NULL DEFAULT '0',
   `listener_id` int(11) DEFAULT NULL,
@@ -127,15 +212,15 @@ CREATE TABLE `listener_process` (
   KEY `listener_id` (`listener_id`),
   CONSTRAINT `listener_process_fk` FOREIGN KEY (`listener_id`) REFERENCES `listener` (`listener_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `refbook_measurement_type`
---
+-- ----------------------------
+-- Records of listener_process
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for refbook_measurement_type
+-- ----------------------------
 DROP TABLE IF EXISTS `refbook_measurement_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `refbook_measurement_type` (
   `measurement_type_id` tinyint(4) NOT NULL DEFAULT '0',
   `display_name` varchar(255) DEFAULT NULL,
@@ -143,15 +228,15 @@ CREATE TABLE `refbook_measurement_type` (
   `ord` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`measurement_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `refbook_measurement_type_metric`
---
+-- ----------------------------
+-- Records of refbook_measurement_type
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for refbook_measurement_type_metric
+-- ----------------------------
 DROP TABLE IF EXISTS `refbook_measurement_type_metric`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `refbook_measurement_type_metric` (
   `measurement_type_metric_id` smallint(6) NOT NULL DEFAULT '0',
   `measurement_type_id` tinyint(4) DEFAULT NULL,
@@ -163,15 +248,15 @@ CREATE TABLE `refbook_measurement_type_metric` (
   CONSTRAINT `refbook_measurement_type_metric_fk` FOREIGN KEY (`measurement_type_id`) REFERENCES `refbook_measurement_type` (`measurement_type_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `refbook_measurement_type_metric_fk1` FOREIGN KEY (`metric_id`) REFERENCES `refbook_metric` (`metric_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `refbook_metric`
---
+-- ----------------------------
+-- Records of refbook_measurement_type_metric
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for refbook_metric
+-- ----------------------------
 DROP TABLE IF EXISTS `refbook_metric`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `refbook_metric` (
   `metric_id` tinyint(4) NOT NULL DEFAULT '0',
   `html_code` varchar(50) DEFAULT NULL,
@@ -180,15 +265,15 @@ CREATE TABLE `refbook_metric` (
   `code` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`metric_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `schedule_report`
---
+-- ----------------------------
+-- Records of refbook_metric
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for schedule_report
+-- ----------------------------
 DROP TABLE IF EXISTS `schedule_report`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule_report` (
   `schedule_id` int(11) NOT NULL AUTO_INCREMENT,
   `report_type` varchar(50) NOT NULL DEFAULT 'synop' COMMENT 'synop, bufr',
@@ -199,19 +284,19 @@ CREATE TABLE `schedule_report` (
   `last_scheduled_run_planned` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`schedule_id`),
-  KEY `fk_schedule_report__station_id` (`station_id`),
-  CONSTRAINT `fk_schedule_report__station_id` FOREIGN KEY (`station_id`) REFERENCES `station` (`station_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `send_like_attach` int(1) DEFAULT '1',
+  `send_email_together` int(1) DEFAULT '0',
+  PRIMARY KEY (`schedule_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `schedule_report_destination`
---
+-- ----------------------------
+-- Records of schedule_report
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for schedule_report_destination
+-- ----------------------------
 DROP TABLE IF EXISTS `schedule_report_destination`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule_report_destination` (
   `schedule_destination_id` int(11) NOT NULL AUTO_INCREMENT,
   `schedule_id` int(11) NOT NULL,
@@ -227,18 +312,18 @@ CREATE TABLE `schedule_report_destination` (
   KEY `schedule_id` (`schedule_id`),
   CONSTRAINT `schedule_report_destination_fk` FOREIGN KEY (`schedule_id`) REFERENCES `schedule_report` (`schedule_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `schedule_report_processed`
---
+-- ----------------------------
+-- Records of schedule_report_destination
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for schedule_report_processed
+-- ----------------------------
 DROP TABLE IF EXISTS `schedule_report_processed`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule_report_processed` (
   `schedule_processed_id` int(11) NOT NULL AUTO_INCREMENT,
-  `schedule_id` int(11) NOT NULL,
+  `sr_to_s_id` int(11) NOT NULL,
   `check_period_start` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `check_period_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `listener_log_id` int(11) NOT NULL,
@@ -250,21 +335,36 @@ CREATE TABLE `schedule_report_processed` (
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`schedule_processed_id`),
-  KEY `schedule_id` (`schedule_id`),
   KEY `listener_log_id` (`listener_log_id`),
   KEY `sch_rep_processed__is_indexes` (`is_last`,`is_processed`),
-  KEY `sch_rep_processed__created` (`created`),
-  CONSTRAINT `schedule_report_processed_fk` FOREIGN KEY (`schedule_id`) REFERENCES `schedule_report` (`schedule_id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  KEY `sch_rep_processed__created` (`created`)
 ) ENGINE=InnoDB AUTO_INCREMENT=70608 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `sensor_data`
---
+-- ----------------------------
+-- Records of schedule_report_processed
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for schedule_report_to_station
+-- ----------------------------
+DROP TABLE IF EXISTS `schedule_report_to_station`;
+CREATE TABLE `schedule_report_to_station` (
+  `id` int(11) NOT NULL,
+  `schedule_id` int(11) NOT NULL,
+  `station_id` smallint(7) NOT NULL,
+  `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of schedule_report_to_station
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sensor_data
+-- ----------------------------
 DROP TABLE IF EXISTS `sensor_data`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sensor_data` (
   `sensor_data_id` int(11) NOT NULL DEFAULT '0',
   `station_id` smallint(6) DEFAULT NULL,
@@ -291,15 +391,15 @@ CREATE TABLE `sensor_data` (
   CONSTRAINT `sensor_data_fk` FOREIGN KEY (`sensor_feature_id`) REFERENCES `station_sensor_feature` (`sensor_feature_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `sensor_data_fk1` FOREIGN KEY (`listener_log_id`) REFERENCES `listener_log` (`log_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `sensor_data_minute`
---
+-- ----------------------------
+-- Records of sensor_data
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for sensor_data_minute
+-- ----------------------------
 DROP TABLE IF EXISTS `sensor_data_minute`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sensor_data_minute` (
   `sensor_data_id` int(11) NOT NULL DEFAULT '0',
   `sensor_id` int(11) DEFAULT NULL,
@@ -326,15 +426,15 @@ CREATE TABLE `sensor_data_minute` (
   CONSTRAINT `sensor_data_minute_fk` FOREIGN KEY (`listener_log_id`) REFERENCES `listener_log` (`log_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `sensor_data_minute_fk1` FOREIGN KEY (`sensor_id`) REFERENCES `station_sensor` (`station_sensor_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `sensor_handler`
---
+-- ----------------------------
+-- Records of sensor_data_minute
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for sensor_handler
+-- ----------------------------
 DROP TABLE IF EXISTS `sensor_handler`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sensor_handler` (
   `handler_id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `handler_id_code` varchar(255) NOT NULL,
@@ -353,16 +453,17 @@ CREATE TABLE `sensor_handler` (
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`handler_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
---
--- Table structure for table `sensor_handler_default_feature`
---
+-- ----------------------------
+-- Records of sensor_handler
+-- ----------------------------
+INSERT INTO `sensor_handler` VALUES ('1', 'WaterLevel', 'Water Level', 'Water Level', 'WL', '0', '1', '1', 'water', '1', '0', '0', '25', '-1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
+-- ----------------------------
+-- Table structure for sensor_handler_default_feature
+-- ----------------------------
 DROP TABLE IF EXISTS `sensor_handler_default_feature`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sensor_handler_default_feature` (
   `handler_feature_id` int(11) NOT NULL DEFAULT '0',
   `handler_id` tinyint(4) DEFAULT NULL,
@@ -379,15 +480,17 @@ CREATE TABLE `sensor_handler_default_feature` (
   KEY `handler_id` (`handler_id`),
   CONSTRAINT `sensor_handler_default_feature_fk` FOREIGN KEY (`handler_id`) REFERENCES `sensor_handler` (`handler_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `sensor_sea_level_trend`
---
+-- ----------------------------
+-- Records of sensor_handler_default_feature
+-- ----------------------------
+INSERT INTO `sensor_handler_default_feature` VALUES ('151', '20', 'water_level', '1', '0.000', '11', '0.00', '0.00', '0.00', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `sensor_handler_default_feature` VALUES ('152', '20', 'level_offset', '0', '0.000', '11', '0.00', '0.00', '0.00', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
+-- ----------------------------
+-- Table structure for sensor_sea_level_trend
+-- ----------------------------
 DROP TABLE IF EXISTS `sensor_sea_level_trend`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sensor_sea_level_trend` (
   `trend_id` int(11) NOT NULL DEFAULT '0',
   `log_id` int(11) DEFAULT NULL,
@@ -407,15 +510,15 @@ CREATE TABLE `sensor_sea_level_trend` (
   CONSTRAINT `sensor_sea_level_trend_fk` FOREIGN KEY (`log_id`) REFERENCES `listener_log` (`log_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `sensor_sea_level_trend_fk1` FOREIGN KEY (`sensor_id`) REFERENCES `station_sensor` (`station_sensor_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `station`
---
+-- ----------------------------
+-- Records of sensor_sea_level_trend
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for station
+-- ----------------------------
 DROP TABLE IF EXISTS `station`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `station` (
   `station_id` smallint(6) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(255) NOT NULL,
@@ -450,18 +553,19 @@ CREATE TABLE `station` (
   `station_gravity` decimal(20,10) DEFAULT '0.0000000000',
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `color` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`station_id`),
   KEY `i_station__type` (`station_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `station_calculation`
---
+-- ----------------------------
+-- Records of station
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for station_calculation
+-- ----------------------------
 DROP TABLE IF EXISTS `station_calculation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `station_calculation` (
   `calculation_id` int(11) NOT NULL DEFAULT '0',
   `station_id` smallint(6) DEFAULT NULL,
@@ -475,15 +579,15 @@ CREATE TABLE `station_calculation` (
   CONSTRAINT `station_calculation_fk` FOREIGN KEY (`station_id`) REFERENCES `station` (`station_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `station_calculation_fk1` FOREIGN KEY (`handler_id`) REFERENCES `calculation_handler` (`handler_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `station_calculation_data`
---
+-- ----------------------------
+-- Records of station_calculation
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for station_calculation_data
+-- ----------------------------
 DROP TABLE IF EXISTS `station_calculation_data`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `station_calculation_data` (
   `calculation_data_id` int(11) NOT NULL DEFAULT '0',
   `calculation_id` int(11) DEFAULT NULL,
@@ -497,15 +601,15 @@ CREATE TABLE `station_calculation_data` (
   CONSTRAINT `station_calculation_data_fk` FOREIGN KEY (`calculation_id`) REFERENCES `station_calculation` (`calculation_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `station_calculation_data_fk1` FOREIGN KEY (`listener_log_id`) REFERENCES `listener_log` (`log_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `station_calculation_variable`
---
+-- ----------------------------
+-- Records of station_calculation_data
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for station_calculation_variable
+-- ----------------------------
 DROP TABLE IF EXISTS `station_calculation_variable`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `station_calculation_variable` (
   `calculation_variable_id` int(11) NOT NULL DEFAULT '0',
   `calculation_id` int(11) DEFAULT NULL,
@@ -519,15 +623,15 @@ CREATE TABLE `station_calculation_variable` (
   CONSTRAINT `fk_station_cal_var__sensor_feature_id` FOREIGN KEY (`sensor_feature_id`) REFERENCES `station_sensor_feature` (`sensor_feature_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `station_calculation_variable_fk` FOREIGN KEY (`calculation_id`) REFERENCES `station_calculation` (`calculation_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `station_sensor`
---
+-- ----------------------------
+-- Records of station_calculation_variable
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for station_sensor
+-- ----------------------------
 DROP TABLE IF EXISTS `station_sensor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `station_sensor` (
   `station_sensor_id` int(11) NOT NULL DEFAULT '0',
   `station_id` smallint(6) DEFAULT NULL,
@@ -541,15 +645,15 @@ CREATE TABLE `station_sensor` (
   KEY `handler_id` (`handler_id`),
   CONSTRAINT `station_sensor_fk` FOREIGN KEY (`station_id`) REFERENCES `station` (`station_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `station_sensor_feature`
---
+-- ----------------------------
+-- Records of station_sensor
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for station_sensor_feature
+-- ----------------------------
 DROP TABLE IF EXISTS `station_sensor_feature`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `station_sensor_feature` (
   `sensor_feature_id` int(11) NOT NULL DEFAULT '0',
   `sensor_id` int(11) DEFAULT NULL,
@@ -576,46 +680,15 @@ CREATE TABLE `station_sensor_feature` (
   KEY `sensor_feature__id_code_index` (`sensor_id`,`feature_code`),
   CONSTRAINT `station_sensor_feature_fk` FOREIGN KEY (`sensor_id`) REFERENCES `station_sensor` (`station_sensor_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `xml_process_log`
---
+-- ----------------------------
+-- Records of station_sensor_feature
+-- ----------------------------
 
-DROP TABLE IF EXISTS `xml_process_log`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `xml_process_log` (
-  `xml_log_id` int(11) NOT NULL DEFAULT '0',
-  `comment` text,
-  `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`xml_log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `tbl_message_forwarding_info`
---
-
-DROP TABLE IF EXISTS `tbl_message_forwarding_info`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_message_forwarding_info` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `source` text NOT NULL COMMENT 'Connection source string',
-  `description` text COMMENT 'Description of forward info',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Provides info about WMs for message forwarding.';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `tbl_forwarded_message`
---
-
+-- ----------------------------
+-- Table structure for tbl_forwarded_message
+-- ----------------------------
 DROP TABLE IF EXISTS `tbl_forwarded_message`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tbl_forwarded_message` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `message_id` int(11) NOT NULL COMMENT 'Id of message in listener_log',
@@ -630,15 +703,38 @@ CREATE TABLE `tbl_forwarded_message` (
   CONSTRAINT `fk_forwarded_message__client_id` FOREIGN KEY (`client_id`) REFERENCES `tbl_message_forwarding_info` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_forwarded_message__log_id` FOREIGN KEY (`message_id`) REFERENCES `listener_log` (`log_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table with info about forwarded messages';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- ----------------------------
+-- Records of tbl_forwarded_message
+-- ----------------------------
 
--- Dump completed on 2014-11-19 15:03:06
+-- ----------------------------
+-- Table structure for tbl_message_forwarding_info
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_message_forwarding_info`;
+CREATE TABLE `tbl_message_forwarding_info` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `source` text NOT NULL COMMENT 'Connection source string',
+  `description` text COMMENT 'Description of forward info',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Provides info about WMs for message forwarding.';
+
+-- ----------------------------
+-- Records of tbl_message_forwarding_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for xml_process_log
+-- ----------------------------
+DROP TABLE IF EXISTS `xml_process_log`;
+CREATE TABLE `xml_process_log` (
+  `xml_log_id` int(11) NOT NULL DEFAULT '0',
+  `comment` text,
+  `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`xml_log_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xml_process_log
+-- ----------------------------

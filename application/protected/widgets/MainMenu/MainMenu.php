@@ -39,13 +39,12 @@ class MainMenu
                 'stationsoverview'=>array(
                     "label"=>"admin_stations",
                     'items'=>array(
-                        'stationsoverview'  =>  array("label"=>"Stations Overview"),
-                        'stationsave'       =>  array("label"=>"admin_create_station"),
-                        'stations'          =>  array("label"=>'admin_stations'),
+                        'stationsoverview'  =>  array("label"=>"admin_station_overview"),
+                        //'stationsave'       =>  array("label"=>"admin_create_station"),
+                        'stations'          =>  array("label"=>'admin_stations_list'),
                         'stationgroups'     =>  array("label"=>'admin_station_groups')
                     ),
                 ),
-
 
                 'connections'=>array(
                     "label"=>"admin_connections_connections",
@@ -58,27 +57,28 @@ class MainMenu
                 'importmsg'=>array(
                     "label"=>"admin_import_data",
                     'items'=>array(
-                        'importmsg'       =>  array("label"=>'admin_import_message'),
-                        'importxml'       =>  array("label"=>'admin_import_xml'),
+                        'importmsg'                     =>  array("label"=>'admin_import_message'),
+                        'importxml'                     =>  array("label"=>'admin_import_xml'),
+                        'msggeneration'                 =>  array("label"=>"admin_msg_generation"),
+                        'awsfiltered'                   =>  array("label"=>"admin_aws_filtered_data"),
+                        'forwardlist'                   =>  array("label"=>"message_forwarding_list"),
+                        'stationtypedataexport'         =>  array("label"=>"ODSS export"),
+//                        'stationtypedatahistory'        => array(),
+//                        array(
+//                            "label" => "ODSS export",
+//                            "items" => array(
+//                                'stationtypedatahistory'        => array(),
+//
+//                            )
+//                        );
                     ),
                 ),
-                'msggeneration'=>array(
-                    "label"=>"admin_msg_generation",
-                    'items'=>array()
-                ),
-                'awsfiltered'=>array(
-                    "label"=>"admin_aws_filtered_data",
-                    'items'=>array()
-                ),
-                'forwardlist'=>array(
-                    "label"=>"message_forwarding_list",
-                    'items'=>array()
-                ),
+
                 'users'=>array(
                     "label"=>"superadmin_users",
                     "items"=>array(
-                        'users' => array('label' =>'superadmin_users'),
-                        'user'  => array('label' =>'superadmin_user'),
+//                        'users' => array('label' =>'superadmin_users'),
+//                        'user'  => array('label' =>'superadmin_user'),
                     )
                 ),
                 'heartbeatreports'=>array(
@@ -88,19 +88,17 @@ class MainMenu
                 'sendsmscommand'=>array(
                     "label"=>"superadmin_sendsmscommand",
                     'items'=>array(
-                        'smscommandsetup' => array(
-                            "label"=>"sms setup",
-                            'items'=>array()
-                        ),
+
                     )
                 ),
                 'setupsensors'=>array(
                     "label"=>"admin_setup",
                     "items"=>array(
-                        'setupsensors'      => array("label"=>'admin_setup_setup_sensors'),
+                        'setupsensors'      => array("label"=>'Main'),
                         'setupother'        => array("label"=>'admin_setup_other_settings'),
                         'dbsetup'           => array("label"=>'admin_setup_db_setup'),
                         'mailsetup'         => array("label"=>'admin_setup_mail_setup'),
+                        'smscommandsetup'   => array("label"=>"SMS"),
 
                         'dbbackup'          => array(),
                         'checkcomstatus'    => array(),
@@ -151,7 +149,7 @@ class MainMenu
                     'items'=>array()
                 ),
                 'awsformat'=>array(
-                    "label"=>"AWS Format",
+                    "label"=>"superadmin_aws_format",
                     'items'=>array()
                 ),
                 'exportadminssettings'=>array(
@@ -218,13 +216,13 @@ class MainMenu
                     'schedulestationhistory' => array(),
                 )
             );
-            $this->data['site']['stationtypedataexport'] = array(
-                "label" => "ODSS export",
-                "items" => array(
-                    'stationtypedatahistory'        => array(),
-
-                )
-            );
+//            $this->data['site']['stationtypedataexport'] = array(
+//                "label" => "ODSS export",
+//                "items" => array(
+//                    'stationtypedatahistory'        => array(),
+//
+//                )
+//            );
         }
 
         $this->data['site']['login'] = array("items"=>array());

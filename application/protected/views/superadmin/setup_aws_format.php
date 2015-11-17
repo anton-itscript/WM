@@ -3,7 +3,7 @@
 ?>
 
 <div class="middlenarrow">
-    <h1>AWS Format</h1>
+    <h1><?php echo It::t('menu_label', 'superadmin_aws_format'); ?></h1>
 
 <?php echo CHtml::beginForm($this->createUrl('superadmin/awsformat'), 'post'); ?>
 

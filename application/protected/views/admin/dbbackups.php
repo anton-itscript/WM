@@ -6,8 +6,8 @@
 	<?php 
 		if (!$backups) 
 		{
-	?>		
-			There are no any backups yet.
+	?>
+			No backups yet
 	<?php  
 		}
 		else

@@ -15,14 +15,16 @@ return array(
     //main menu "Admin"
     'admin_dashboard'         => 'Dashboard',
     'admin_stations'          => 'Stations',
-    'admin_station_groups'    => 'Station Groups',
+    'admin_stations_list'     => 'List',
+    'admin_station_groups'    => 'Groups',
     'admin_create_station'    => 'Create Station',
     'admin_connections'       => 'Connections',
-    'admin_import_data'       => 'Import data',
+    'admin_import_data'       => 'Data',
     'admin_msg_generation'    => 'Msg Generation',
-    'admin_aws_filtered_data' => 'AWS Filtered Data',
+    'admin_aws_filtered_data' => 'Filtered Data',
 	'message_forwarding_list' => 'Forwarding List',
     'admin_setup'             => 'Setup',
+    'admin_station_overview'  => 'Details',
     
     //main menu "Admin" -> "Connections"
     'admin_connections_connections'  => 'Connections',
@@ -62,17 +64,18 @@ return array(
     'home_schedule'           => 'Schedule',
 
     //super admin menu
-    'superadmin_users'              => 'Existing Users',
+    'superadmin_users'              => 'Users',
     'superadmin_user'               => 'User',
     'superadmin_access'             => 'Access',
     'superadmin_accessedit'         => 'Action',
-    'superadmin_syncsettings'       => 'Setting up synchronization',
+    'superadmin_syncsettings'       => 'Synch',
     'superadmin_longdb'             => 'Long term data',
     'superadmin_longdbsetup'        => 'DB Setup',
     'superadmin_LongDbSetup'        => 'DB Setup',
     'superadmin_longdbtask'         => 'Schedule task',
-    'superadmin_heartbeatreport'    => 'Heartbeat Report',
-    'superadmin_config'             => 'Config',
+    'superadmin_heartbeatreport'    => 'Heartbeat',
+    'superadmin_config'             => 'Graph',
+    'superadmin_aws_format'         => 'AWS',
     'superadmin_sendsmscommand'     => 'SMS',
     'superadmin_metrics'            => 'Metrics',
 

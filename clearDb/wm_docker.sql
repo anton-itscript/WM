@@ -85,9 +85,9 @@ INSERT INTO `access_global` VALUES ('51', 'Admin', 'Coefficients', '1', 'Setting
 INSERT INTO `access_global` VALUES ('52', 'Admin', 'EditSensor', '1', 'Edit Station Sensor');
 INSERT INTO `access_global` VALUES ('53', 'Admin', 'ExportAdminsSettings', '1', 'Export Admins Settings');
 INSERT INTO `access_global` VALUES ('54', 'Site', 'ScheduleStationHistory', '1', '');
-INSERT INTO `access_global` VALUES ('55', 'Site', 'StationTypeDataExport', '1', '');
-INSERT INTO `access_global` VALUES ('56', 'Site', 'StationTypeDataHistory', '1', '');
-INSERT INTO `access_global` VALUES ('57', 'Site', 'ScheduleTypeDownload', '1', '');
+INSERT INTO `access_global` VALUES ('55', 'Admin', 'StationTypeDataExport', '1', '');
+INSERT INTO `access_global` VALUES ('56', 'Admin', 'StationTypeDataHistory', '1', '');
+INSERT INTO `access_global` VALUES ('57', 'Admin', 'ScheduleTypeDownload', '1', '');
 INSERT INTO `access_global` VALUES ('58', 'Admin', 'SendSmsCommand', '1', '');
 INSERT INTO `access_global` VALUES ('59', 'Admin', 'SmsCommandSetup', '1', '');
 INSERT INTO `access_global` VALUES ('60', 'Admin', 'GenerateSmsCommand', '1', '');
@@ -1218,6 +1218,7 @@ CREATE TABLE `tbl_forwarded_message` (
   CONSTRAINT `fk_forwarded_message__client_id` FOREIGN KEY (`client_id`) REFERENCES `tbl_message_forwarding_info` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_forwarded_message__log_id` FOREIGN KEY (`message_id`) REFERENCES `listener_log` (`log_id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table with info about forwarded messages';
+
 
 -- ----------------------------
 -- Records of tbl_forwarded_message

@@ -3,7 +3,7 @@
 ?>
 
 <div class="middlenarrow">
-    <h1>Config</h1>
+    <h1><?php echo It::t('menu_label', 'superadmin_config'); ?></h1>
 
 <?php echo CHtml::beginForm($this->createUrl('superadmin/config'), 'post'); ?>
 
@@ -20,7 +20,7 @@
     <tr>
         <th></th>
         <td>
-            <?php echo CHtml::submitButton('Save config', array('name' => '__save'))?>
+            <?php echo CHtml::submitButton('Save', array('name' => '__save'))?>
         </td>
     </tr>
 </table>

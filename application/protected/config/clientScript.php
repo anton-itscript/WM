@@ -172,5 +172,15 @@ return [
         'admin.smscommandsetup'      => [],
         'admin.generatesmscommand'   => [],
         'admin.stationsoverview'     => [],
+
+        'admin.stationtypedataexport'    => [
+            'js'      => ['js/jquery.form.js', 'js/schedule_type_work.js', 'js/controller/site.scheduletype.js'],
+            'depends' => ['js', 'jquery.datePicker','maskInput'],
+            'css'     => ['css/StationTypeDataExport.css'],
+        ],
+        'admin.stationtypedatahistory'   => [
+            'js'      => ['js/schedule_type_work.js'],
+        ],
+        'admin.scheduletypedownload'     => [],
     ]
 ];

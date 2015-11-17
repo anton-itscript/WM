@@ -44,13 +44,13 @@
         <tr>
             <th></th>
             <td>
-                <?php echo CHtml::submitButton('Save config', array('name' => 'save_db_config'))?> (Only change config file)
+                <?php echo CHtml::submitButton('Save', array('name' => 'save_db_config'))?> (Only change config file)
             </td>
         </tr>
         <tr>
             <th></th>
             <td>
-                <?php echo CHtml::submitButton(($conf_form->status?'Recreate DB':'Create DB').' from config', array('name' => 'db_create'))?>
+                <?php echo CHtml::submitButton(($conf_form->status? 'Recreate DB':'Create DB').' from config', array('name' => 'db_create'))?>
             </td>
         </tr>
     </table>

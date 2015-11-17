@@ -45,7 +45,7 @@ class AWSFormatConfigForm extends CFormModel
 
     public static function listFormats()
     {
-        return array('1'=>'old', '2'=>'new');
+        return array('1'=>'long', '2'=>'short');
     }
 
     public function getAWSFormat()

@@ -2,7 +2,7 @@
 <div class="middlenarrow">
     <h1>
         <?php
-        echo "Heartbeat Report Setting";
+        echo "Heartbeat Setting";
         ?>
     </h1>
 

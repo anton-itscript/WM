@@ -1,7 +1,7 @@
 
 
 <div class="middlenarrow" id="stations-overview">
-<h1>Stations Overview</h1>
+<h1><?php echo It::t('menu_label', 'admin_station_overview'); ?></h1>
 
 
 
@@ -14,10 +14,6 @@
 	 */
 		foreach ($stations as $key => $station) 
 		{
-//			echo "<pre>";
-//			print_r($station);
-//			echo "</pre>";
-//			exit;
 	?>
 		<tr>
 			<th>Station ID</th>
@@ -96,14 +92,14 @@
 					<table class="tablelist">
 						<tbody>
 						<tr>
-							<th colspan="8"><b>Sensors</b> of <?php echo $station->station_id_code; ?></th>
+							<th colspan="9"><b>Sensors</b> of <?php echo $station->station_id_code; ?></th>
 							<th colspan="2">Calculations:</th>
 						</tr>
 						<tr>
 							<th rowspan="2">No.</th>
 							<th rowspan="2">Device ID</th>
 							<th rowspan="2">Sensor name</th>
-							<th colspan="2">Main Feature</th>
+							<th colspan="3">Main Feature</th>
 							<th colspan="3">Filters</th>
 							<th rowspan="2">Dew Point</th>
 							<th rowspan="2">Pressure</th>
@@ -111,6 +107,7 @@
 						<tr>
 							<th>Name</th>
 							<th>Unit</th>
+							<th>Height</th>
 							<th>Min</th>
 							<th>Max</th>
 							<th>Diff</th>
@@ -128,11 +125,20 @@
 							<?php if ($main_feature):?>
 								<td><?php echo $main_feature->feature_display_name ?></td>
 								<td><?php echo $metric->metricMain->metric->html_code ?></td>
+								<td>
+									<?php if (isset($sensor['handler']['features']['height'])) {
+										echo $sensor['handler']['features']['height']->feature_constant_value;
+										if (isset($sensor['handler']['features']['height']['metric'])) {
+											echo ' '; echo $sensor['handler']['features']['height']['metric']->html_code;
+										}
+									}
+									?>
+								</td>
 								<td><?php echo $main_feature->filter_min ?></td>
 								<td><?php echo $main_feature->filter_max ?></td>
 								<td><?php echo $main_feature->filter_diff ?></td>
 							<?php else : ?>
-								<td colspan="5"></td>
+								<td colspan="6"></td>
 							<?php endif ?>
 
 							<td><?php echo (($sensor->hasCalculation('DewPoint')) ? 'Yes' : 'No'); ?></td>
@@ -177,10 +183,10 @@
 			</td>
 		</tr>
 		<tr>
-			<th colspan="8" style="background: #cccccc;">&nbsp;</th>
+			<th colspan="8" style="background: #fff;">&nbsp;</th>
 		</tr>
 
-    <?php 
+    <?php
 		}
 	?>
     </table>

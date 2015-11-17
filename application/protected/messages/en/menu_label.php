@@ -15,15 +15,17 @@ return array(
     //main menu "Admin"
     'admin_dashboard'         => 'Dashboard',
     'admin_stations'          => 'Stations',
-    'admin_station_groups'    => 'Station Groups',
+    'admin_station_groups'    => 'Groups',
     'admin_create_station'    => 'Create Station',
     'admin_connections'       => 'Connections',
-    'admin_import_data'       => 'Import data',
+    'admin_import_data'       => 'Data',
     'admin_msg_generation'    => 'Msg Generation',
     'admin_aws_filtered_data' => 'AWS Filtered Data',
 	'message_forwarding_list' => 'Forwarding List',
     'admin_setup'             => 'Setup',
-    
+    'admin_station_overview'  => 'Details',
+
+
     //main menu "Admin" -> "Connections"
     'admin_connections_connections'  => 'Connections',
     'admin_connections_log'          => 'Log',
