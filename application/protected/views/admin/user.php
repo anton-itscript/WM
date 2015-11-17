@@ -10,7 +10,7 @@
 
     <?php echo CHtml::beginForm($this->createUrl('admin/user'), 'post'); ?>
     <input type="hidden" name="user_id" value="<?php echo $user->user_id?>" />
-    <table class="formtable" style="float: left; width: 550px;" >
+    <table class="formtable" style="width: 550px;" >
         <?php if ($user->user_id) { ?>
         <tr>
             <th><?php echo CHtml::activeLabel($user, 'user_id'); ?> <sup>*</sup></th>

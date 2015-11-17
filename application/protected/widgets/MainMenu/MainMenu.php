@@ -111,20 +111,20 @@ class MainMenu
 
             ),
             'superadmin' => array(
-                'users'=>array(
-                    "label"=>"superadmin_users",
-                    "items"=>array(
-                        'users' => array('label' =>'superadmin_users'),
-                        'user'  => array('label' =>'superadmin_user'),
-                    )
-                ),
-                'access'=>array(
-                    "label"=>"superadmin_access",
-                    "items"=>array(
-                        'access'        => array('label' => 'superadmin_access'),
-                        'accessedit'    => array('label' => 'superadmin_accessedit')
-                    )
-                ),
+//                'users'=>array(
+//                    "label"=>"superadmin_users",
+//                    "items"=>array(
+//                        'users' => array('label' =>'superadmin_users'),
+//                        'user'  => array('label' =>'superadmin_user'),
+//                    )
+//                ),
+//                'access'=>array(
+//                    "label"=>"superadmin_access",
+//                    "items"=>array(
+//                        'access'        => array('label' => 'superadmin_access'),
+//                        'accessedit'    => array('label' => 'superadmin_accessedit')
+//                    )
+//                ),
                 'syncsettings'=>array(
                     "label"=>"superadmin_syncsettings",
                     "items"=>array(

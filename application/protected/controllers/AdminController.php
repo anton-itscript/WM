@@ -96,7 +96,12 @@ class AdminController extends CController
 
     public function actionStationsOverview()
     {
-        $stations = Station::model()->with(array('sensors.handler'=>array('alias'=>'hh'),'sensors.handler.features.metric'=>array('alias'=>'metr'),'station_calculation.handler.metric'))->findAll();
+        $stations = Station::model()->with(array(
+            'sensors.handler'=>array('alias'=>'hh'),
+            'sensors.handler.features.metric'=>array('alias'=>'metr'),
+            'sensors.main_feature',
+            'station_calculation.handler.metric',
+        ))->findAll();
 
         $this->render('stations_overview', array(
             'stations' => $stations,
@@ -222,7 +227,7 @@ class AdminController extends CController
                     $validated = false;
                 }
 
-                if ($measurements[$key]['required'] == 0) {
+                if ($measurements[$key]['required'] == 0 && !$measurements[$key]['object']->sensor_feature_id) {
                     unset($measurements[$key]);
                 }
             }

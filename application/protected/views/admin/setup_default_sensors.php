@@ -60,7 +60,7 @@ if (!$form->handlers) {
                     } ?>
                     <td rowspan="<?=count($value['features'])?>" style="text-align:center; vertical-align:middle">
                         <?php //echo CHtml::activeDropDownList($value, 'start_time', $form->arrh, array('style' => 'width: 25px;','disabled'=>'disabled')); ?>
-                        <?=$form->arrh[$value->start_time]?>
+                        <?= $value->start_time==-1 ? '' : $form->arrh[$value->start_time]?>
                     </td>
 
                     <td rowspan="<?=count($value['features'])?>" style="padding: 1px; text-align:center; vertical-align:middle"><?php
