@@ -3,10 +3,9 @@
 ?>
 
 <div class="middlenarrow">
-    <h1>Setting up synchronization</h1>
+    <h1><?php echo It::t('menu_label', 'superadmin_syncsettings'); ?></h1>
 
 <?=CHtml::beginForm($this->createUrl('superadmin/syncsettings'), 'post'); ?>
-
 <?=CHtml::errorSummary($form); ?>
 
 

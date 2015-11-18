@@ -1,6 +1,6 @@
 
 <div class="middlenarrow">
-<h1>Import</h1>
+    <h1><?=It::t('menu_label', 'admin_import_message')?></h1>
 <blockquote class="tip">
 <p>You can import messages with the following format "@DDCP1201109181713.....$"<br/>
 This import tool checks whether:<br/>

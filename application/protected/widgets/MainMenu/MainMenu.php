@@ -39,9 +39,9 @@ class MainMenu
                 'stationsoverview'=>array(
                     "label"=>"admin_stations",
                     'items'=>array(
+                        'stations'          =>  array("label"=>'admin_stations_list'),
                         'stationsoverview'  =>  array("label"=>"admin_station_overview"),
                         //'stationsave'       =>  array("label"=>"admin_create_station"),
-                        'stations'          =>  array("label"=>'admin_stations_list'),
                         'stationgroups'     =>  array("label"=>'admin_station_groups')
                     ),
                 ),
@@ -57,20 +57,20 @@ class MainMenu
                 'importmsg'=>array(
                     "label"=>"admin_import_data",
                     'items'=>array(
-                        'importmsg'                     =>  array("label"=>'admin_import_message'),
-                        'importxml'                     =>  array("label"=>'admin_import_xml'),
-                        'msggeneration'                 =>  array("label"=>"admin_msg_generation"),
                         'awsfiltered'                   =>  array("label"=>"admin_aws_filtered_data"),
                         'forwardlist'                   =>  array("label"=>"message_forwarding_list"),
-                        'stationtypedataexport'         =>  array("label"=>"ODSS export"),
-//                        'stationtypedatahistory'        => array(),
-//                        array(
-//                            "label" => "ODSS export",
-//                            "items" => array(
-//                                'stationtypedatahistory'        => array(),
-//
-//                            )
-//                        );
+                        'stationtypedataexport'         =>  array("label"=>"ODSS Export",
+                            "items" => array(
+                                'stationtypedatahistory'        => array(),
+                            ),
+                        ),
+                        'importmsg'                     =>  array("label"=>'admin_import_message'),
+                        'msggeneration'                 =>  array("label"=>"admin_msg_generation"),
+                        'importxml'                     =>  array("label"=>'admin_import_xml'),
+
+
+
+
                     ),
                 ),
 
@@ -91,11 +91,11 @@ class MainMenu
 
                     )
                 ),
-                'setupsensors'=>array(
+                'setupother'=>array(
                     "label"=>"admin_setup",
                     "items"=>array(
-                        'setupsensors'      => array("label"=>'Main'),
-                        'setupother'        => array("label"=>'admin_setup_other_settings'),
+                        'setupother'        => array("label"=>'Main'),
+                        'setupsensors'      => array("label"=>'admin_setup_setup_sensors'),
                         'dbsetup'           => array("label"=>'admin_setup_db_setup'),
                         'mailsetup'         => array("label"=>'admin_setup_mail_setup'),
                         'smscommandsetup'   => array("label"=>"SMS"),
@@ -123,35 +123,26 @@ class MainMenu
 //                        'accessedit'    => array('label' => 'superadmin_accessedit')
 //                    )
 //                ),
-                'syncsettings'=>array(
-                    "label"=>"superadmin_syncsettings",
-                    "items"=>array(
 
-                    )
-                ),
                 'longdbsetup'=>array(
-                    "label"=>"superadmin_longdb",
+                    "label"=>"Setup",
                     "items"=>array(
-                        'longdbsetup'   => array('label' => 'superadmin_longdbsetup'),
-                        'longdbtask'    => array('label' => 'superadmin_longdbtask'),
+                        'longdbsetup'       =>  array('label' => 'superadmin_longdbsetup'),
+                        'longdbtask'        =>  array('label' => 'superadmin_longdbtask'),
+                        'syncsettings'      =>  array("label"=>"superadmin_syncsettings","items"=>array()),
+                        'heartbeatreport'   =>  array("label"=>"superadmin_heartbeatreport",'items'=>array()),
+                        'config'            =>  array("label"=>"superadmin_config",'items'=>array()),
+                        'awsformat'         =>  array("label"=>"superadmin_aws_format",'items'=>array()),
                     )
-                ),
-                'heartbeatreport'=>array(
-                    "label"=>"superadmin_heartbeatreport",
-                    'items'=>array()
-                ),
-                'config'=>array(
-                    "label"=>"superadmin_config",
-                    'items'=>array()
                 ),
                 'metrics'=>array(
                     "label"=>"superadmin_metrics",
                     'items'=>array()
                 ),
-                'awsformat'=>array(
-                    "label"=>"superadmin_aws_format",
-                    'items'=>array()
-                ),
+
+
+
+
                 'exportadminssettings'=>array(
                     "label"=>"admin_import_export_admins_settings",
                     'items'=>array()

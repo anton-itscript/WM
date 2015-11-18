@@ -6,6 +6,7 @@
         <div class="spacer"></div>
         <?php $current_url = $this->createUrl('admin/awsfiltered'); ?>
         <div id="filterparams">
+            <h1><?=It::t('menu_label', 'admin_aws_filtered_data')?></h1>
             <form action="<?php echo $current_url?>" method="post">
                 <table width="100%" class="formtable">
                     <tr>

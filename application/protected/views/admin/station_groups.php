@@ -6,7 +6,7 @@
 
 
 <div class="middlenarrow grouplist">
-    <h1>Station Group</h1><?php
+    <h1><?php echo It::t('menu_label', 'admin_station_groups'); ?></h1><?php
     echo CHtml::beginForm($this->createUrl('admin/stationgroups'), 'post');
     echo CHtml::activeLabel($group, 'group_name');
     echo CHtml::activeHiddenField($group,'group_id');

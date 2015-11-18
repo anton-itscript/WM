@@ -1,9 +1,9 @@
 <?php $this->widget('TwoDatesFilter', array('block_path' => '#filterparams', 'date_from_name' => 'XmlLogForm[date_from]', 'date_to_name' => 'XmlLogForm[date_to]'));?>
 
-
 <div class="middlewide">
-        <div class="middlenarrow">
-            
+    <div class="middlenarrow">
+    <h1><?php echo It::t('menu_label', 'admin_connections_xmllog'); ?></h1>
+
                 <div class="spacer"></div>
                 <?php $current_url = $this->createUrl('admin/xmllog')?>
                 <div id="filterparams" style="margin-bottom: 10px;">

@@ -22,7 +22,7 @@
 			<th>Display Name</th>
 			<th>Time Zone</th>
 			<th>Communication Type</th>
-			<th>Total Sensors</th>
+			<th><?=$station->getAttributeLabel('altitude')?></th>
 			<th>Tools</th>
 		</tr>
         <tr class="<?php echo ($key % 2 == 0 ? 'c' : ''); ?>">
@@ -55,7 +55,7 @@
 					}
 				?>
             </td>
-            <td><?php echo count($station->sensors); ?></td>
+            <td><?=$station->altitude?></td>
             <td nowrap>
 				<?php echo CHtml::link('Change', array('admin/StationSave', 'station_id' => $station->station_id), array('title' => 'Change Station Details')); ?> 
                 &nbsp;&nbsp;&nbsp;

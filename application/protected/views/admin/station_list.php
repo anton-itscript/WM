@@ -1,7 +1,8 @@
 
 
 <div class="middlenarrow">
-<h1>Stations</h1>
+
+	<h1><?php echo It::t('menu_label', 'admin_stations_list'); ?></h1>
 
 <?php echo CHtml::link('Add new Station', array('admin/StationSave')); ?><br /><br />
 

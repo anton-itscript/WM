@@ -1,7 +1,7 @@
 
 
 <div class="middlenarrow">
-    <h1>Existing Users</h1>
+    <h1>Users</h1>
     <?php echo CHtml::link('Add new User', array('admin/user')); ?><br /><br />
     <?php if (count($users) > 0) :?>
         <table class="tablelist">

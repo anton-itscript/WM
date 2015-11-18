@@ -1,6 +1,6 @@
 
 <div class="middlenarrow">
-    <h1>Other Settings</h1>
+    <h1>Main Settings</h1>
 
     <?php $timezones = TimezoneWork::prepareList();?>
     <?php echo  CHtml::beginForm($this->createUrl('admin/setupother'), 'post'); ?>
@@ -45,7 +45,7 @@
                 <?php echo CHtml::error($settings,'local_timezone_id'); ?>
             </td>
         </tr>
-        
+        <?php /*
         <tr><th colspan="2"><br/>XML Messages Settings:</th></tr>
         <tr>
             <td><?php echo CHtml::activeLabel($settings, 'xml_messages_path')?></td>
@@ -67,7 +67,8 @@
                 (How often script should check XML folder?)
                 <?php echo CHtml::error($settings,'xml_check_frequency'); ?>
             </td>
-        </tr>        
+        </tr>
+        */?>
         </table>    
         <?php echo CHtml::submitButton('Save')?>
 

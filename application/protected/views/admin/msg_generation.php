@@ -3,7 +3,7 @@
 <?php  Yii::app()->clientScript->registerScriptFile(It::baseUrl().'/js/jquery.datePicker.js');?>
 
 <div class="middlenarrow">
-<h1>Message Generation</h1>
+<h1><?=It::t('menu_label', 'admin_msg_generation')?></h1>
 
 Choose a station, set a time period, an interval and generate random messages for all the sensors you have selected.<br/><br/>
 <?php $current_url = $this->createUrl('admin/msggeneration'); ?>
