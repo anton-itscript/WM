@@ -20,8 +20,8 @@ class AdminController extends CController
     public function actionStations(){
 
         $importStations = new ImportStations();
-
-        if (isset($_REQUEST['import_stations']) && count($_FILES['ImportStations']['name']['files'])-1) {
+      
+        if (isset($_REQUEST['import_stations']) && !empty($_FILES['ImportStations']['name']['files'][0])) {
             $count = count($_FILES['ImportStations']['name']['files']);
             for ($i=0; $i < $count; $i++) {
                 $importStations->files[] = CUploadedFile::getInstance($importStations, "files[$i]");
