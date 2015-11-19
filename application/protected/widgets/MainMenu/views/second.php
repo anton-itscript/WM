@@ -1,5 +1,5 @@
-<div class="middlewide third_menu">
-    <div class="middlenarrow">
+<div class="middlewide third_menu" >
+    <div class="middlenarrow"  >
         <div id="third_menu">
             <ul>
                 <?php foreach($data['items'] as $action => $item ):  ?>

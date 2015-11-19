@@ -39,6 +39,7 @@ class Settings extends CStubActiveRecord
             array('db_exp_sql_dbname,db_exp_sql_login',   'required', 'on' => 'dbexport'),
             array('db_exp_sql_dbname,db_exp_sql_login',   'length',   'allowEmpty' => false, 'max' => 255, 'on' => 'dbexport'),
             array('db_exp_sql_password', 'checkUser',       'on' => 'dbexport'),
+            array('scheduled_reports_path', 'safe',       'on' => 'other'),
         );
 		
         if (It::isLinux()) {

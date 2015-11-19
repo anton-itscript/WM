@@ -50,7 +50,7 @@
         <tr>
             <th></th>
             <td>
-                <?php echo CHtml::submitButton(($conf_form->status? 'Recreate DB':'Create DB').' from config', array('name' => 'db_create'))?>
+                <?php echo CHtml::submitButton(($conf_form->status? 'Recreate DB':'Create DB').' from config', array('name' => 'db_create','confirm'=>'Are you sure you want to recreate long DB?'))?>
             </td>
         </tr>
     </table>

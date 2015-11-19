@@ -5,9 +5,9 @@ class ScheduleReports extends Schedule
 
     public function run($args)
     {
-//        if(!Yii::app()->mutex->lock('ScheduleReports',3600)) {
-//            Yii::app()->end();
-//        }
+        if(!Yii::app()->mutex->lock('ScheduleReports',3600)) {
+            Yii::app()->end();
+        }
 
 //        $synchronization = new Synchronization();
 //        if(!$synchronization->isMaster() and $synchronization->isProcessed())
@@ -20,8 +20,8 @@ class ScheduleReports extends Schedule
 
         if (count($proper_periods) === 0) {
 			$this->_logger->log(__METHOD__ . ' Exiting. No proper periods found.' . "\n\n");
-//            Yii::app()->mutex->unlock();
-//			Yii::app()->end();
+            Yii::app()->mutex->unlock();
+			Yii::app()->end();
 		}
 		
 		$criteria = new CDbCriteria();
@@ -50,26 +50,29 @@ class ScheduleReports extends Schedule
 
 		if (count($scheduledReports) === 0) {
 			$this->_logger->log(__METHOD__ . ' Exiting. No proper reports found.' . "\n\n");
-//            Yii::app()->mutex->unlock();
-//			Yii::app()->end();
+            Yii::app()->mutex->unlock();
+			Yii::app()->end();
 		}
 		
 		$this->_logger->log(__METHOD__ . ' New scheduled reports', array('report count' => count($scheduledReports)));
-		
+		$this->_logger->log(__METHOD__ . ' New scheduled reports '.print_r($scheduledReports,1));
+
 		$reportProcesses = array();
 		foreach($scheduledReports as $scheduledReport) {
 			$this->_logger->log("\n");
 			$this->_logger->log(__METHOD__ .' Check scheduled report', array('schedule_id' => $scheduledReport->schedule_id));
 
 			$check_period = $this->getCheckPeriod($generationTime, $scheduledReport->period);
+           ;
 
 			if ($scheduledReport->report_type === 'data_export') {
                 $this->_logger->log(__METHOD__ . ' scheduledReport->report_type  = data_export');
 				// add record about schedule running to process afterwards
-                for ($i=0;$i<count($scheduledReport->station);$i++) {
+
+                for ($i=0;$i<count($scheduledReport['station']);$i++) {
                     $schedule_report_process = new ScheduleReportProcessed;
 
-                    $schedule_report_process->sr_to_s_id            = $scheduledReport->station[$i]->id;
+                    $schedule_report_process->sr_to_s_id            = $scheduledReport['station'][$i]->id;
                     $schedule_report_process->check_period_start    = $check_period[3];
                     $schedule_report_process->check_period_end      = $check_period[4];
 
@@ -85,7 +88,7 @@ class ScheduleReports extends Schedule
                         $this->_logger->log(__METHOD__ . ' Schedule report not saved ', array('schedule_error' => $scheduledReport->getErrors()));
                     }
 
-                    $reportProcesses[$scheduledReport->station[$i]->id] = array(
+                    $reportProcesses[$scheduledReport['station'][$i]->id] = array(
                         'schedule_id' => $scheduledReport->schedule_id,
                         'schedule_processed_id' => $schedule_report_process->schedule_processed_id,
                         'schedule_info' => $scheduledReport,
@@ -93,9 +96,14 @@ class ScheduleReports extends Schedule
                         'check_period_end' => $check_period[4]
                     );
                 }
+
 			} else {
                 $logRecords=array();
-                foreach ($scheduledReport->station as $station) {
+
+
+                foreach ($scheduledReport['station'] as $station) {
+
+                    $this->_logger->log(__METHOD__ . ' $station '.print_r($station,1));
 
                     $criteria = new CDbCriteria();
 
@@ -108,6 +116,9 @@ class ScheduleReports extends Schedule
 
 
                     $logRecord = ListenerLog::model()->find($criteria);
+
+
+
                     if(!is_null($logRecord))
                         $logRecords[] = $logRecord;
                 }
@@ -115,13 +126,13 @@ class ScheduleReports extends Schedule
 
 				if (count($logRecords)>0)
 				{
-                    for ($i=0;$i<count($scheduledReport->station);$i++) {
+                    for ($i=0;$i<count($scheduledReport['station']);$i++) {
                         $schedule_report_process = new ScheduleReportProcessed;
 
                         $continue = false;
                         foreach ($logRecords  as $logRecord) {
 
-                            if ($logRecord->station_id == $scheduledReport->station[$i]->station_id) {
+                            if ($logRecord->station_id == $scheduledReport['station'][$i]->station_id) {
                                 $schedule_report_process->listener_log_id = $logRecord->log_id;
                                 $listener_log_id = $logRecord->log_id;
 
@@ -135,7 +146,7 @@ class ScheduleReports extends Schedule
                         if($continue)
                             continue;
 
-                        $schedule_report_process->sr_to_s_id = $scheduledReport->station[$i]->id;
+                        $schedule_report_process->sr_to_s_id = $scheduledReport['station'][$i]->id;
                         $schedule_report_process->check_period_start = $check_period[3];
                         $schedule_report_process->check_period_end = $check_period[4];
 
@@ -151,7 +162,7 @@ class ScheduleReports extends Schedule
                             $this->_logger->log(__METHOD__ .' Schedule report not saved ', array('schedule_error' => $scheduledReport->getErrors()));
                         }
 
-                        $reportProcesses[$scheduledReport->station[$i]->id] = array(
+                        $reportProcesses[$scheduledReport['station'][$i]->id] = array(
                             'log_id'                => $listener_log_id,
                             'schedule_id'           => $scheduledReport->schedule_id,
                             'schedule_processed_id' => $schedule_report_process->schedule_processed_id,
@@ -217,7 +228,7 @@ class ScheduleReports extends Schedule
              new WeatherReportMailSender($scheduleProcessedIdArray);
         }
         $this->_logger->log(__METHOD__ .' Schedule report completed'."\n\n\n\n\n\n\n\n\n");
-//        Yii::app()->mutex->unlock();
+        Yii::app()->mutex->unlock();
     }
 
 }

@@ -789,7 +789,7 @@ class SiteController extends CController
 						$forms_d[$key] = new ScheduleReportDestination();
                     }
 
-                    $forms_d[$key]->attributes = $value;
+                    $forms_d[$key]->attributes = $value; //schedule_destination_id
                     $valid = $valid & $forms_d[$key]->validate();
                 }
             }
@@ -808,7 +808,7 @@ class SiteController extends CController
 						$forms_s[$key] = new ScheduleReportToStation();
                     }
 
-                    $forms_s[$key]->attributes = $value;
+                    $forms_s[$key]->attributes = $value; //id
 //                    $valid = $valid & $forms_s[$key]->validate();
                 }
             }

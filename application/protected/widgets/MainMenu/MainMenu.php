@@ -127,7 +127,7 @@ class MainMenu
                 'longdbsetup'=>array(
                     "label"=>"Setup",
                     "items"=>array(
-                        'longdbsetup'       =>  array('label' => 'superadmin_longdbsetup'),
+//                        'longdbsetup'       =>  array('label' => 'superadmin_longdbsetup'),
                         'longdbtask'        =>  array('label' => 'superadmin_longdbtask'),
                         'syncsettings'      =>  array("label"=>"superadmin_syncsettings","items"=>array()),
                         'heartbeatreport'   =>  array("label"=>"superadmin_heartbeatreport",'items'=>array()),
