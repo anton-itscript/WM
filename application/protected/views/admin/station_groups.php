@@ -33,7 +33,7 @@
                     <?php foreach ($groups as $group_id => $group){?>
                         <td>
                             <?php
-                            echo CHtml::activeCheckBox($form,"data[$station_id][$group_id]",array('checked'=>isset($data[$station_id][$group_id])?'checked':''))
+                            echo CHtml::activeCheckBox($form,"data[$station_id][$group_id]",array('checked'=>isset($data[$station_id][$group_id]) ? 'checked' : ''))
                             ?>
                         </td>
                     <?php } ?>

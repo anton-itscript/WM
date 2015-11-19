@@ -4,6 +4,12 @@ class ColorValidator extends CValidator{
     public function validateAttribute($model, $attribute) {
 
         $value = $model->$attribute;
+
+        if (empty($value)) {
+            $value = Color::randomColor();
+            $model->$attribute = $value;
+        }
+       
         $place = substr($value,0,1);
         $hexColor = substr($value,1,6);
 

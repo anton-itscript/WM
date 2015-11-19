@@ -17,9 +17,12 @@ class Station extends CStubActiveRecord
     }
 
     public function beforeSave(){
-        if(!$this->getUseLong() && $this->beforeSave){
-            if ($this->isNewRecord)
+        if (!$this->getUseLong()) {
+            if ($this->isNewRecord) {
                 $this->created = new CDbExpression('NOW()');
+
+               // $this->color = Color::randomColor();
+            }
 
             $this->timezone_offset = TimezoneWork::getOffsetFromUTC($this->timezone_id, 1);
             $this->updated = new CDbExpression('NOW()');
@@ -29,12 +32,11 @@ class Station extends CStubActiveRecord
 
     public function afterFind()
     {
-
-        if(!$this->getUseLong() && empty($this->color)) {
-            $this->beforeSave = false;
-            $this->color = Color::randomColor();
-            $this->save(false);
-        }
+//        if (!$this->getUseLong() && empty($this->color)) {
+//            $this->beforeSave = false;
+//            $this->color = Color::randomColor();
+//            $this->save(false);
+//        }
         return parent::afterFind();
     }
 

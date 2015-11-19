@@ -1694,27 +1694,27 @@ class AdminController extends CController
         $accessEdit = Yii::app()->user->isSuperAdmin();
 
         $group = new StationGroup();
-        if(isset($_GET['group_id'])){
+        if (isset($_GET['group_id'])) {
             $group_id = $_GET['group_id'];
-            if($_GET['action'] == 'delete'){
+            if ($_GET['action'] == 'delete') {
                 StationGroup::deleteGroupId($group_id);
                 $this->redirect($this->createUrl('admin/StationGroups'));
             }
             $group = StationGroup::model()->findByPk($group_id);
         }
 
-        if(isset($_POST['StationGroup']['name']) && $_POST['StationGroup']['name']){
+        if (isset($_POST['StationGroup']['name']) && $_POST['StationGroup']['name']) {
             if(isset($_POST['StationGroup']['group_id']) && $_POST['StationGroup']['group_id'])
                 $group = StationGroup::model()->findByPk($_POST['StationGroup']['group_id']);
 
             $group->name = $_POST['StationGroup']['name'];
-            if($group->validate()){
+            if ($group->validate()) {
                 $group->save();
                 $this->redirect($this->createUrl('admin/StationGroups'));
             }
         }
 
-        if(isset($_POST['StationGroupsForm'])){
+        if (isset($_POST['StationGroupsForm'])) {
             StationGroupDestination::setStationGroupArray($_POST['StationGroupsForm']['data']);
         }
 
