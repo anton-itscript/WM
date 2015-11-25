@@ -116,9 +116,12 @@ ADD run.sh /run.sh
 RUN mkdir /tmp/wm_clear_databases
 RUN mkdir /var/wm_backups
 
+ADD ./application/www/files/install/db.sql 		/tmp/wm_clear_databases/wm_docker.sql
+ADD ./application/www/files/install/long_db.sql		/tmp/wm_clear_databases/wm_docker_long.sql
 
-ADD clearDb/wm_docker.sql 		/tmp/wm_clear_databases/wm_docker.sql
-ADD clearDb/wm_docker_long.sql		/tmp/wm_clear_databases/wm_docker_long.sql
+		#	ADD clearDb/wm_docker.sql 		/tmp/wm_clear_databases/wm_docker.sql
+		#	ADD clearDb/wm_docker_long.sql		/tmp/wm_clear_databases/wm_docker_long.sql
+
 ADD clearDb/wm_docker_old.sql   	/tmp/wm_clear_databases/wm_docker_old.sql
 ADD clearDb/wm_docker_long_old.sql	/tmp/wm_clear_databases/wm_docker_long_old.sql
 
