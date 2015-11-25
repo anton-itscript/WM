@@ -39,11 +39,12 @@ class ConnectionsLogForm extends CFormModel
 		{
             foreach ($stations as $station)
 			{
+                $value_connetcion_type = false;
                 switch($station->communication_type)
 				{
 					case 'direct':
 					case 'sms':
-						
+                        $value_connetcion_type = SMSCOMPort::getLinuxComName($station->communication_port);
 						$connection_type = $station->communication_port;
 						break;
 					
@@ -62,8 +63,8 @@ class ConnectionsLogForm extends CFormModel
 						$connection_type = 'tcp:'. $station->communication_esp_ip .':'. $station->communication_esp_port;
 						break;
 				}
-				
-                $this->all_sources[$connection_type] = $connection_type;
+
+                $this->all_sources[$connection_type] = $value_connetcion_type ? $value_connetcion_type : $connection_type;
             }
         }        
 

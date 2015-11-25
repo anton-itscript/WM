@@ -211,7 +211,7 @@
     <div id="footer">
 
             <div id="logo">
-                <a href="<?php echo $this->createUrl('update/index') ?>">v <?php Yii::app()->params['version']['sprint']?></a>
+                <a href="#<?php // echo $this->createUrl('update/index') ?>">v <?=Yii::app()->params['version']['stage']?>.<?=Yii::app()->params['version']['sprint']?>.<?=Yii::app()->params['version']['update']?></a>
             </div>
             <div id="copyright">
                 <?php echo It::t('site_label', 'main_layout__footer_year'); ?>

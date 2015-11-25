@@ -24,10 +24,10 @@
          DIRECTORY_SEPARATOR .'backups',
   'show_fake_com_ports' => false,
   'show_msg_generation' => true,
-  'version_name' => 
+  'version' =>
   array (
     'stage' => '0',
-    'sprint' => '07',
+    'sprint' => '08',
     'update' => '00',
   ),
   'com_connect_params' => 

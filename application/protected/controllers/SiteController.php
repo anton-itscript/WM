@@ -15,7 +15,7 @@ class SiteController extends CController
             unset($checkAccess[array_search($access,$checkAccess)]);
         }
 
-        $access = $checkAccess? array_shift($checkAccess):'Logout';
+        $access = $checkAccess ? array_shift($checkAccess) : 'Logout';
 
         $this->redirect($this->createUrl('site/'.$access));
 

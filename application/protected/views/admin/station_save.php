@@ -195,6 +195,15 @@
 				<?php echo CHtml::error($form, 'timezone_id'); ?>
 			</td>
 		</tr>
+
+		<tr>
+			<th><?php echo CHtml::activeLabel($form, 'aws_format'); ?> <sup>*</sup></th>
+			<td colspan="3">
+				<?php echo CHtml::activeDropDownList($form, 'aws_format', AWSFormat::listFormats(), array('style' => 'width: 270px;')); ?>
+				<?php echo CHtml::error($form, 'aws_format'); ?>
+			</td>
+		</tr>
+
 		<tr>
 			<td>&nbsp;</td>
 			<td colspan="3" style="text-align: left;"><?php echo CHtml::submitButton($form->station_id ? 'Update' : 'Add'); ?></td>

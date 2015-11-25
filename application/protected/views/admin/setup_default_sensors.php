@@ -12,7 +12,7 @@ if (!$form->handlers) {
     echo CHtml::beginForm($this->createUrl('admin/SetupSensors'), 'post');?>
 
         <?php echo CHtml::errorSummary($form); ?>
-        <table class="tablelist">
+        <table class="tablelist headers-centered">
             <tr>
 
                 <th rowspan="2" ></th>
@@ -21,38 +21,38 @@ if (!$form->handlers) {
                 <th rowspan='2' >Unit</th>
                 <th rowspan='2' >Description</th>
                 <th colspan="3" >Filters & Alerts</th>
-                <th rowspan='2' >Height/Depth/Ref</th>
-                <th rowspan='2' >Report Start Time</th>
+                <th rowspan='2' >Height<br>Depth<br>Ref</th>
+                <th rowspan='2' >Report <br> Start <br> Time</th>
                 <th rowspan='2' style="width: 50px">Panel Limit</th>
                 <th rowspan='2' style="width: 30px">Tools</th>
             </tr>
             <tr>
 
-                <th>T1< </th>
                 <th>T1></th>
+                <th>T1< </th>
                 <th>|T0-T1| ></th>
             </tr>
 
-            <?php $i=1; ?>
+            <?php $ji=1; ?>
             <?php foreach ($form->handlers as $key => $value) {?>
                 <tr>
-                    <td rowspan="<?=count($value['features'])?>" ><?php echo $i++; ?>.</td>
-                    <td rowspan="<?=count($value['features'])?>" ><?php echo $value->default_prefix?></td>
-                    <td rowspan="<?=count($value['features'])?>" ><?php echo $value->display_name?></td>
+                    <td  style="text-align: center" rowspan="<?=count($value['features'])?>" ><?php echo $ji++; ?>.</td>
+                    <td  style="text-align: center" rowspan="<?=count($value['features'])?>" ><?php echo $value->default_prefix?></td>
+                    <td  style="text-align: left" rowspan="<?=count($value['features'])?>" ><?php echo $value->display_name?></td>
 
                     <?php $i=0;foreach ($value['features'] as $feature) {
 
                         $additional_features = $form->getFeatureByFeatureCodeAndHandlerIdCode($value->handler_id_code,$feature->feature_code); ?>
 
                         <td><?=$feature['metric']->html_code ?></td>
-                        <td><?php  echo $additional_features['feature_name']?></td>
+                        <td style="text-align: left" ><?php  echo $additional_features['feature_name']?></td>
                         <?php if ($additional_features['exstra_features']==true) { ?>
                             <td colspan="3"></td>
-                            <td><?=$feature->feature_constant_value ?></td>
+                            <td style="text-align: right" ><?=It::getIntIfIsDecemal($feature->feature_constant_value) ?></td>
                         <?php } else { ?>
-                            <td><?=$feature->filter_max ?></td>
-                            <td><?=$feature->filter_min ?></td>
-                            <td><?=$feature->filter_diff ?></td>
+                            <td style="text-align: right" ><?=It::getIntIfIsDecemal($feature->filter_max) ?></td>
+                            <td style="text-align: right" ><?=It::getIntIfIsDecemal($feature->filter_min)?></td>
+                            <td style="text-align: right" ><?=It::getIntIfIsDecemal($feature->filter_diff) ?></td>
                             <td></td>
                         <?php }?>
                     <?php
@@ -85,14 +85,14 @@ if (!$form->handlers) {
                     ?>
                 <tr>
                     <td><?=$feature['metric']->html_code ?></td>
-                    <td><?php  echo $additional_features['feature_name']?></td>
+                    <td style="text-align: left" ><?php  echo $additional_features['feature_name']?></td>
                     <?php if ($additional_features['exstra_features']==true) { ?>
                         <td colspan="3"></td>
-                        <td><?=$feature->feature_constant_value ?></td>
+                        <td style="text-align: right" ><?=It::getIntIfIsDecemal($feature->feature_constant_value) ?></td>
                     <?php } else { ?>
-                        <td><?=$feature->filter_max ?></td>
-                        <td><?=$feature->filter_min ?></td>
-                        <td><?=$feature->filter_diff ?></td>
+                        <td style="text-align: right" ><?=It::getIntIfIsDecemal($feature->filter_max) ?></td>
+                        <td style="text-align: right" ><?=It::getIntIfIsDecemal($feature->filter_min) ?></td>
+                        <td style="text-align: right" ><?=It::getIntIfIsDecemal($feature->filter_diff) ?></td>
                         <td></td>
                     <?php }?>
                 </tr>
@@ -101,8 +101,8 @@ if (!$form->handlers) {
             <?php } ?>
             <?php foreach ($form->calculations as $key => $value) {?>
                 <tr>
-                    <td><?php echo $i++; ?>.</td>
-                    <td><?php echo $value->default_prefix?></td>
+                    <td style="text-align: center" ><?php echo $i++; ?>.</td>
+                    <td style="text-align: center" ><?php echo $value->default_prefix?></td>
                     <td>Calculation: <?php echo $value->display_name?></td>
                     <td><?=$value['metric']->html_code?></td>
                     <td></td>
@@ -121,7 +121,7 @@ if (!$form->handlers) {
                 </tr>
             <?php } ?>
             </table>
-        <div style="text-align: right;padding: 10px"><?php
+        <div style="text-align: right; padding: 10px 0 0 0"><?php
             echo CHtml::submitButton(It::t('site_label', 'do_save'));?>
         </div><?php
     echo CHtml::endForm();

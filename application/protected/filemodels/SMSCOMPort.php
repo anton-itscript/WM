@@ -12,5 +12,12 @@ class SMSCOMPort extends PFileModel
         return $array;
     }
 
+    public static function getLinuxComName($com)
+    {
+        $comsArray = SysFunc::getAvailableComPortsList();
+        return $comsArray[$com];
+    }
+
+
 
 }

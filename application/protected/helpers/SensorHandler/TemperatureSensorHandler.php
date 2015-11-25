@@ -17,7 +17,7 @@ class TemperatureSensorHandler extends SensorHandler
             'has_filter_diff'       => 1,
             'is_cumulative'         => 0, // is it cumulative or not? (it is true for sun, rain)
             'is_main'               => 1, // display info about this measurement in places where we need  to display info about  only one measurement for sensor
-            'aws_graph_using'       => 'Temperature',  // if takes part in “AWS Graph” page
+            'aws_graph_using'       => 'Temperature Air',  // if takes part in “AWS Graph” page
             'aws_panel_show'        => 1,
         )
     );

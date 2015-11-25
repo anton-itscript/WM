@@ -80,9 +80,9 @@ class SynchronizationForm extends CFormModel
     {
         $label = array();
 
-        $label["server_ip"]                     = $this->_data['SERVER_IP']['label'];
+        $label["server_ip"]                     = 'Server IP';
         $label["server_port"]                   = $this->_data['SERVER_PORT']['label'];
-        $label["remote_server_ip"]              = $this->_data['REMOTE_SERVER_IP']['label'];
+        $label["remote_server_ip"]              = 'Remote Server IP';
         $label["remote_server_port"]            = $this->_data['REMOTE_SERVER_PORT']['label'];
         $label["switch_variant"]                = $this->_data['SWITCH_VARIANT']['label'];
         $label["flexibility_role"]              = $this->_data['FLEXIBILITY_ROLE']['label'];
@@ -92,16 +92,14 @@ class SynchronizationForm extends CFormModel
         $label["forwarding_messages_port"]      = $this->_data['FOR_COMES_FORWARDING_MESSAGES_PORT']['label'];
         $label["for_send_messages_to_ip"]       = $this->_data['FOR_SEND_MESSAGES_TO_IP']['label'];
         $label["for_send_messages_port"]        = $this->_data['FOR_SEND_MESSAGES_PORT']['label'];
-        $label["identificator"]                 = $this->_data['IDENTIFICATOR']['label'];
-        $label["tcp_server_command_port"]       = $this->_data['TCP_SERVER_COMMAND_PORT']['label'];
-        $label["tcp_client_command_port"]       = $this->_data['TCP_CLIENT_COMMAND_PORT']['label'];
+        $label["identificator"]                 = 'Identifier';
+        $label["tcp_server_command_port"]       = 'TCP Server Command Port';
+        $label["tcp_client_command_port"]       = 'TCP Client Command Port';
         return $label;
     }
 
     public function save()
     {
-
-
         $this->_configForm->updateParam('SERVER_IP',array('label'=>$this->_data['SERVER_IP']['label'], 'value'=>$this->server_ip ));
         $this->_configForm->updateParam('SERVER_PORT',array('label'=>$this->_data['SERVER_PORT']['label'], 'value'=>$this->server_port ));
         $this->_configForm->updateParam('REMOTE_SERVER_IP',array('label'=>$this->_data['REMOTE_SERVER_IP']['label'], 'value'=>$this->remote_server_ip ));
@@ -117,12 +115,9 @@ class SynchronizationForm extends CFormModel
         $this->_configForm->updateParam('IDENTIFICATOR',array('label'=>$this->_data['IDENTIFICATOR']['label'], 'value'=>$this->identificator ));
         $this->_configForm->updateParam('TCP_SERVER_COMMAND_PORT',array('label'=>$this->_data['TCP_SERVER_COMMAND_PORT']['label'], 'value'=>$this->tcp_server_command_port ));
         $this->_configForm->updateParam('TCP_CLIENT_COMMAND_PORT',array('label'=>$this->_data['TCP_CLIENT_COMMAND_PORT']['label'], 'value'=>$this->tcp_client_command_port ));
-
         $this->_configForm->updateParam('TCP_SERVER_COMMAND_PID',array($this->tcp_server_command_pid));
         $this->_configForm->updateParam('TCP_CLIENT_COMMAND_PID',array($this->tcp_client_command_pid));
-
         $this->_configForm->saveToFile();
-
     }
 
     public static function getSwitchVariants()

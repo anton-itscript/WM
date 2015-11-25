@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class AWSFormatConfigForm @deprecated
+ */
 class AWSFormatConfigForm extends CFormModel
 {
     public $config;

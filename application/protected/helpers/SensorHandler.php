@@ -60,6 +60,8 @@ class SensorHandler extends BaseComponent{
         'rain_in_period'            =>  'rain_in_day',
     );
 
+
+    protected $aws_format;
     /*
 	 * creates object of specific handler class
 	 */
@@ -828,6 +830,13 @@ class SensorHandler extends BaseComponent{
             }
         }
         return false;
+    }
+
+    public function loadAWSFormat($aws_format_id)
+    {
+        $aws = new AWSFormat();
+        $aws->setAWSFormat($aws_format_id);
+        $this->aws_format = $aws;
     }
 }
 

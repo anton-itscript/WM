@@ -485,6 +485,7 @@ class ProcessMessage extends BaseComponent
                         $save_data_params['sensor_features'] = $sensor_info['features'];
 						// create object of sensor handler
                         $handler_obj = SensorHandler::create($sensor_info['sensor']->handler->handler_id_code);
+                        $handler_obj->loadAWSFormat($this->_station->aws_format);
 						// parse string coming after sensor ID into data pairs (feature:value)
                         $res = $handler_obj->prepareDataPairs($message_sensor_string[1], $measuring_timestamp, $sensor_info['features']);
 						if ($res === false){

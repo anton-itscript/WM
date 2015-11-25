@@ -67,10 +67,6 @@ class MainMenu
                         'importmsg'                     =>  array("label"=>'admin_import_message'),
                         'msggeneration'                 =>  array("label"=>"admin_msg_generation"),
                         'importxml'                     =>  array("label"=>'admin_import_xml'),
-
-
-
-
                     ),
                 ),
 
@@ -124,7 +120,7 @@ class MainMenu
 //                    )
 //                ),
 
-                'longdbsetup'=>array(
+                'longdbtask'=>array(
                     "label"=>"Setup",
                     "items"=>array(
 //                        'longdbsetup'       =>  array('label' => 'superadmin_longdbsetup'),
@@ -132,7 +128,7 @@ class MainMenu
                         'syncsettings'      =>  array("label"=>"superadmin_syncsettings","items"=>array()),
                         'heartbeatreport'   =>  array("label"=>"superadmin_heartbeatreport",'items'=>array()),
                         'config'            =>  array("label"=>"superadmin_config",'items'=>array()),
-                        'awsformat'         =>  array("label"=>"superadmin_aws_format",'items'=>array()),
+                       // 'awsformat'         =>  array("label"=>"superadmin_aws_format",'items'=>array()),
                     )
                 ),
                 'metrics'=>array(

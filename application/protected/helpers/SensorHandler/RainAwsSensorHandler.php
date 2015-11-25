@@ -8,9 +8,9 @@
 class RainAwsSensorHandler extends SensorHandler {
 
     /**
-     * @var AWSFormatConfigForm
+     * @var AWSFormat
      */
-    protected $awsFormat;
+    protected $aws_format;
 
     public $features = array(
         array(
@@ -227,7 +227,7 @@ class RainAwsSensorHandler extends SensorHandler {
 
         $this->_logger->log(__METHOD__. ': ' . print_r($this->incoming_sensor_value,1));
 
-        if ($this->awsFormat->isOldAWSFormat()) {
+        if ($this->aws_format->isOldawsFormat()) {
 
             $length = strlen($this->incoming_sensor_value);
 
@@ -333,7 +333,7 @@ class RainAwsSensorHandler extends SensorHandler {
     public function getRandomValue($features)
 	{
 
-        if ($this->awsFormat->isOldAWSFormat()) {
+        if ($this->aws_format->isOldawsFormat()) {
 
             $period = rand(1,180);
             $ac_period = rand(0, 1000);
@@ -354,7 +354,7 @@ class RainAwsSensorHandler extends SensorHandler {
     
     public function prepareXMLValue($xml_data, $db_features)
 	{
-        if ($this->awsFormat->isOldAWSFormat()) {
+        if ($this->aws_format->isOldawsFormat()) {
             $data_1 = str_pad($xml_data['period'], 3, "0", STR_PAD_LEFT);
 
             if (isset($xml_data['rain_in_period']) && ($xml_data['rain_in_period'] != 'M')) {
@@ -396,7 +396,7 @@ class RainAwsSensorHandler extends SensorHandler {
 
     public function __construct($logger)
     {
-        $this->awsFormat = new AWSFormatConfigForm;
+        $this->aws_format = new AWSFormat;
 
         parent::__construct($logger);
     }

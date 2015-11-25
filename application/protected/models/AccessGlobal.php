@@ -24,9 +24,9 @@ class AccessGlobal extends CStubActiveRecord
         );
     }
     public function checkController(){
-        if(in_array($this->controller,array_slice(Yii::app()->params['controllers'],1)))
+        if(in_array($this->controller, array_slice(Yii::app()->params['controllers'], 1)))
             return true;
-        $this->addError('controller', 'Controller not found. Use '.implode(', ',array_slice(Yii::app()->params['controllers'],1)) );
+        $this->addError('controller', 'Controller not found. Use '.implode(', ' , array_slice(Yii::app()->params['controllers'],1)) );
         return false;
     }
     public function checkAction(){
@@ -90,7 +90,7 @@ class AccessGlobal extends CStubActiveRecord
         $controllers = Yii::app()->params['controllers'];
         foreach ($controllers as $controller){
             $temp = AccessGlobal::getActionForController($controller,1,$disable);
-            if($temp) $action[$controller] = $temp;
+            if ($temp) $action[$controller] = $temp;
         }
 
         return $action;

@@ -19,7 +19,11 @@ class UserIdentity extends CUserIdentity {
             $access = AccessGlobal::getAction($record->role == 'superadmin'?'0':'1');
             if($record->role == 'user'){
                 $access['site']=array_intersect($access['site'],AccessGlobal::getActionFromArrayId(AccessUser::getActionIdFromUser($record->user_id)));
-                $access['sdmin']=array('');
+
+            }
+            if($record->role == 'admin'){
+                $access['site']=array_intersect($access['site'],AccessGlobal::getActionFromArrayId(AccessUser::getActionIdFromUser($record->user_id)));
+
             }
             $this->_id = $record->user_id;
             $this->setState('role', $record->role);
@@ -27,6 +31,7 @@ class UserIdentity extends CUserIdentity {
             $this->setState('access', $access);
             $this->errorCode = self::ERROR_NONE;
         }
+
         return !$this->errorCode;
     }
 

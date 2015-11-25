@@ -78,10 +78,10 @@ require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'applications_param_incl.
 						'enabled' => false,
 					),
 
-                    'db' => array(
-                        'class' => 'CFileLogRoute',
-                        'logFile' => 'db_application_'. date('l') .'.log',
-                    )
+//                    'db' => array(
+//                        'class' => 'CFileLogRoute',
+//                        'logFile' => 'db_application_'. date('l') .'.log',
+//                    )
 				),
 			),
 

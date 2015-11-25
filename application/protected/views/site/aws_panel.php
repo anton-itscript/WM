@@ -19,6 +19,8 @@
                 foreach($stationGroup as $station_id){ ?>
                     <th><?php
                         echo CHtml::link($stations[$station_id]->station_id_code, array('site/awssingle', 'station_id' => $stations[$station_id]->station_id));    ?>
+                        <br>
+                        <?=$stations[$station_id]->wmo_block_number?><?=$stations[$station_id]->station_number?>
                     </th>   <?php
                 } ?>
             </tr>
@@ -63,8 +65,11 @@
                         foreach($sensorData['handlers'][$handler_id]['code'] as $code_id => $code){
                             $flag=1;?>
                             <tr title="<?php echo $code_id; ?>" class="<?php echo $handlerGroup_id%2?'tableSpace':''; ?> ">
-                                <td class="handler"><?php
-                                    echo  $handlers[$handler_id]->display_name;?>
+                                <td class="handler">
+                                    <div class="handlername">
+                                        <?php echo  $handlers[$handler_id]->display_name;?>
+                                    </div>
+
                                     <div class="metric">
                                         <?= '&nbsp;'.$code['metric']; ?>
                                     </div>
@@ -87,8 +92,10 @@
                     }
                     if ($param['name']=='handlersCalc'){?>
                         <tr class="<?php echo $handlerGroup_id%2 ? 'tableSpace':''; ?>">
-                            <td class="handler">    <?php
-                                echo  $handlersCalc[$handler_id]->display_name;   ?>
+                            <td class="handler">
+                                <div class="handlername">
+                                    <?php echo  $handlersCalc[$handler_id]->display_name;?>
+                                </div>
                                 <div class="metric"><?php
                                     echo  $handlersCalc[$handler_id]->metric->html_code   ?>
                                 </div>

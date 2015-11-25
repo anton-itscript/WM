@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'aws_format'             => 'AWS format',
     'station_id_code'        => 'Station ID',
     'station_type'           => 'Type',
     'communication_type'     => 'Communication Type',

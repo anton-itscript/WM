@@ -21,7 +21,6 @@ class Station extends CStubActiveRecord
             if ($this->isNewRecord) {
                 $this->created = new CDbExpression('NOW()');
 
-               // $this->color = Color::randomColor();
             }
 
             $this->timezone_offset = TimezoneWork::getOffsetFromUTC($this->timezone_id, 1);
@@ -32,11 +31,6 @@ class Station extends CStubActiveRecord
 
     public function afterFind()
     {
-//        if (!$this->getUseLong() && empty($this->color)) {
-//            $this->beforeSave = false;
-//            $this->color = Color::randomColor();
-//            $this->save(false);
-//        }
         return parent::afterFind();
     }
 
@@ -103,6 +97,7 @@ class Station extends CStubActiveRecord
             array('station_gravity', 'numerical', 'min' => 0),
             array('station_gravity', 'compare', 'operator' => '!=', 'compareValue' => '0'),
             array('color', 'ColorValidator'),
+            array('aws_format', 'safe'),
         );
     }
     
@@ -337,6 +332,7 @@ class Station extends CStubActiveRecord
 	{
         return array (
             'station_id_code'        => It::t ('attributes', 'station_id_code'),
+            'aws_format'             => It::t ('attributes', 'aws_format'),
             'station_type'           => It::t ('attributes', 'station_type'),
             'communication_type'     => It::t ('attributes', 'communication_type'),
             'communication_port'     => It::t ('attributes', 'communication_port'),
@@ -457,7 +453,7 @@ class Station extends CStubActiveRecord
      */
     public static function stationFromGroup(&$stations, $groupStation, &$pages = null){
         $criteria = new CDbCriteria();
-            $criteria->select = 'station_id, display_name, station_id_code, station_type, event_message_period';
+            $criteria->select = 'station_id, display_name, station_id_code, wmo_block_number, wmo_member_state_id, station_number, station_type, event_message_period';
             $criteria->compare('station_type', array('aws', 'awos'));
             if(isset($groupStation))
                 $criteria->compare('station_id', $groupStation);
@@ -544,5 +540,10 @@ class Station extends CStubActiveRecord
     public function getCalculation()
     {
         return $this->with('station_calculation.handler')->findByPk($this->getPrimaryKey());
+    }
+
+    public function getAwsFormat()
+    {
+        return $this->aws_format;
     }
 }

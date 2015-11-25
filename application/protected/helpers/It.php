@@ -579,6 +579,13 @@ class It
         return date('Y-m-d H:i:s',$time);
 
     }
+
+    public static function getIntIfIsDecemal($float)
+    {
+        if((int)$float == $float)
+            return (int)$float;
+        return $float;
+    }
 }
 
 ?>

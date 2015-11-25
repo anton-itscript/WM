@@ -1008,6 +1008,10 @@ table.tablelist th a.desc:hover, table.tablelist th a.desc.selected {
     background: url("../img/order_desc_selected.png") no-repeat scroll right center transparent;
     display: block;
 }
+table.tablelist.headers-centered th {
+    text-align: center;
+    vertical-align: middle;
+}
 
 table.rgtable th, table.rgtable td {
     font-size: 11px;
@@ -1351,6 +1355,10 @@ blockquote.note {
 
 .awspanel table.tablelist .handler div.metric {
     float: right;
+}
+
+.awspanel table.tablelist .handler div.handlername {
+    float: left;
 }
 
 .awspanel table.tablelist .tableSpace {

@@ -88,7 +88,7 @@ class SysFunc
 					$matches = array();
 					if (preg_match('/\/dev\/ttyS([0-9])/', $line, $matches)) {
 						$serialPort = 'COM' . ($matches[1] + 1);
-						$result[$serialPort] = "$serialPort ($matches[0])";
+						$result[$serialPort] = $matches[0];
 					}
 				}
 			}

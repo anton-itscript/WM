@@ -1,7 +1,7 @@
 
 <div class="middlenarrow">
 
-    <h1><?php echo It::t('menu_label', 'superadmin_syncsettings'); ?></h1>
+    <h1><?php echo It::t('menu_label', 'superadmin_heartbeatreport'); ?></h1>
 
     <?php echo CHtml::beginForm($this->createUrl('superadmin/heartbeatreport'), 'post'); ?>
 

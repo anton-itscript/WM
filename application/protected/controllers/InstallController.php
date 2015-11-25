@@ -7,6 +7,11 @@
 	{
 		public $layout = 'install';
 
+		public function beforeAction()
+		{
+			$this->redirect($this->createUrl('admin/stations'));
+		}
+
 		/**
 		 *  First page. Check COM port component is installed. 
 		 */
@@ -142,5 +147,7 @@
 				'conf_form_long' => $conf_form_long,
 			));
 		}
+
+
 	}
 ?>

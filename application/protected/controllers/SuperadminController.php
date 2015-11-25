@@ -216,13 +216,20 @@ class SuperadminController extends CController
             }
         }
         if(isset($_POST['HeartbeatReportForm'])){
+
             $form->attributes=$_POST['HeartbeatReportForm'];
             if(isset($_POST['scenario'])){
                 $form->scenario = $_POST['scenario'];
                 if($form->validate()){
                     $form->update();
+                    $this->redirect($this->createUrl('superadmin/HeartbeatReport'));
                 }
             }
+
+//            echo "<pre>";
+//            print_r($_POST);
+//            echo "</pre>";
+//            exit;
         }
 
 

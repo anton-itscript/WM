@@ -77,7 +77,7 @@ class GenerateMessageCommand  extends CConsoleCommand
                     }
                 }
             }
-
+            $this->_logger->log('Sensors '. print_r($sensors,1));
             $i = time();
             $messages[$i]['timestamp'] = $i;
             $this->_logger->log(__METHOD__ . ': sensors ' . print_r($sensors['sensor_id_code'], 1));
@@ -101,10 +101,15 @@ class GenerateMessageCommand  extends CConsoleCommand
 
                 if ($sensors) {
                     foreach ($sensors as $k1 => $v1) {
-                        $handler = SensorHandler::create($v1['handler_id_code']);
 
+
+                        $handler = SensorHandler::create($v1['handler_id_code']);
+                        $handler->loadAWSFormat($station->aws_format);
                         $random_value = $handler->getRandomValue($v1['features']);
                         $sensors_values[] = $v1['sensor_id_code'] . $random_value;
+
+                        $this->_logger->log('SensorHandler:: '. print_r($v1['handler_id_code'],1) . 'value: ' . $v1['sensor_id_code'] . $random_value);
+                        $this->_logger->log('features:: '. print_r($v1['features'],1) );
                     }
 
                     shuffle($sensors_values);

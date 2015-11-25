@@ -16,7 +16,15 @@
 
 
                         foreach ($res as $act) {
-                            echo $act[0].'<br>';
+
+                            if (strtoupper($act[0]) == "AWS" or strtoupper($act[0]) == "MSG" or strtoupper($act[0]) == "RG") {
+                                echo strtoupper($act[0]).'<br>';
+                            }
+                            else {
+                                echo $act[0].'<br>';
+                            }
+
+
                         }
                         ?>
                     </th>

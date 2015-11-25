@@ -1605,17 +1605,39 @@ class AdminController extends CController
      * Users
      */
     public function actionUsers(){
-        $criteria = new CDbCriteria();
-        $criteria->compare('role',array_slice(Yii::app()->params['user_role'],1));
-        $criteria->order = "role desc";
-        $users = User::model()->findAll($criteria);
 
-        $criteria = new CDbCriteria();
-        $criteria->compare('controller',Yii::app()->params['controllers'][2]);
-        $criteria->compare('enable','1');
-        $criteria->addNotInCondition('action',AccessGlobal::getDefaultAction());
-        $criteria->order = "action asc";
-        $actions = AccessGlobal::model()->findAll($criteria);
+        if (Yii::app()->user->isAdmin()) {
+
+            $criteria = new CDbCriteria();
+            $criteria->compare('role',array_slice(Yii::app()->params['user_role'],2));
+            $criteria->order = "role desc";
+            $users = User::model()->findAll($criteria);
+
+            $criteria = new CDbCriteria();
+            $criteria->compare('controller',Yii::app()->params['controllers'][2]);
+            $criteria->compare('enable','1');
+            $criteria->addNotInCondition('action',AccessGlobal::getDefaultAction());
+            $criteria->order = "action asc";
+            $actions = AccessGlobal::model()->findAll($criteria);
+        }
+
+        if (Yii::app()->user->isSuperAdmin()) {
+
+            $criteria = new CDbCriteria();
+            $criteria->compare('role',array_slice(Yii::app()->params['user_role'],1));
+            $criteria->order = "role desc";
+            $users = User::model()->findAll($criteria);
+
+            $criteria = new CDbCriteria();
+            $criteria->compare('controller',Yii::app()->params['controllers'][2]);
+            $criteria->compare('enable','1');
+            $criteria->addNotInCondition('action',AccessGlobal::getDefaultAction());
+            $criteria->order = "action asc";
+            $actions = AccessGlobal::model()->findAll($criteria);
+        }
+
+
+
 
         $this->render('users', array(
             'users'     => $users,

@@ -65,6 +65,7 @@ class HeartbeatReportForm extends CFormModel{
         {
             switch($this->scenario){
                 case 'Save':
+                    Config::set(self::optionName.'_CLIENT_NAME',$this->clientName);
                     Config::set(self::optionName.'_PERIOD',$this->period);
                     Config::set(self::optionName.'_EMAIL',$this->email);
                     Config::set(self::optionName.'_FTP',$this->ftp);

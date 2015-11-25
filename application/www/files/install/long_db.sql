@@ -554,6 +554,7 @@ CREATE TABLE `station` (
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `color` varchar(255) DEFAULT NULL,
+  `aws_format` int(10) DEFAULT 1,
   PRIMARY KEY (`station_id`),
   KEY `i_station__type` (`station_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

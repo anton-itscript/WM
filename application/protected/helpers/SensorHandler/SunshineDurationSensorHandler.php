@@ -8,9 +8,9 @@
 class SunshineDurationSensorHandler extends SensorHandler {
 
     /**
-     * @var AWSFormatConfigForm
+     * @var awsFormat
      */
-    protected $awsFormat;
+    protected $aws_format;
 
     public $features = array(
         array(
@@ -189,7 +189,7 @@ class SunshineDurationSensorHandler extends SensorHandler {
     }       
     
     public function _prepareDataPairs() {
-        if ($this->awsFormat->isOldAWSFormat()) {
+        if ($this->aws_format->isOldawsFormat()) {
             $length = strlen($this->incoming_sensor_value);
 
             if ($length <> 10)
@@ -277,7 +277,7 @@ class SunshineDurationSensorHandler extends SensorHandler {
     
     public function getRandomValue($features)
 	{
-        if ($this->awsFormat->isOldAWSFormat()) {
+        if ($this->aws_format->isOldawsFormat()) {
 
             $period = str_pad('60', 3, "0", STR_PAD_LEFT);
             $ac_period = str_pad(rand(0, 60), 3, "0", STR_PAD_LEFT);
@@ -296,7 +296,7 @@ class SunshineDurationSensorHandler extends SensorHandler {
 	
 	public function prepareXMLValue($xml_data, $db_features)
 	{
-        if ($this->awsFormat->isOldAWSFormat()) {
+        if ($this->aws_format->isOldawsFormat()) {
 
             $data_1 = str_pad($xml_data['period'], 3, "0", STR_PAD_LEFT);
 
@@ -338,7 +338,7 @@ class SunshineDurationSensorHandler extends SensorHandler {
 
     public function __construct($logger)
     {
-        $this->awsFormat = new AWSFormatConfigForm;
+        $this->aws_format = new AWSFormat;
 
         parent::__construct($logger);
     }

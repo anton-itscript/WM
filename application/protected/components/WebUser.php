@@ -134,6 +134,8 @@ class WebUser extends CWebUser
             $this->access = $accessArray;
             return in_array($action,$this->access[$controller]);
         }
+
+        return false;
     }
 }
 

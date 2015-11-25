@@ -119,20 +119,26 @@ $(document).ready( function() {
                 setHeightTable(ind);
             } else {
                 $('.awstable_block:eq('+ind+')').html('<img src="'+BaseUrl+'/img/loading.gif">');
-                $('.awstable_block:eq('+ind+')').show();
+
 
                 $.get(
                     BaseUrl+'/site/awstable',
                     {show_station: tabs_loaded[ind].station_id},
+
                     function(data){
                         $('.awstable_block:eq('+ind+')').html(data);
-                        tabs_loaded[ind].loaded = true;})
+                        tabs_loaded[ind].loaded = true;
+                    })
                     .always(function() {
-                        if(checkData(ind)){
+                        if (checkData(ind)) {
                             setHeightTable(ind);
-                            setWidthColumn(ind);}
-                        else
-                            $('.awstable_block:eq('+ind+')').html('No results');});
+                            setWidthColumn(ind);
+                        } else {
+                            $('.awstable_block:eq('+ind+')').html('No results');
+                        }
+                    });
+
+                $('.awstable_block:eq('+ind+')').show();
             }
         }
     });

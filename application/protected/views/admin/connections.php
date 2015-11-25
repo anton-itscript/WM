@@ -25,6 +25,13 @@
 		{
 			$connection_type = str_replace(array(':', '.'), array('__','_'), $params['connection_type']);
             $communication_type = $connections[$key]['communication_type'];
+
+            if (preg_match("/sms/i",$key, $matches1) or preg_match("/direct/i",$key, $matches2))
+            {
+                $key = SMSCOMPort::getLinuxComName($connection_type);
+            }
+
+
 		?>
     <tr class="<?php echo fmod($i,2) == 0 ? 'c' : ''?>" >
        <td><b><?php echo (CHtml::encode($key)); ?></b></td>

@@ -11,11 +11,7 @@
 
 <table class="formtable">
 
-    <tr>
-        <th><?php echo CHtml::Label( "Control Server IP", '1')?></th>
-        <td><?=$_SERVER['SERVER_ADDR']?></td>
 
-    </tr>
     <tr>
         <th><?php echo CHtml::activeLabel($form, "server_ip")?></th>
         <td><?php echo CHtml::activeTextField($form, "server_ip", array('disabled'=>$disabled))?></td>
@@ -92,7 +88,7 @@
     <tr>
         <th></th>
         <td>
-            <?php echo CHtml::submitButton('Save server sunc', array('name' => '__save','disabled'=>$disabled))?>
+            <?php echo CHtml::submitButton('Save Server SUNC', array('name' => '__save','disabled'=>$disabled))?>
         </td>
         <td></td>
         <td></td>

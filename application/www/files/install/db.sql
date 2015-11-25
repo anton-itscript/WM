@@ -500,6 +500,9 @@ INSERT INTO `refbook_measurement_type` VALUES ('21', 'Cloud Measuring Range', 'c
 INSERT INTO `refbook_measurement_type` VALUES ('22', 'Snow Depth', 'snow_depth', '19');
 INSERT INTO `refbook_measurement_type` VALUES ('23', 'Water Level', 'water_level', '20');
 INSERT INTO `refbook_measurement_type` VALUES ('24', 'Water Level Offset', 'level_offset', '21');
+INSERT INTO `refbook_measurement_type` VALUES ('25', 'Temperature Soil', 'temperature_soil', '20');
+INSERT INTO `refbook_measurement_type` VALUES ('26', 'Temperature Water', 'temperature_water', '21');
+
 
 -- ----------------------------
 -- Table structure for refbook_measurement_type_metric
@@ -559,6 +562,8 @@ INSERT INTO `refbook_measurement_type_metric` VALUES ('39', '23', '11', '0');
 INSERT INTO `refbook_measurement_type_metric` VALUES ('40', '24', '4', '0');
 INSERT INTO `refbook_measurement_type_metric` VALUES ('41', '24', '5', '1');
 INSERT INTO `refbook_measurement_type_metric` VALUES ('42', '24', '11', '0');
+INSERT INTO `refbook_measurement_type_metric` VALUES ('43', '25', '2', '1');
+INSERT INTO `refbook_measurement_type_metric` VALUES ('44', '26', '2', '1');
 
 -- ----------------------------
 -- Table structure for refbook_metric
@@ -889,9 +894,9 @@ INSERT INTO `sensor_handler_default_feature` VALUES ('127', '6', 'solar_radiatio
 INSERT INTO `sensor_handler_default_feature` VALUES ('128', '7', 'sun_duration_in_period', '1', '0.000', '13', '0.00', '0.00', '0.00', '2014-10-17 15:28:16', '2014-10-24 13:15:40');
 INSERT INTO `sensor_handler_default_feature` VALUES ('129', '7', 'sun_duration_in_day', '0', '0.000', '13', '0.00', '0.00', '0.00', '2014-10-17 15:28:16', '2014-10-24 13:15:40');
 INSERT INTO `sensor_handler_default_feature` VALUES ('130', '8', 'temperature', '1', '0.000', '2', '0.00', '0.00', '0.00', '2014-10-17 15:28:20', '2014-10-17 15:28:45');
-INSERT INTO `sensor_handler_default_feature` VALUES ('131', '9', 'temperature', '1', '0.000', '2', '0.00', '0.00', '0.00', '2014-10-17 15:28:24', '2014-10-17 16:31:30');
+INSERT INTO `sensor_handler_default_feature` VALUES ('131', '9', 'temperature_soil', '1', '0.000', '2', '0.00', '0.00', '0.00', '2014-10-17 15:28:24', '2014-10-17 16:31:30');
 INSERT INTO `sensor_handler_default_feature` VALUES ('132', '9', 'depth', '0', '0.000', '5', '0.00', '0.00', '0.00', '2014-10-17 15:28:24', '2014-10-17 16:31:30');
-INSERT INTO `sensor_handler_default_feature` VALUES ('133', '16', 'temperature', '1', '0.000', '2', '0.00', '0.00', '0.00', '2014-10-17 15:28:33', '2014-10-17 15:28:33');
+INSERT INTO `sensor_handler_default_feature` VALUES ('133', '16', 'temperature_water', '1', '0.000', '2', '0.00', '0.00', '0.00', '2014-10-17 15:28:33', '2014-10-17 15:28:33');
 INSERT INTO `sensor_handler_default_feature` VALUES ('134', '16', 'depth', '0', '0.000', '5', '0.00', '0.00', '0.00', '2014-10-17 15:28:33', '2014-10-17 15:28:33');
 INSERT INTO `sensor_handler_default_feature` VALUES ('135', '17', 'visibility_1', '1', '0.000', '11', '0.00', '0.00', '0.00', '2014-10-17 15:29:07', '2014-10-17 15:29:07');
 INSERT INTO `sensor_handler_default_feature` VALUES ('136', '17', 'visibility_10', '0', '0.000', '11', '0.00', '0.00', '0.00', '2014-10-17 15:29:07', '2014-10-17 15:29:07');
@@ -1036,6 +1041,7 @@ CREATE TABLE `station` (
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `color` varchar(255) DEFAULT NULL,
+  `aws_format` int(10) DEFAULT 1,
   PRIMARY KEY (`station_id`),
   KEY `i_station__type` (`station_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1288,6 +1294,9 @@ INSERT INTO `tbl_migration` VALUES ('m151105_054503_defaultMailSettings', '14471
 INSERT INTO `tbl_migration` VALUES ('m151105_064906_defaultMails', '1447132304');
 INSERT INTO `tbl_migration` VALUES ('m151105_113200_PathesForDockerVolumes', '1447132304');
 INSERT INTO `tbl_migration` VALUES ('m151109_063217_AddSMSAccesActions', '1447132304');
+INSERT INTO `tbl_migration` VALUES ('m151110_110651_AddStationsOverview', '1448445855');
+INSERT INTO `tbl_migration` VALUES ('m151124_074817_aws_format_for_stations', '1448445855');
+INSERT INTO `tbl_migration` VALUES ('m151124_074931_aws_format_for_stations_long', '1448445855');
 
 -- ----------------------------
 -- Table structure for user
@@ -1321,12 +1330,9 @@ CREATE TABLE `xml_process_log` (
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`xml_log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of xml_process_log
 -- ----------------------------
-INSERT INTO `xml_process_log` VALUES ('1', 'Folder doesn\'t exists: C:\\weather_monitor_ftp\\xml_messages', '2015-11-10 11:11:01', '2015-11-10 11:11:01');
-INSERT INTO `xml_process_log` VALUES ('2', 'Folder doesn\'t exists: /usr/share/nginx/html/www/files/xml_messages', '2015-11-10 11:16:02', '2015-11-10 11:16:02');
-INSERT INTO `xml_process_log` VALUES ('3', 'Folder doesn\'t exists: /usr/share/nginx/html/www/files/xml_messages', '2015-11-10 11:21:01', '2015-11-10 11:21:01');
-INSERT INTO `xml_process_log` VALUES ('4', 'Folder doesn\'t exists: /usr/share/nginx/html/www/files/xml_messages', '2015-11-10 11:26:01', '2015-11-10 11:26:01');
+
