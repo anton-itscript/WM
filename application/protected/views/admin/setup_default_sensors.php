@@ -28,9 +28,9 @@ if (!$form->handlers) {
             </tr>
             <tr>
 
-                <th>T1></th>
-                <th>T1< </th>
-                <th>|T0-T1| ></th>
+                <th style="width: 50px" >T1></th>
+                <th style="width: 50px" >T1< </th>
+                <th style="width: 50px" >|T0-T1| ></th>
             </tr>
 
             <?php $ji=1; ?>
