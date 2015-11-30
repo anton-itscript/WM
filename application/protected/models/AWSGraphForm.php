@@ -47,11 +47,10 @@ class AWSGraphForm extends CFormModel
         if (!$this->hasErrors() && $this->station_id) {
             $stationResult = Station::model()->getStationsWithSensorsFeatures($this->station_id);
 
-
-
+            $i=0;
             foreach ($this->sensor_feature_code as $group_code => $group) {
                 if (!empty($group)) {
-                    $i=0;
+
                     foreach ($stationResult as $station) {
                         $colorWalker = new Color($station->color);
 
@@ -68,6 +67,11 @@ class AWSGraphForm extends CFormModel
 //                                        $colorWalker->mix('888888');
                                         $colorWalker->darken();
 
+//
+//                                        echo "<pre>";
+//                                        print_r($i);
+//                                        print_r($sensorFeature);
+//                                        echo "</pre>";
 
 
                                         $qb = new CDbCriteria();
@@ -142,7 +146,7 @@ class AWSGraphForm extends CFormModel
                                         $tmp[] = ['x' => strtotime($data->ListenerLog->measuring_timestamp) * 1000, 'y' => floatval($data->value)];
                                     }
                                     $series_data[$i] = $tmp;
-
+                                    $i++;
                                 }
                             }
 
@@ -158,7 +162,7 @@ class AWSGraphForm extends CFormModel
                             }
                         }
 
-                        $i++;
+
 
                     }
 

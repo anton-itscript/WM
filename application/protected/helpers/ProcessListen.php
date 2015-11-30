@@ -159,9 +159,9 @@ class ProcessListen extends BaseComponent
 		// Check COM## pattern
 		else if (preg_match('/COM[0-9]+/', $this->source))
 		{
-			$this->_logger->log(__CLASS__.' '.__METHOD__ .' Check COM port');
+			$this->_logger->log(__CLASS__.' '.__METHOD__ .' Check Serial port');
             // else it is COM port connection: it can be DataLogger or GSM modem
-			ListenerProcess::addComment($this->listener->listener_id, 'hardware_recognizing', $this->source.' is COM port.');
+			ListenerProcess::addComment($this->listener->listener_id, 'hardware_recognizing', SMSCOMPort::getLinuxComName($this->source).' is Serial port.');
             $this->hardware = 'com';
         }
 

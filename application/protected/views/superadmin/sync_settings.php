@@ -88,7 +88,7 @@
     <tr>
         <th></th>
         <td>
-            <?php echo CHtml::submitButton('Save Server SUNC', array('name' => '__save','disabled'=>$disabled))?>
+            <?php echo CHtml::submitButton('Save settings', array('name' => '__save','disabled'=>$disabled))?>
         </td>
         <td></td>
         <td></td>
@@ -99,6 +99,6 @@
     <?=CHtml::endForm(); ?>
 
     <?=CHtml::beginForm($this->createUrl('superadmin/syncsettings'), 'post'); ?>
-        <?=CHtml::submitButton(($synchronization->process_status=='stopped' or $synchronization->process_status=='')  ?    'Start process' : 'Stop process'  , array('name' => 'process_start'))?>
+        <?=CHtml::submitButton(($synchronization->process_status=='stopped' or $synchronization->process_status=='')  ?    'Start Sync' : 'Stop Sync'  , array('name' => 'process_start'))?>
     <?=CHtml::endForm(); ?>
 </div>

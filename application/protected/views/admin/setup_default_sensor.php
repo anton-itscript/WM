@@ -51,7 +51,13 @@
     </blockquote>
 
     <?php if ($sensor_features) { ?>
-        <?php foreach ($sensor_features as $key => $value) { ?>
+        <?php
+
+//        echo "<pre>";
+//        print_r($sensor_features);
+//        echo "</pre>";
+
+        foreach ($sensor_features as $key => $value) { ?>
             <table class="formtable">
             <tr>
                 <th style="width: 100px;"><b><?php if ($value->is_constant) {?>Feature<?php }else{?>Measurement<?php }?>:</b></th>
@@ -96,7 +102,7 @@
                     <?php }?>        
                     <td style="width: 460px;">
                         <blockquote class="tip">
-                            <?php if ($value->is_cumulative) {?>
+                            <?php if ($value->is_cumulative and !strpos($value->feature_code,'day')) {?>
                                 <p>Set  values for a <b>1 HOUR</b> period. If we receive rain for a different period -will calculate the appropriate filter-value.<br/><span style="font-size: 10px;">E.g. if we receive a value for 120 minutes instead of 60 minutes, the observed value will be compared with alert value * 2.</span></p>
                             <?php } else {?>
                             <p>Independent from the period of measurement. Filters incoming data.</p>

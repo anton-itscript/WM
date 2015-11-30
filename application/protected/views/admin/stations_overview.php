@@ -39,7 +39,7 @@
 					
 					if (($station->communication_type === 'direct') || ($station->communication_type === 'sms')) 
 					{
-						echo '('. $station->communication_port .')'; 
+						echo '('.  SMSCOMPort::getLinuxComName($station->communication_port) .')';
 					} 
 					else if ($station->communication_type === 'tcpip') 
 					{

@@ -15,11 +15,11 @@ if (!$form->handlers) {
         <table class="tablelist headers-centered">
             <tr>
 
-                <th rowspan="2" ></th>
+
                 <th rowspan="2" >ID Prefix</th>
-                <th rowspan='2' >Handler</th>
+                <th rowspan='2'  style="text-align: left" >Handler</th>
                 <th rowspan='2' >Unit</th>
-                <th rowspan='2' >Description</th>
+                <th rowspan='2'  style="text-align: left" >Description</th>
                 <th colspan="3" >Filters & Alerts</th>
                 <th rowspan='2' >Height<br>Depth<br>Ref</th>
                 <th rowspan='2' >Report <br> Start <br> Time</th>
@@ -36,7 +36,7 @@ if (!$form->handlers) {
             <?php $ji=1; ?>
             <?php foreach ($form->handlers as $key => $value) {?>
                 <tr>
-                    <td  style="text-align: center" rowspan="<?=count($value['features'])?>" ><?php echo $ji++; ?>.</td>
+
                     <td  style="text-align: center" rowspan="<?=count($value['features'])?>" ><?php echo $value->default_prefix?></td>
                     <td  style="text-align: left" rowspan="<?=count($value['features'])?>" ><?php echo $value->display_name?></td>
 
@@ -44,7 +44,7 @@ if (!$form->handlers) {
 
                         $additional_features = $form->getFeatureByFeatureCodeAndHandlerIdCode($value->handler_id_code,$feature->feature_code); ?>
 
-                        <td><?=$feature['metric']->html_code ?></td>
+                        <td style="text-align: center" ><?=$feature['metric']->html_code ?></td>
                         <td style="text-align: left" ><?php  echo $additional_features['feature_name']?></td>
                         <?php if ($additional_features['exstra_features']==true) { ?>
                             <td colspan="3"></td>
@@ -84,7 +84,7 @@ if (!$form->handlers) {
 
                     ?>
                 <tr>
-                    <td><?=$feature['metric']->html_code ?></td>
+                    <td style="text-align: center" ><?=$feature['metric']->html_code ?></td>
                     <td style="text-align: left" ><?php  echo $additional_features['feature_name']?></td>
                     <?php if ($additional_features['exstra_features']==true) { ?>
                         <td colspan="3"></td>
@@ -101,7 +101,7 @@ if (!$form->handlers) {
             <?php } ?>
             <?php foreach ($form->calculations as $key => $value) {?>
                 <tr>
-                    <td style="text-align: center" ><?php echo $i++; ?>.</td>
+
                     <td style="text-align: center" ><?php echo $value->default_prefix?></td>
                     <td>Calculation: <?php echo $value->display_name?></td>
                     <td><?=$value['metric']->html_code?></td>

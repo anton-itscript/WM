@@ -219,7 +219,10 @@ class RainAwsSensorHandler extends SensorHandler {
     
     public function formatValue($value, $feature_name = 'rain_in_period')
 	{
-		return number_format($value, 3);
+       // return round($value,10);
+//		return number_format(0.850 , 1);
+		return rtrim(number_format((float)$value, 3),'0');
+		//return number_format((float)$value, 3);
     }
     
     public function _prepareDataPairs()
@@ -300,11 +303,10 @@ class RainAwsSensorHandler extends SensorHandler {
             $value_1 = substr($this->incoming_sensor_value, 0, 4);
             $is_m = $value_1 == 'MMMM' ? 1 : 0;
 
-            $value_1 = $value_1 / 1000;
+            $value_1 = $value_1 / 10;
 
             $this->prepared_pairs['rain_in_period'] = array(
                 'feature_code' => 'rain_in_period',
-              //  'period' => $info_1,
                 'period' => 1,
                 'value' => $value_1,
                 'metric_id' => $needed_feature_1['metric_id'],
@@ -315,7 +317,7 @@ class RainAwsSensorHandler extends SensorHandler {
             $value_2 = substr($this->incoming_sensor_value, 4, 4);
             $is_m = $value_2 == 'MMMM' ? 1 : 0;
 
-            $value_2 = $value_2 / 1000;
+            $value_2 = $value_2 / 10;
 
             $this->prepared_pairs['rain_in_day'] = array(
                 'feature_code' => 'rain_in_day',

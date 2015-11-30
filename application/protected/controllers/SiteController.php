@@ -143,7 +143,7 @@ class SiteController extends CController
                 StationCalculationData::addCalculationData($sensorData,$lastLogsId,$handlersCalcId);
                 // sensor data
                 if(isset($sensorData['handlers'])){
-                    foreach($sensorData['handlers'] as $handler_id => &$handler){
+                    foreach($sensorData['handlers'] as $handler_id => & $handler){
                         SensorHandler::setGroupAwsPanel(
                             $handlerGroup,
                             $handlers[$handler_id]->handler_id_code,
@@ -159,13 +159,13 @@ class SiteController extends CController
                 }
                 //calculationData
                 if(isset($sensorData['handlersCalc'])){
-                    foreach($sensorData['handlersCalc'] as $handler_id => &$handler){
+                    foreach($sensorData['handlersCalc'] as $handler_id => & $handler){
                         SensorHandler::setGroupAwsPanel(
                             $handlerGroup,
                             $handlersCalc[$handler_id]->handler_id_code,
                             $handler_id,'handlersCalc');
 
-                        foreach($handler['stations'] as $station_id => &$station){
+                        foreach($handler['stations'] as $station_id => & $station){
                             CalculationHandler::getDataForAwsPanel(
                                 $station,
                                 $stations[$station_id]->lastMessage->log_id,
@@ -423,6 +423,7 @@ class SiteController extends CController
         $form = new AWSGraphForm();
         $res = array();
         if (Yii::app()->request->isPostRequest) {
+
             if (isset($_POST['clear'])) {
                 $form->clearMemory();
                 $this->redirect($this->createUrl('site/awsgraph'));
@@ -435,6 +436,12 @@ class SiteController extends CController
 
                 }
             }
+//
+//            echo "<pre>";
+//            print_r($_POST);
+//            print_r($res);
+//            echo "</pre>";
+//            exit;
         }
 
         $this->render('aws_graph', array(

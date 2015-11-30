@@ -69,10 +69,10 @@ class ProcessListenCom extends BaseComponent
 	{
         if (preg_match('/COM[0-9]+/', $this->source))
         {
-            $this->_logger->log(__METHOD__ .' Check COM port');
+            $this->_logger->log(__METHOD__ .' Check Serial port');
 
             // else it is COM port connection: it can be DataLogger or GSM modem
-            ListenerProcess::addComment($this->listener->listener_id, 'hardware_recognizing', $this->source.' is COM port.');
+            ListenerProcess::addComment($this->listener->listener_id, 'hardware_recognizing',  SMSCOMPort::getLinuxComName($this->source).' is Serial port.');
 
             try
             {
@@ -91,7 +91,7 @@ class ProcessListenCom extends BaseComponent
                 $this->_connector = new GsmModemSerialConnector($this->_logger, $serial);
                 $this->_connector->setParams(array('port' => $this->source));
 
-                ListenerProcess::addComment($this->listener->listener_id, 'hardware_recognizing', 'Script started to recognize hardware connected to PC via COM port');
+                ListenerProcess::addComment($this->listener->listener_id, 'hardware_recognizing', 'Script started to recognize hardware connected to PC via Serial port');
 
                 if ($this->listener->additional_param == 'SMS') {
 
@@ -100,7 +100,7 @@ class ProcessListenCom extends BaseComponent
                             $this->_logger->log (__METHOD__, array('hardware' => 'modem'));
                             $this->hardware = 'modem';
 
-                            ListenerProcess::addComment ($this->listener->listener_id, 'hardware_recognizing', 'Hardware connected to PC via COM port - is GSM Modem');
+                            ListenerProcess::addComment ($this->listener->listener_id, 'hardware_recognizing', 'Hardware connected to PC via Serial port - is GSM Modem');
 
                             $this->_logger->log (__METHOD__, array('hardware' => $this->hardware));
 
@@ -119,7 +119,7 @@ class ProcessListenCom extends BaseComponent
                         $this->_logger->log (__METHOD__, array('hardware' => 'datalogger'));
                         $this->hardware = 'dl';
 
-                        ListenerProcess::addComment ($this->listener->listener_id, 'hardware_recognizing', 'Hardware connected to PC via COM port - is Datalogger');
+                        ListenerProcess::addComment ($this->listener->listener_id, 'hardware_recognizing', 'Hardware connected to PC via Serial port - is Datalogger');
 
                         $this->_logger->log (__METHOD__, array('hardware' => $this->hardware));
 

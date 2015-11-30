@@ -80,7 +80,7 @@ class ProcessListenDL extends BaseComponent
     public function run()
 	{
 
-        ListenerProcess::addComment($this->listener->listener_id, 'comment','going to start listening datalogger, source= '. $this->source);
+        ListenerProcess::addComment($this->listener->listener_id, 'comment','going to start listening datalogger, source= '.  SMSCOMPort::getLinuxComName($this->source));
         $i = 0;
         while (true)
         {

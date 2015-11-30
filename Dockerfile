@@ -113,6 +113,10 @@ ENV MYSQL_USER=admin \
 ADD import_sql.sh /import_sql.sh
 ADD run.sh /run.sh
 
+ADD migrations.sh /migrations.sh
+RUN chmod 755 /migrations.sh
+
+
 RUN mkdir /tmp/wm_clear_databases
 RUN mkdir /var/wm_backups
 

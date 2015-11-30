@@ -12,16 +12,6 @@ echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 procs=$(cat /proc/cpuinfo |grep processor | wc -l)
 sed -i -e "s/worker_processes 5/worker_processes $procs/" /etc/nginx/nginx.conf
 
-set MIGRATIONS="";
-MIGRATIONS=$(ls -a /usr/share/nginx/html/protected/migrations | grep .php);
-if [ -n "$MIGRATIONS" ] ; then
-	echo $MIGRATIONS;
-	
-	cd /usr/share/nginx/html/protected/
-	./yiic migrate  --interactive=0 
-	
-fi
-
 
 chmod 777 /dev/ttyS0
 chmod 777 /dev/ttyS1

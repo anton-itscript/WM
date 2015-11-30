@@ -81,7 +81,7 @@ class ProcessListenModem extends BaseComponent
     public function run()
 	{
 
-        ListenerProcess::addComment($this->listener->listener_id, 'comment', 'going to start listening for SMS messages, source= '. $this->source);
+        ListenerProcess::addComment($this->listener->listener_id, 'comment', 'going to start listening for SMS messages, source= '.  SMSCOMPort::getLinuxComName($this->source));
 
         $this->_connector->onReceiveMessages = function ($messages) {
             ListenerProcess::addComment($this->listener->listener_id, 'comment', 'found '. count($messages) .' messages at modem');
@@ -110,7 +110,7 @@ class ProcessListenModem extends BaseComponent
         //$SMSCOMPort->COM;
         //$com = yii::app()->params['com_for_send_sms_command'];
         if ($this->source == $SMSCOMPort->COM) {
-            ListenerProcess::addComment($this->listener->listener_id, 'sms_command', 'going to start send SMS command, source= '. $this->source);
+            ListenerProcess::addComment($this->listener->listener_id, 'sms_command', 'going to start send SMS command, source= '.  SMSCOMPort::getLinuxComName($this->source));
             while(true) {
                 if ($this->synchronization->isMaster()) {
                     $this->grabModemMessages($i++);
