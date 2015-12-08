@@ -436,12 +436,7 @@ class SiteController extends CController
 
                 }
             }
-//
-//            echo "<pre>";
-//            print_r($_POST);
-//            print_r($res);
-//            echo "</pre>";
-//            exit;
+
         }
 
         $this->render('aws_graph', array(

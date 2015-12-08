@@ -426,7 +426,7 @@ class SensorHandler extends BaseComponent{
                     FROM `".SensorData::model()->tableName()."`
                     WHERE `sensor_feature_id` = '".$sensor_feature_id."'
                         AND `measuring_timestamp` <= '".date('Y-m-d H:i:s', $time_end)."'
-                        AND `measuring_timestamp` >= '".date('Y-m-d H:i:s', $time_start)."'
+                        AND `measuring_timestamp` > '".date('Y-m-d H:i:s', $time_start)."'
                         AND `is_m` = '0'";
             $res = Yii::app()->db->createCommand($sql)->queryScalar();
 

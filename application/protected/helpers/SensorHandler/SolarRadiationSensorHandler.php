@@ -281,7 +281,7 @@ class SolarRadiationSensorHandler extends SensorHandler
             $this->prepared_pairs['solar_radiation_in_period'] = array(
                 'feature_code' => 'solar_radiation_in_period',
                 //'period' => $info_1,
-                'period' => 1,
+                'period' => 30,
                 'value' => $value,
                 'exp_value' => $pow,
                 'metric_id' => $needed_feature_1['metric_id'],
