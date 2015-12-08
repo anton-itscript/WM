@@ -221,7 +221,7 @@ class RainAwsSensorHandler extends SensorHandler {
 	{
 
         if ($value != 0)
-		    return number_format((float)$value, 3);
+		    return rtrim(number_format((float)$value, 3),'0');
         else
             return '0.0';
 
