@@ -208,7 +208,7 @@ class RainAwsSensorHandler extends SensorHandler {
 		$sql = "SELECT SUM(CAST(`sensor_feature_value` AS DECIMAL(15,4))) AS `total_today`
                 FROM `".SensorData::model()->tableName()."`
                 WHERE `sensor_feature_id` = '".$sensor_feature_id."' 
-                  AND `measuring_timestamp` <= '".date('Y-m-d H:i:s', $measuring_timestamp)."' 
+                  AND `measuring_timestamp` <= '".date('Y-m-d H:i:s', $measuring_timestamp)."'
                   AND `measuring_timestamp` > '".date('Y-m-d H:i:s', $hour_start)."'
                   AND `is_m` = '0'";
         
@@ -219,10 +219,12 @@ class RainAwsSensorHandler extends SensorHandler {
     
     public function formatValue($value, $feature_name = 'rain_in_period')
 	{
-       // return round($value,10);
-//		return number_format(0.850 , 1);
-		return rtrim(number_format((float)$value, 3),'0');
-		//return number_format((float)$value, 3);
+
+        if ($value != 0)
+		    return rtrim(number_format((float)$value, 3),'0');
+        else
+            return '0.0';
+
     }
     
     public function _prepareDataPairs()
@@ -307,7 +309,7 @@ class RainAwsSensorHandler extends SensorHandler {
 
             $this->prepared_pairs['rain_in_period'] = array(
                 'feature_code' => 'rain_in_period',
-                'period' => 1,
+                'period' => 30,
                 'value' => $value_1,
                 'metric_id' => $needed_feature_1['metric_id'],
                 'normilized_value' => It::convertMetric($value_1, $needed_feature_1['metric_code'], $needed_feature_1['general_metric_code']),

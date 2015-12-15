@@ -253,7 +253,7 @@ class SunshineDurationSensorHandler extends SensorHandler {
             $this->prepared_pairs['sun_duration_in_period'] = array(
                 'feature_code' => 'sun_duration_in_period',
 //                'period' => $info_1,
-                'period' => 1,
+                'period' => 30,
                 'value' => $value,
                 'metric_id' => $needed_feature_1['metric_id'],
                 'normilized_value' => It::convertMetric($value, $needed_feature_1['metric_code'], $needed_feature_1['general_metric_code']),
